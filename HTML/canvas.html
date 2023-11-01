@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="grid grid-cols-10 place-content-center min-w-screen min-h-screen bg-clouds2 bg-cover">
-            <div class="col-span-4 flex flex-col items-center">
+            <div class="col-span-3 flex flex-col items-center">
                 <p class="text-center text-2xl font-semibold text-black">Kies je laag :</p>
                 <img class="w-96" src="../Images/placeholder.jpg" alt="placeholder">
 
@@ -18,9 +18,10 @@
                 </div>
             </div>
 
-            <div class="col-span-6 flex flex-col items-center">
+            <div class="col-span-7 flex flex-col items-center">
                 <p class="text-center text-2xl font-semibold">Versier je laag : </p>
-                <canvas id="canvas" class="w-full max-h-full aspect-video border-2 border-black border-solid mb-8"></canvas>
+<!--                width 3/4 veranderd zodat de pagina geen screen scroll heeft-->
+                <canvas id="canvas" class="w-3/4 max-h-full aspect-video border-2 border-black border-solid mb-8 rounded bg-slate-50 bg-opacity-30"></canvas>
                 <div class="w-full flex flex-row justify-between">
                     <div id="colors" class="grid grid-rows-2 grid-cols-4 gap-1 justify-self-start">
                         <button id="black" class="bg-black setting"></button>
@@ -60,7 +61,7 @@
                     </div>
                 </div>
                 <script type="module" src="../js/main.js"></script>
-                <a href="./end.html"><button class="bg-slate-50 p-6 w-96 rounded-lg">Mijn kunstwerk is af</button></a>
+                <a href="./end.html"><button class="p-6 w-96 text-center rounded-md bg-slate-50 bg-opacity-70 hover:bg-opacity-100 text-black text-xl font-medium mb-2">Mijn kunstwerk is af</button></a>
             </div>
     </div>
 
