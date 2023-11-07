@@ -6,7 +6,7 @@ const canvas = document.getElementById("canvas");
 const width = 1920;
 const height = 1080;
 
-console.log('jo')
+let oldcolor;
 
 // context of the canvas
 const context = canvas.getContext("2d");
@@ -62,10 +62,24 @@ const sizes = {
 function setSize(e, size) {
     context.lineWidth = size;
     selectSize(e);
+
+    let sizeImg = document.getElementById("sizeimg")
+
+    if (size == 5) {
+        sizeImg.src = "../assets/small.svg";
+    }
+
+    if (size == 10) {
+        sizeImg.src = "../assets/medium.svg";
+    }
+
+    if (size == 15) {
+        sizeImg.src = "../assets/big.svg";
+    }
 }
 
 function selectSize(e) {
-    if (mode === 'rect')
+    if (mode === 'square')
         return;
 
     const sizes = document.getElementsByClassName("size");
@@ -169,7 +183,7 @@ function selectMode(e, newMode) {
     if (size !== null)
     {
         size.classList.remove('hide-select');
-        if (newMode === 'rect')
+        if (newMode === 'square')
             size.classList.add('hide-select');
     }
 
@@ -177,6 +191,9 @@ function selectMode(e, newMode) {
     e.target.parentElement.classList.add('selected');
 
     mode = newMode;
+
+    let BrushTypeButton = document.getElementById("brushimg");
+    BrushTypeButton.src = "../assets/" + mode + ".svg";
 }
 
 const activeEvents = {
@@ -215,7 +232,7 @@ function setMode(e, mode) {
             activeEvents['mousedown'] = startPolygon;
             activeEvents['mouseup'] = endPolygon;
             break;
-        case 'rect':
+        case 'square':
             window.addEventListener("mousedown", startRect);
             window.addEventListener("mouseup", endRect);
 
@@ -234,6 +251,16 @@ function setColor(e, color) {
     context.strokeStyle = colors[color];
     context.fillStyle = colors[color];
     selectColor(e);
+
+    let Buttonlist = document.getElementById("color-selector");
+
+
+    if (oldcolor) {
+    Buttonlist.classList.remove("bg-" + oldcolor + "-500")
+    }
+    oldcolor = color
+
+    Buttonlist.classList.add("bg-" + color + "-500");
 }
 
 function selectColor(e) {

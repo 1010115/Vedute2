@@ -3,67 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/popup.js"></script>
     <link href="../css/output.css" rel="stylesheet">
     <title>Vedute maker - editor</title>
 </head>
 <body>
-    <div class="grid grid-cols-10 place-content-center min-w-screen min-h-screen bg-clouds2 bg-cover">
-            <div class="col-span-3 flex flex-col items-center">
-                <p class="text-center text-2xl font-semibold text-black">Kies je laag :</p>
-                <img class="w-96" src="../Images/placeholder.jpg" alt="placeholder">
+<div class="grid grid-cols-10 place-content-center min-w-screen min-h-screen bg-clouds2 bg-cover">
+    <div class="col-span-2 flex flex-col items-center">
+        <p class="text-center text-2xl font-semibold text-black">Kies je laag :</p>
+        <img class="w-96" src="../Images/placeholder.jpg" alt="placeholder">
 
-                <div class="place-content-around">
-                    <button class="bg-slate-50 p-2 rounded-lg mx-2"><-</button>
-                    <button class="bg-slate-50 p-2 rounded-lg mx-2">-></button>
-                </div>
-            </div>
-
-            <div class="col-span-7 flex flex-col items-center">
-                <p class="text-center text-2xl font-semibold">Versier je laag : </p>
-<!--                width 3/4 veranderd zodat de pagina geen screen scroll heeft-->
-                <canvas id="canvas" class="w-3/4 max-h-full aspect-video border-2 border-black border-solid mb-8 rounded bg-slate-50 bg-opacity-30"></canvas>
-                <div class="w-full flex flex-row justify-between">
-                    <div id="colors" class="grid grid-rows-2 grid-cols-4 gap-1 justify-self-start">
-                        <button id="black" class="bg-black setting"></button>
-                        <button class="bg-red-500 setting"></button>
-                        <button class="bg-green-500 setting"></button>
-                        <button class="bg-blue-500 setting"></button>
-                        <button class="bg-white setting"></button>
-                        <button class="bg-yellow-500 setting"></button>
-                        <button class="bg-orange-500 setting"></button>
-                        <button class="bg-violet-500 setting"></button>
-                    </div>
-                    <div id="settings" class="grid grid-rows-2 grid-cols-4 gap-1 justify-self-end">
-                        <button id="pen" class="setting tool">
-                            <img src="../assets/pen.svg" alt="pen">
-                        </button>
-                        <button id="small" class="setting size">
-                            <img src="../assets/small.svg" alt="small">
-                        </button>
-                        <button id="medium" class="setting size">
-                            <img src="../assets/medium.svg" alt="medium">
-                        </button>
-                        <button id="big" class="setting size">
-                            <img src="../assets/big.svg" alt="big">
-                        </button>
-                        <button id="path" class="setting tool">
-                            <img src="../assets/path.svg" alt="path">
-                        </button>
-                        <button id="polygon" class="setting tool">
-                            <img src="../assets/polygon.svg" alt="polygon">
-                        </button>
-                        <button id="rect" class="setting tool">
-                            <img src="../assets/square.svg" alt="square">
-                        </button>
-                        <button id="clear" class="setting">
-                            <img src="../assets/clear.svg" alt="clear">
-                        </button>
-                    </div>
-                </div>
-                <script type="module" src="../js/main.js"></script>
-                <a href="./end.html"><button class="p-6 w-96 text-center rounded-md bg-slate-50 bg-opacity-70 hover:bg-opacity-100 text-black text-xl font-medium mb-2">Mijn kunstwerk is af</button></a>
-            </div>
+        <div class="place-content-around">
+            <button class="bg-slate-50 p-2 rounded-lg mx-2"><-</button>
+            <button class="bg-slate-50 p-2 rounded-lg mx-2">-></button>
+        </div>
     </div>
 
+    <div class="col-span-7 flex flex-col items-center bg-red-50">
+        <p class="text-center text-2xl font-semibold">Versier je laag : </p>
+        <!--width 3/4 veranderd zodat de pagina geen screen scroll heeft-->
+        <canvas id="canvas"
+                class=" w-1/4 h-96 aspect-video border-2 border-black border-solid mb-8 rounded bg-slate-50 bg-opacity-30"></canvas>
+        <div class="w-full flex flex-row justify-between">
+
+        </div>
+        <script type="module" src="../js/main.js"></script>
+        <a href="./end.html">
+            <button class="p-6 w-96 text-center rounded-md bg-slate-50 bg-opacity-70 hover:bg-opacity-100 text-black text-xl font-medium mb-2">
+                Mijn kunstwerk is af
+            </button>
+        </a>
+    </div>
+
+    <div class="col-span-1 flex flex-col items-center justify-center">
+        <div class="flex flex-col">
+            <!--popup brush-->
+            <button class="bg-slate-50 rounded-full justify-center hover:border-2 border-black mb-2 relative flex place-content-center" id="brush-selector"><img src="#" id="brushimg"></button>
+            <div id="brushModal" class="absolute hidden z-10 bg-slate-50 p-2  right-40 rounded-full border-2 border-black">
+                <button id="pen" class="setting tool  p-4 rounded-full"><img src="../assets/pen.svg" alt="pen"></button>
+                <button id="path" class="setting tool  p-4 rounded-full"><img src="../assets/path.svg" alt="path"></button>
+                <button id="square" class="setting tool  p-4 rounded-full"><img src="../assets/square.svg" alt="square"></button>
+                <button id="polygon" class="setting tool p-4 rounded-full"><img src="../assets/polygon.svg" alt="polygon"></button>
+            </div>
+
+            <!--popup color selector-->
+            <button class="bg-black rounded-full justify-center hover:border-2 border-black mb-2 relative flex place-content-center p-4" id="color-selector"></button>
+            <div id="colorModal" class="absolute hidden z-10 bg-slate-50 p-2  right-40 rounded-full border-2 border-black">
+                <div id="colors">
+                    <button id="black"  class="bg-black setting rounded-full"></button>
+                    <button  class="bg-red-500 setting rounded-full"></button>
+                    <button  class="bg-green-500 setting rounded-full"></button>
+                    <button  class="bg-blue-500 setting rounded-full"></button>
+                    <button  class="bg-white setting rounded-full"></button>
+                    <button  class="bg-yellow-500 setting rounded-full"></button>
+                    <button  class="bg-orange-500 setting rounded-full"></button>
+                    <button  class="bg-violet-500 setting rounded-full"></button>
+                </div>
+            </div>
+
+            <!--brushsize selector-->
+            <button class="bg-slate-50 rounded-full justify-center hover:border-2 border-black mb-2 relative flex place-content-center" id="size-selector"><img src="#" id="sizeimg"></button>
+            <div id="sizeModal" class="absolute hidden z-10 bg-slate-50 p-2  right-40 rounded-full border-2 border-black">
+                <button id="small" class="setting size rounded-full">   <img src="../assets/small.svg" alt="small"></button>
+                <button id="medium" class="setting size rounded-full"><img src="../assets/medium.svg" alt="medium"></button>
+                <button id="big" class="setting size rounded-full"><img src="../assets/big.svg" alt="big"></button>
+            </div>
+
+            <!--popup custom image import-->
+            <button class="bg-slate-50 rounded-full p-6 justify-center hover:border-2 border-black mb-2" id="image-button">import image</button>
+            <div id="imageModal" class="imageModal">
+
+            </div>
+
+            <!--sticker selector-->
+            <button class="bg-slate-50 rounded-full p-6 justify-center hover:border-2 border-black mb-2" id="sticker-selector">sticker selector</button>
+            <div id="stickerModal" class="stickerModal">
+
+            </div>
+
+            <div id="settings" class="grid grid-rows-4 grid-cols-2 gap-1 justify-self-end mt-1">
+                <button id="clear" class="setting rounded"><img src="../assets/clear.svg" alt="clear"></button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
