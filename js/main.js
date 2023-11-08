@@ -3,7 +3,7 @@ import {colors} from "./colors.js";
 
 const container = document.getElementById("canvas-container");
 const canvas = document.getElementById("canvas");
-const width = 1920;
+const width = 960;
 const height = 1080;
 
 let oldcolor;

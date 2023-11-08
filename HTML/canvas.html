@@ -8,8 +8,8 @@
     <title>Vedute maker - editor</title>
 </head>
 <body>
-<div class="grid grid-cols-10 place-content-center min-w-screen min-h-screen bg-clouds2 bg-cover">
-    <div class="col-span-2 flex flex-col items-center">
+<div class="grid grid-cols-10 place-content-center min-w-screen min-h-screen h-full bg-clouds2 bg-cover">
+    <div class="col-span-3 flex flex-col items-center">
         <p class="text-center text-2xl font-semibold text-black">Kies je laag :</p>
         <img class="w-96" src="../Images/placeholder.jpg" alt="placeholder">
 
@@ -19,11 +19,10 @@
         </div>
     </div>
 
-    <div class="col-span-7 flex flex-col items-center bg-red-50">
+    <div class="col-span-4 flex flex-col items-center bg-red-50 h-full">
         <p class="text-center text-2xl font-semibold">Versier je laag : </p>
-        <!--width 3/4 veranderd zodat de pagina geen screen scroll heeft-->
         <canvas id="canvas"
-                class=" w-1/4 h-96 aspect-video border-2 border-black border-solid mb-8 rounded bg-slate-50 bg-opacity-30"></canvas>
+                class="h-canvasheight w-canvaswidth mx-4 aspect-video border-2 border-black border-solid mb-8 rounded bg-slate-50 bg-opacity-30"></canvas>
         <div class="w-full flex flex-row justify-between">
 
         </div>
@@ -35,10 +34,10 @@
         </a>
     </div>
 
-    <div class="col-span-1 flex flex-col items-center justify-center">
+    <div class="col-span-2 flex flex-col items-center justify-center">
         <div class="flex flex-col">
             <!--popup brush-->
-            <button class="bg-slate-50 rounded-full justify-center hover:border-2 border-black mb-2 relative flex place-content-center" id="brush-selector"><img src="#" id="brushimg"></button>
+            <button class="bg-slate-50 rounded-full justify-center hover:border-2 border-black mb-2 relative flex place-content-center w-full p-2" id="brush-selector"><img src="#" id="brushimg"></button>
             <div id="brushModal" class="absolute hidden z-10 bg-slate-50 p-2  right-40 rounded-full border-2 border-black">
                 <button id="pen" class="setting tool  p-4 rounded-full"><img src="../assets/pen.svg" alt="pen"></button>
                 <button id="path" class="setting tool  p-4 rounded-full"><img src="../assets/path.svg" alt="path"></button>
@@ -47,7 +46,7 @@
             </div>
 
             <!--popup color selector-->
-            <button class="bg-black rounded-full justify-center hover:border-2 border-black mb-2 relative flex place-content-center p-4" id="color-selector"></button>
+            <button class="bg-black rounded-full justify-center hover:border-2 border-black mb-2 relative flex place-content-center p-6 w-full" id="color-selector"></button>
             <div id="colorModal" class="absolute hidden z-10 bg-slate-50 p-2  right-40 rounded-full border-2 border-black">
                 <div id="colors">
                     <button id="black"  class="bg-black setting rounded-full"></button>
@@ -62,7 +61,7 @@
             </div>
 
             <!--brushsize selector-->
-            <button class="bg-slate-50 rounded-full justify-center hover:border-2 border-black mb-2 relative flex place-content-center" id="size-selector"><img src="#" id="sizeimg"></button>
+            <button class="bg-slate-50 rounded-full justify-center hover:border-2 border-black mb-2 relative flex place-content-center w-full p-2" id="size-selector"><img src="#" id="sizeimg"></button>
             <div id="sizeModal" class="absolute hidden z-10 bg-slate-50 p-2  right-40 rounded-full border-2 border-black">
                 <button id="small" class="setting size rounded-full">   <img src="../assets/small.svg" alt="small"></button>
                 <button id="medium" class="setting size rounded-full"><img src="../assets/medium.svg" alt="medium"></button>
