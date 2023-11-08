@@ -1,6 +1,7 @@
 //import '../css/output.css' <-- deze geeft error waardoor de script crashed
 import {colors} from "./colors.js";
 
+
 const container = document.getElementById("canvas-container");
 const canvas = document.getElementById("canvas");
 const width = 1920;
@@ -269,5 +270,14 @@ function initialize() {
     document.getElementById('pen').firstElementChild.click();
     document.getElementById('black').click();
 }
+
+// Set image in localhost and redirect to end.html
+let finishBtn = document.getElementById('finish')
+finishBtn.addEventListener('click', () =>{
+    let img = canvas.toDataURL("image/png")
+    localStorage.setItem('img', img)
+    finishBtn.href = "../html/end.html"
+
+})
 
 initialize();
