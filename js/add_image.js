@@ -1,4 +1,4 @@
-window.addEventListener('load', init);
+window.addEventListener('DOMContentLoaded', init);
 let currentX = 0;
 let currentY = 0;
 let lastX = 0;
@@ -16,7 +16,7 @@ function init() {
     const output = document.getElementById("output");
     canvas = document.getElementById("canvas");
     context = canvas.getContext("2d");
-    //checks if teh user has uploaded any files and then initializes the image
+    //checks if the user has uploaded any files and then initializes the image
     if (files.length === 0) {
       output.textContent = "No files selected.";
       return;
@@ -38,7 +38,7 @@ function init() {
           };
          }
             }}
-      )};
+      )}
 }
 
 function _Go() {
