@@ -12,6 +12,11 @@ module.exports = {
       },
       colors: {
         'donkergrijs': '#47525E',
+      },
+      spacing: {
+        '128': '32rem',
+        'canvasheight': '35.2rem',
+        'canvaswidth': '25.6rem',
       }
     },
   },
