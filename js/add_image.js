@@ -6,8 +6,8 @@ let lastY = 0;
 let canvas, context;
 let imageCanvas, imagecontext;
 let img;
-let mouseX;
-let mouseY;
+let mouseposX;
+let mouseposY;
 let isDraggable = false;
 
 function init() {
@@ -61,15 +61,15 @@ function _MouseEvents() {
   
   imageCanvas.onmousedown = function(e) {
     
-    mouseX = e.pageX - this.offsetLeft;
-    mouseY = e.pageY - this.offsetTop;
-    console.log(mouseX, mouseY)
+    mouseposX = e.pageX - this.offsetLeft;
+    mouseposY = e.pageY - this.offsetTop;
+    console.log(mouseposX, mouseposY)
     
 
-    if (mouseX >= (currentX - 400/2 ) &&
-        mouseX <= (currentX + 400/2) &&
-        mouseY >= (currentY -600/2) &&
-        mouseY <= (currentY + 600/2)) {
+    if (mouseposX >= (currentX - 400/2 ) &&
+        mouseposX <= (currentX + 400/2) &&
+        mouseposY >= (currentY -600/2) &&
+        mouseposY <= (currentY + 600/2)) {
       isDraggable = true;
       console.log(isDraggable);
     }
