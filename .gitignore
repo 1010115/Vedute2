@@ -1,0 +1,18 @@
+# Default ignored files
+/shelf/
+/.idea
+
+# Editor-based HTTP Client requests
+/httpRequests/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+
+# Bestanden gegenereerd door Node.js
+node_modules/
+
+# Bestanden gegenereerd door npm
+package-lock.json
+
+# Bestanden gegenereerd door Tailwind CSS
+css/output.css
