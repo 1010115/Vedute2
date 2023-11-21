@@ -2,14 +2,30 @@ document.addEventListener("DOMContentLoaded", init)
 
 //starting variables for brush - color - size
 let Ubrush = "pen"; //user brush
-let UColor = [60, 180, 20] //user color
-let USize = 50; //user size
-let Utoothpicklength= 18;//user toothpick length
+let UColor = [0,0,0]; //user color
+let USize = 10; //user size
+let Utoothpicklength= 5;//user toothpick length
+let oldcolor;
+let sizeImg;
+let brushImg
 
+//brush sizes
 const sizes = {
     'small': 5,
     'medium': 10,
     'big': 15
+}
+
+//alle colors die worden gebruikt
+const colors = {
+    "black": [0,0,0],
+    "white": [255,255,255],
+    "red": [239,68,68],
+    "green": [34,197,94],
+    "blue": [59,130,246],
+    "yellow": [234,179,8],
+    "orange": [249,115,22],
+    "violet": [139,92,246]
 }
 
 const activeEvents = {
@@ -17,7 +33,6 @@ const activeEvents = {
     "mouseup": undefined,
     "mousemove": undefined
 };
-
 
 // For every brush
 function setup() {
@@ -28,7 +43,36 @@ function setup() {
 
 function draw() {
     if (mouseIsPressed) {
-        sprayPaint()
+
+        switch ( Ubrush ) {
+            case "pen":
+                pen()
+                break;
+            case "spraypaint":
+                sprayPaint()
+                break;
+            case "calligraphy":
+                calligraphy()
+                break;
+            case "marker":
+                marker()
+                break;
+            case "wiggle":
+                wiggle()
+                break;
+            case "toothpick":
+                toothpick()
+                break;
+            case "hatching":
+                hatching()
+                break;
+            case "splatter":
+                splatter()
+                break;
+            case "eraser":
+                eraser()
+                break;
+        }
     }
 }
 
@@ -40,80 +84,74 @@ function setBrush(e, mode){
 
     switch (mode) {
         case 'pen':
-            window.addEventListener("mousedown", startDraw);
-            window.addEventListener("mouseup", endDraw);
-            window.addEventListener("mousemove", draw);
-
-            activeEvents['mousedown'] = startDraw;
-            activeEvents['mouseup'] = endDraw;
-            activeEvents['mousemove'] = draw;
+            Ubrush = "pen";
+            console.log(Ubrush);
             break;
-
-        case 'kwast':
-            window.addEventListener("mousedown", startPath);
-            window.addEventListener("mouseup", endPath);
-
-            activeEvents['mousedown'] = startPath;
-            activeEvents['mouseup'] = endPath;
-    }
+        case 'spraypaint':
+            Ubrush = "spraypaint";
+            console.log(Ubrush);
+            break;
+        case 'calligraphy':
+            Ubrush = "calligraphy";
+            console.log(Ubrush);
+            break;
+        case 'marker':
+            Ubrush = "marker";
+            console.log(Ubrush);
+            break;
+        case 'wiggle':
+            Ubrush = "wiggle";
+            console.log(Ubrush);
+            break;
+        case 'toothpick':
+            Ubrush = "toothpick";
+            console.log(Ubrush);
+            break;
+        case 'splatter':
+            Ubrush = "splatter";
+            console.log(Ubrush);
+            break;
+        case 'eraser':
+            Ubrush = "eraser";
+            console.log(Ubrush);
+            break;
+    }}
 
     function setSize(e, size) {
-        context.lineWidth = size;
-        selectSize(e);
-
-        let sizeImg = document.getElementById("sizeimg")
-
-        if (size == 5) {
+        if (size === 5) {
+            USize = 5;
+            console.log(USize);
             sizeImg.src = "../assets/small.svg";
         }
 
-        if (size == 10) {
+        if (size === 10) {
+            USize = 10;
+            console.log(USize);
             sizeImg.src = "../assets/medium.svg";
         }
 
-        if (size == 15) {
+        if (size === 15) {
+            USize = 15;
+            console.log(USize);
             sizeImg.src = "../assets/big.svg";
         }
     }
 
-    function selectSize(e) {
-        if (mode === 'square')
-            return;
 
-        const sizes = document.getElementsByClassName("size");
-        for (const size of sizes) {
-            size.classList.remove('selected');
-        }
-
-        if (e === undefined)
-            return;
-
-        e.target.parentElement.classList.add('selected');
-    }
-
-    function setColor(e, color) {
-        context.strokeStyle = colors[color];
-        context.fillStyle = colors[color];
-        selectColor(e);
+    function setColor(e, color, buttonid) {
 
         let Buttonlist = document.getElementById("color-selector");
+        UColor = color
+
+        console.log(UColor);
 
 
         if (oldcolor) {
             Buttonlist.classList.remove("bg-" + oldcolor + "-500")
         }
-        oldcolor = color
+        oldcolor = buttonid
 
-        Buttonlist.classList.add("bg-" + color + "-500");
-    }
-
-    function selectColor(e) {
-        const colors = document.getElementById("colors").children;
-        for (const color of colors) {
-            color.classList.remove('selected');
-        }
-
-        e.target.classList.add('selected');
+        Buttonlist.classList.add("bg-" + buttonid + "-500");
     }
 
     function init() {
@@ -129,12 +167,20 @@ function setBrush(e, mode){
 
         const colorButtons = document.getElementById('colors').children;
         for (const colorButton of colorButtons) {
-            colorButton.addEventListener('click', (e) => { setColor(e, colorButton.classList.value.replace(/bg-(\w*).*/, '$1'))} );
+            colorButton.addEventListener('click', (e) => { setColor(e, colors[colorButton.id], colorButton.id)} );
         }
+
+        sizeImg = document.getElementById("sizeimg")
+        sizeImg.src = "../assets/medium.svg";
+
+        brushImg = document.getElementById("brushimg")
+        brushImg.src = "../assets/pen.svg"
+
+
+        console.log("init klaar");
 
     }
 
-}
 
 
 function touchMoved() {
@@ -148,7 +194,7 @@ function touchMoved() {
 function pen() {
     // set the color and weight of the stroke
     stroke(UColor, 255)
-    strokeWeight(2)
+    strokeWeight(USize)
 
     // draw a line from current mouse point to previous mouse point
     line(mouseX, mouseY, pmouseX, pmouseY)
@@ -330,5 +376,11 @@ function sprayPaint() {
             point(lerpX + randX, lerpY + randY)
         }
     }
+}
+
+//---   eraser  ---
+function eraser() {
+    pen()
+    erase(200, 255)
 }
 

@@ -37,8 +37,6 @@ function init() {
     SizeModal = document.getElementById('sizeModal');
 
     SizeSelector.addEventListener("click", selectSizeModal)
-
-
 }
 
 
