@@ -1,200 +1,31 @@
-//import '../css/output.css' <-- deze geeft error waardoor de script crashed
-import {colors} from "./colors.js";
+document.addEventListener("DOMContentLoaded", init)
 
-
-const container = document.getElementById("canvas-container");
-const canvas = document.getElementById("canvas");
-const width = 960;
-const height = 1080;
-
+//starting variables for brush - color - size
+let Ubrush = "pen"; //user brush
+let UColor = [0,0,0]; //user color
+let USize = 10; //user size
+let Utoothpicklength= 5;//user toothpick length
 let oldcolor;
+let sizeImg;
+let brushImg
 
-// context of the canvas
-const context = canvas.getContext("2d");
-context.imageSmoothingEnabled = true;
-
-// resize canvas (CSS does scale it up or down)
-canvas.height = height;
-canvas.width = width;
-
-function getMousePos(canvas, evt) {
-    var rect = canvas.getBoundingClientRect(),
-        scaleX = canvas.width / rect.width,
-        scaleY = canvas.height / rect.height;
-
-    return {
-        x: (evt.clientX - rect.left) * scaleX,
-        y: (evt.clientY - rect.top) * scaleY
-    }
-}
-
-// --- Pen ---
-let drawing = false;
-
-function startDraw(e) {
-    drawing = true;
-    context.beginPath();
-    draw(e)
-}
-
-function endDraw(e) {
-    drawing = false;
-}
-
-function draw(e) {
-    if (!drawing) return;
-
-    let { x, y } = getMousePos(canvas, e);
-
-    context.lineTo(x, y);
-    context.stroke();
-
-    // for smoother drawing
-    context.beginPath();
-    context.moveTo(x, y);
-}
-
+//brush sizes
 const sizes = {
     'small': 5,
     'medium': 10,
     'big': 15
 }
 
-function setSize(e, size) {
-    context.lineWidth = size;
-    selectSize(e);
-
-    let sizeImg = document.getElementById("sizeimg")
-
-    if (size == 5) {
-        sizeImg.src = "../assets/small.svg";
-    }
-
-    if (size == 10) {
-        sizeImg.src = "../assets/medium.svg";
-    }
-
-    if (size == 15) {
-        sizeImg.src = "../assets/big.svg";
-    }
-}
-
-function selectSize(e) {
-    if (mode === 'square')
-        return;
-
-    const sizes = document.getElementsByClassName("size");
-    for (const size of sizes) {
-        size.classList.remove('selected');
-    }
-
-    if (e === undefined)
-        return;
-
-    e.target.parentElement.classList.add('selected');
-}
-
-// --- Path ---
-
-function startPath(e) {
-    drawing = true;
-    context.beginPath();
-    draw(e)
-}
-
-function endPath(e) {
-    drawing = false;
-    let { x, y } = getMousePos(canvas, e);
-
-    context.lineTo(x, y);
-    context.stroke();
-}
-
-// --- Polygon ---
-
-let poly = false;
-let polyTimeout = undefined;
-
-function startPolygon(e) {
-    if (e.target.id !== 'canvas')
-        return;
-
-    drawing = true;
-
-    if (poly) {
-        polygon(e);
-    }
-    else {
-        context.beginPath();
-        draw(e);
-    }
-    poly = true;
-}
-
-function endPolygon(e) {
-    if (!poly)
-        return;
-
-    polyTimeout = setTimeout(() => {
-        drawing = false;
-        context.closePath();
-        context.stroke();
-
-        poly = false;
-    }, 1000);
-}
-
-function polygon(e) {
-    if (!drawing) return;
-    clearTimeout(polyTimeout);
-
-    let { x, y } = getMousePos(canvas, e);
-
-    context.lineTo(x, y);
-    context.stroke();
-}
-
-// --- Rect ---
-let start = {}
-
-function startRect(e) {
-    start = getMousePos(canvas, e);
-}
-
-function endRect(e) {
-    let { x, y } = getMousePos(canvas, e);
-    context.fillRect(start.x, start.y, x - start.x, y - start.y);
-}
-
-// --- Clear ---
-
-function clearCanvas() {
-    context.clearRect(0, 0, canvas.width, canvas.height);
-}
-
-let mode = 'draw';
-
-function selectMode(e, newMode) {
-    const tools = document.getElementsByClassName("tool");
-    for (const tool of tools) {
-        tool.classList.remove('selected');
-    }
-
-    const size = document.querySelector(".size.selected");
-    if (size !== null)
-    {
-        size.classList.remove('hide-select');
-        if (newMode === 'square')
-            size.classList.add('hide-select');
-    }
-
-
-    e.target.parentElement.classList.add('selected');
-
-    mode = newMode;
-
-    let BrushTypeButton = document.getElementById("brushimg");
-    BrushTypeButton.src = "../assets/" + mode + ".svg";
+//alle colors die worden gebruikt
+const colors = {
+    "black": [0,0,0],
+    "white": [255,255,255],
+    "red": [239,68,68],
+    "green": [34,197,94],
+    "blue": [59,130,246],
+    "yellow": [234,179,8],
+    "orange": [249,115,22],
+    "violet": [139,92,246]
 }
 
 const activeEvents = {
@@ -203,7 +34,49 @@ const activeEvents = {
     "mousemove": undefined
 };
 
-function setMode(e, mode) {
+// For every brush
+function setup() {
+    canvas = createCanvas(406, 560);
+    background('#fbf8f3')
+    canvas.parent('canvasCanvas');
+}
+
+function draw() {
+    if (mouseIsPressed) {
+
+        switch ( Ubrush ) {
+            case "pen":
+                pen()
+                break;
+            case "spraypaint":
+                sprayPaint()
+                break;
+            case "calligraphy":
+                calligraphy()
+                break;
+            case "marker":
+                marker()
+                break;
+            case "wiggle":
+                wiggle()
+                break;
+            case "toothpick":
+                toothpick()
+                break;
+            case "hatching":
+                hatching()
+                break;
+            case "splatter":
+                splatter()
+                break;
+            case "eraser":
+                eraser()
+                break;
+        }
+    }
+}
+
+function setBrush(e, mode){
     for (const event in activeEvents) {
         window.removeEventListener(event, activeEvents[event]);
         activeEvents[event] = undefined;
@@ -211,100 +84,303 @@ function setMode(e, mode) {
 
     switch (mode) {
         case 'pen':
-            window.addEventListener("mousedown", startDraw);
-            window.addEventListener("mouseup", endDraw);
-            window.addEventListener("mousemove", draw);
-
-            activeEvents['mousedown'] = startDraw;
-            activeEvents['mouseup'] = endDraw;
-            activeEvents['mousemove'] = draw;
+            Ubrush = "pen";
+            console.log(Ubrush);
             break;
-        case 'path':
-            window.addEventListener("mousedown", startPath);
-            window.addEventListener("mouseup", endPath);
-
-            activeEvents['mousedown'] = startPath;
-            activeEvents['mouseup'] = endPath;
+        case 'spraypaint':
+            Ubrush = "spraypaint";
+            console.log(Ubrush);
             break;
-        case 'polygon':
-            window.addEventListener("mousedown", startPolygon);
-            window.addEventListener("mouseup", endPolygon);
-
-            activeEvents['mousedown'] = startPolygon;
-            activeEvents['mouseup'] = endPolygon;
+        case 'calligraphy':
+            Ubrush = "calligraphy";
+            console.log(Ubrush);
             break;
-        case 'square':
-            window.addEventListener("mousedown", startRect);
-            window.addEventListener("mouseup", endRect);
-
-            activeEvents['mousedown'] = startRect;
-            activeEvents['mouseup'] = endRect;
+        case 'marker':
+            Ubrush = "marker";
+            console.log(Ubrush);
             break;
-
-        default:
+        case 'wiggle':
+            Ubrush = "wiggle";
+            console.log(Ubrush);
             break;
+        case 'toothpick':
+            Ubrush = "toothpick";
+            console.log(Ubrush);
+            break;
+        case 'splatter':
+            Ubrush = "splatter";
+            console.log(Ubrush);
+            break;
+        case 'eraser':
+            Ubrush = "eraser";
+            console.log(Ubrush);
+            break;
+    }}
+
+    function setSize(e, size) {
+        if (size === 5) {
+            USize = 5;
+            console.log(USize);
+            sizeImg.src = "../assets/small.svg";
+        }
+
+        if (size === 10) {
+            USize = 10;
+            console.log(USize);
+            sizeImg.src = "../assets/medium.svg";
+        }
+
+        if (size === 15) {
+            USize = 15;
+            console.log(USize);
+            sizeImg.src = "../assets/big.svg";
+        }
     }
 
-    selectMode(e, mode);
+
+    function setColor(e, color, buttonid) {
+
+        let Buttonlist = document.getElementById("color-selector");
+        UColor = color
+
+        console.log(UColor);
+
+
+        if (oldcolor) {
+            Buttonlist.classList.remove("bg-" + oldcolor + "-500")
+        }
+        oldcolor = buttonid
+
+        Buttonlist.classList.add("bg-" + buttonid + "-500");
+    }
+
+    function init() {
+        const tools = document.getElementsByClassName('tool')
+        for(const tool of tools) {
+            tool.addEventListener('click', (e) => { setBrush(e, tool.id)} );
+        }
+
+        const sizeButtons = document.getElementsByClassName('size')
+        for(const sizeButton of sizeButtons) {
+            sizeButton.addEventListener('click', (e) => { setSize(e, sizes[sizeButton.id])} );
+        }
+
+        const colorButtons = document.getElementById('colors').children;
+        for (const colorButton of colorButtons) {
+            colorButton.addEventListener('click', (e) => { setColor(e, colors[colorButton.id], colorButton.id)} );
+        }
+
+        sizeImg = document.getElementById("sizeimg")
+        sizeImg.src = "../assets/medium.svg";
+
+        brushImg = document.getElementById("brushimg")
+        brushImg.src = "../assets/pen.svg"
+
+
+        console.log("init klaar");
+
+    }
+
+
+
+function touchMoved() {
+    return false
 }
 
-function setColor(e, color) {
-    context.strokeStyle = colors[color];
-    context.fillStyle = colors[color];
-    selectColor(e);
-
-    let Buttonlist = document.getElementById("color-selector");
 
 
-    if (oldcolor) {
-    Buttonlist.classList.remove("bg-" + oldcolor + "-500")
-    }
-    oldcolor = color
+// --- pen---
 
-    Buttonlist.classList.add("bg-" + color + "-500");
+function pen() {
+    // set the color and weight of the stroke
+    stroke(UColor, 255)
+    strokeWeight(USize)
+
+    // draw a line from current mouse point to previous mouse point
+    line(mouseX, mouseY, pmouseX, pmouseY)
 }
 
-function selectColor(e) {
-    const colors = document.getElementById("colors").children;
-    for (const color of colors) {
-        color.classList.remove('selected');
-    }
+// --- marker ---
 
-    e.target.classList.add('selected');
+function marker() {
+    // set the color and brush style
+    fill(UColor, 40)
+    noStroke()
+
+    // draw a circle at the current mouse point, with diameter of 50 pixels
+    circle(mouseX, mouseY, USize)
 }
 
-function initialize() {
-    const colorButtons = document.getElementById('colors').children;
-    for (const colorButton of colorButtons) {
-        colorButton.addEventListener('click', (e) => { setColor(e, colorButton.classList.value.replace(/bg-(\w*).*/, '$1'))} );
-    }
+// --- wiggle ---
 
-    const tools = document.getElementsByClassName('tool');
-    for (const tool of tools) {
-        tool.addEventListener('click', (e) => { setMode(e, tool.id)} );
-    }
+function wiggle() {
+    // set the color and brush style
+    stroke(UColor, 255)
+    strokeWeight(USize)
+    noFill()
 
-    const sizeButtons = document.getElementsByClassName('size');
-    for (const sizeButton of sizeButtons) {
-        sizeButton.addEventListener('click', (e) => { setSize(e, sizes[sizeButton.id])} );
-    }
+    // find the distance between the current and previous mouse points
+    const distance = dist(mouseX, mouseY, pmouseX, pmouseY)
 
-    document.getElementById('clear').addEventListener('click', clearCanvas);
+    // find the midpoint between the current and previous mouse points
+    const midX = (mouseX + pmouseX) / 2
+    const midY = (mouseY + pmouseY) / 2
 
-    // set default settings
-    context.lineCap = 'round';
-    document.getElementById('small').firstElementChild.click();
-    document.getElementById('pen').firstElementChild.click();
-    document.getElementById('black').click();
+    // find the angle of the direction the mouse is moving in
+    const angle = Math.atan2(mouseY - pmouseY, mouseX - pmouseX)
+
+    // find which way to flip the arc
+    const flip = (frameCount % 2) * PI
+
+    // draw the arc as a half circle
+    arc(midX, midY, distance, distance, angle + flip, angle + PI + flip)
 }
 
-// Set image in localhost and redirect to end.html
-let finishBtn = document.getElementById('finish')
-finishBtn.addEventListener('click', () =>{
-    let img = canvas.toDataURL("image/png")
-    localStorage.setItem('img', img)
-    finishBtn.href = "../html/end.html"
+// ---toothpick---
 
-})
+function toothpick() {
+    // set the color and brush style
+    fill(UColor, 150)
+    noStroke()
 
-initialize();
+    // move the origin (0,0) to the current mouse point
+    translate(mouseX, mouseY)
+
+    // find the angle of the direction the mouse is moving in
+    // then rotate the canvas by that angle
+    const angle = Math.atan2(mouseY - pmouseY, mouseX - pmouseX)
+    rotate(angle)
+
+    // set minumum width and height of the toothpick-shaped ellipse
+    const minSize = USize
+
+    // find the distance between current mouse point and previous mouse point
+    const distance = dist(mouseX, mouseY, pmouseX, pmouseY)
+
+    // draw the toothpick-shaped ellipse
+    ellipse(0, 0, distance * Utoothpicklength + minSize, minSize)
+}
+
+// ---calligraphy---
+
+function calligraphy() {
+    // set the color and brush style
+    stroke(UColor, 255)
+    strokeWeight(1)
+    const width = USize
+
+    // set the number of times we lerp the line in the for loop
+    const lerps = 1000
+
+    // repeat the slanted line with lerping
+    for (let i = 0; i <= lerps - 1; i++) {
+
+        // find the lerped x and y coordinates between the mouse points
+        const x = lerp(mouseX, pmouseX, i / lerps)
+        const y = lerp(mouseY, pmouseY, i / lerps)
+
+        // draw a slanted line
+        line(x - width, y - width, x + width, y + width)
+    }
+}
+
+// ---splatter---
+
+function splatter() {
+    // set the color and brush style
+    stroke(UColor, 160)
+    strokeWeight(USize)
+
+    // set the number of times we lerp the point in the for loop
+    const lerps = 8
+
+    // repeat the point with lerping
+    for (let i = 0; i < lerps; i++) {
+
+        // find lerped x and y coordinates of the point
+        const x = lerp(mouseX, pmouseX, i / lerps + lerps)
+        const y = lerp(mouseY, pmouseY, i / lerps + lerps)
+
+        // draw a point
+        point(x, y)
+    }
+}
+
+// ---hatching ---
+
+function hatching() {
+    // set the color and brush style
+    stroke(UColor, 220)
+    strokeWeight(USize)
+
+    // calculate the speed of the mouse
+    let speed = abs(mouseX - pmouseX) + abs(mouseY - pmouseY)
+
+    // make a vector by inverting X and Y values
+    const vector = createVector(mouseY - pmouseY, mouseX - pmouseX)
+
+    // set the vector magnitude (the line length) based on the mouse speed
+    vector.setMag(speed / 2)
+
+    // set the number of times we lerp the line
+    const lerps = 3
+
+    // repeat the line with lerping
+    for (let i = 0; i < lerps; i++) {
+
+        // find the lerped X and Y coordinates
+        const x = lerp(mouseX, pmouseX, i / lerps)
+        const y = lerp(mouseY, pmouseY, i / lerps)
+
+        // draw a line
+        line(x - vector.x, y - vector.y, x + vector.x, y + vector.y)
+    }
+}
+
+// --- spraypaint---
+
+function sprayPaint() {
+    // set the color and brush style
+    stroke(UColor, 255)
+    strokeWeight(USize/50)
+
+    // find the speed of the mouse movement
+    const speed = abs(mouseX - pmouseX) + abs(mouseY - pmouseY)
+
+    // set minimum radius and spray density of spraypaint brush
+    const minRadius = USize;
+    const sprayDensity = 80
+
+    // find radius of the spray paint brush and radius squared
+    const r = speed + minRadius;
+    const rSquared = r * r;
+
+    // set the number of times we lerp the points in the for loop
+    const lerps = 1
+
+    // repeat the random points with lerping
+    for (let i = 0; i < lerps; i++) {
+
+        // find the lerped X and Y coordinates
+        const lerpX = lerp(mouseX, pmouseX, i / lerps)
+        const lerpY = lerp(mouseY, pmouseY, i / lerps)
+
+        // draw a bunch of random points within a circle
+        for (let j = 0; j < sprayDensity; j++) {
+
+            // pick a random position within the circle
+            const randX = random(-r, r)
+            const randY = random(-1, 1) * sqrt(rSquared - randX * randX)
+
+            // draw the random point
+            point(lerpX + randX, lerpY + randY)
+        }
+    }
+}
+
+//---   eraser  ---
+function eraser() {
+    pen()
+    erase(200, 255)
+}
+

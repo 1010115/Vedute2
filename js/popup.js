@@ -16,12 +16,12 @@ function init() {
     BrushSelector = document.getElementById('brush-selector');
     BrushModal = document.getElementById('brushModal');
 
-    BrushSelector.addEventListener("click", selectBrush );
+    BrushSelector.addEventListener("click", selectBrushModal );
 
     ColorSelector = document.getElementById('color-selector');
     ColorModal = document.getElementById('colorModal');
 
-    ColorSelector.addEventListener("click", selectColor);
+    ColorSelector.addEventListener("click", selectColorModal);
 
     ImageButton = document.getElementById("image-button");
     ImageModal = document.getElementById('imageModal');
@@ -36,24 +36,24 @@ function init() {
     SizeSelector = document.getElementById('size-selector');
     SizeModal = document.getElementById('sizeModal');
 
-    SizeSelector.addEventListener("click", selectSize)
+    SizeSelector.addEventListener("click", selectSizeModal)
 }
 
 
-function selectBrush() {
+function selectBrushModal() {
     console.log('brushtype');
     //open brush modal
     BrushModal.classList.remove("hidden");
 
 }
 
-function selectSize() {
+function selectSizeModal() {
     console.log('size-select');
     //open size modal
     SizeModal.classList.remove("hidden");
 }
 
-function selectColor() {
+function selectColorModal() {
     console.log('color-select');
     //open color modal
     ColorModal.classList.remove("hidden");
@@ -83,4 +83,5 @@ document.addEventListener("click", function(event) {
         SizeModal.classList.add("hidden");
     }
 });
+
 
