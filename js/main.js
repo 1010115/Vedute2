@@ -129,6 +129,9 @@ function init() {
       console.log(img);
       image(staticImg, staticX, staticY, w, h);
       imgCorrect = false;
+      if (!confirmImg.classList.contains('hidden')) {
+        confirmImg.classList.toggle('hidden');
+      }
     }
 
   }
@@ -141,6 +144,9 @@ function init() {
       img.hide();
       if (imgDiv.classList.contains('hidden')) {
         imgDiv.classList.toggle('hidden');
+      }
+      if (confirmImg.classList.contains('hidden')) {
+        confirmImg.classList.toggle('hidden');
       }
     } else {
       img = null;
