@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", init)
 
 //starting variables for brush - color - size
 let Ubrush = "pen"; //user brush
-let UColor = [0,0,0]; //user color
+let UColor = [0,0,0];//user color
 let USize = 10; //user size
 let Utoothpicklength= 5;//user toothpick length
 let oldcolor;
@@ -86,30 +86,37 @@ function setBrush(e, mode){
         case 'pen':
             Ubrush = "pen";
             console.log(Ubrush);
+            noErase()
             break;
         case 'spraypaint':
             Ubrush = "spraypaint";
             console.log(Ubrush);
+            noErase()
             break;
         case 'calligraphy':
             Ubrush = "calligraphy";
             console.log(Ubrush);
+            noErase()
             break;
         case 'marker':
             Ubrush = "marker";
             console.log(Ubrush);
+            noErase()
             break;
         case 'wiggle':
             Ubrush = "wiggle";
             console.log(Ubrush);
+            noErase()
             break;
         case 'toothpick':
             Ubrush = "toothpick";
             console.log(Ubrush);
+            noErase()
             break;
         case 'splatter':
             Ubrush = "splatter";
             console.log(Ubrush);
+            noErase()
             break;
         case 'eraser':
             Ubrush = "eraser";
@@ -193,7 +200,7 @@ function touchMoved() {
 
 function pen() {
     // set the color and weight of the stroke
-    stroke(UColor, 255)
+    stroke(UColor[0], UColor[1], UColor[2], 255)
     strokeWeight(USize)
 
     // draw a line from current mouse point to previous mouse point
@@ -204,7 +211,7 @@ function pen() {
 
 function marker() {
     // set the color and brush style
-    fill(UColor, 40)
+    fill(UColor[0], UColor[1], UColor[2], 40)
     noStroke()
 
     // draw a circle at the current mouse point, with diameter of 50 pixels
@@ -215,7 +222,7 @@ function marker() {
 
 function wiggle() {
     // set the color and brush style
-    stroke(UColor, 255)
+    stroke(UColor[0], UColor[1], UColor[2], 255)
     strokeWeight(USize)
     noFill()
 
@@ -240,7 +247,7 @@ function wiggle() {
 
 function toothpick() {
     // set the color and brush style
-    fill(UColor, 150)
+    fill(UColor[0], UColor[1], UColor[2], 150)
     noStroke()
 
     // move the origin (0,0) to the current mouse point
@@ -265,7 +272,7 @@ function toothpick() {
 
 function calligraphy() {
     // set the color and brush style
-    stroke(UColor, 255)
+    stroke(UColor[0], UColor[1], UColor[2], 255)
     strokeWeight(1)
     const width = USize
 
@@ -288,7 +295,7 @@ function calligraphy() {
 
 function splatter() {
     // set the color and brush style
-    stroke(UColor, 160)
+    stroke(UColor[0], UColor[1], UColor[2], 160)
     strokeWeight(USize)
 
     // set the number of times we lerp the point in the for loop
@@ -310,7 +317,7 @@ function splatter() {
 
 function hatching() {
     // set the color and brush style
-    stroke(UColor, 220)
+    stroke(UColor[0], UColor[1], UColor[2], 220)
     strokeWeight(USize)
 
     // calculate the speed of the mouse
@@ -341,7 +348,7 @@ function hatching() {
 
 function sprayPaint() {
     // set the color and brush style
-    stroke(UColor, 255)
+    stroke(UColor[0], UColor[1], UColor[2], 255)
     strokeWeight(USize/50)
 
     // find the speed of the mouse movement
@@ -382,5 +389,6 @@ function sprayPaint() {
 function eraser() {
     pen()
     erase(200, 255)
+
 }
 
