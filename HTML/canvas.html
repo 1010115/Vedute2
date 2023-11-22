@@ -28,6 +28,9 @@
         <div id="canvasCanvas"
              class="h-canvasheight w-canvaswidth mx-4 aspect-video border-2 border-black border-solid mb-6 rounded bg-slate-50 bg-opacity-30">
         </div>
+        <div id="imageCanvas"
+             class="h-canvasheight w-canvaswidth mx-4 bottom-auto aspect-video border-2 border-black border-solid mb-6 rounded bg-slate-50 bg-opacity-30 absolute">
+        </div>
 
         <a href="./end.html">
             <button id="finish"
@@ -85,7 +88,7 @@
             <!--popup custom image import-->
             <button class="bg-slate-50 rounded-full p-6 justify-center hover:border-2 border-black mb-2"
                     id="image-button">import image
-                <input id="files" type="file" accept="image/*" class="setting" multiple/></button>
+                </button>
             <div id="imageModal" class="imageModal">
 
             </div>
@@ -97,7 +100,10 @@
             <div id="stickerModal" class="stickerModal">
 
             </div>
-
+             <!--sticker selector-->
+             <button class="bg-slate-50 rounded-full p-6 justify-center hover:border-2 border-black mb-2"
+             id="image-confirm">image confirm
+            </button>
             <div id="settings" class="grid grid-rows-4 grid-cols-2 gap-1 justify-self-end mt-1">
                 <button id="clear" class="setting rounded"><img src="../assets/clear.svg" alt="clear"></button>
             </div>
