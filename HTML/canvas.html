@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.8.0/p5.js"></script>
-    
     <script src="../js/popup.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.8.0/p5.js"></script>
+    <script src="../js/main.js"></script>
     <link href="../css/output.css" rel="stylesheet">
     <title>Vedute maker - editor</title>
     <script type="text/javascript" src="../js/add_image.js" defer></script>
@@ -45,28 +45,31 @@
             <!--popup brush-->
             <button class="bg-slate-50 rounded-full justify-center hover:border-2 border-black mb-2 relative flex place-content-center w-full p-2"
                     id="brush-selector"><img src="#" id="brushimg"></button>
-            <div id="brushModal"
-                 class="absolute hidden z-10 bg-slate-50 p-2  right-40 rounded-full border-2 border-black">
-                <button id="pen" class="setting tool  p-4 rounded-full"><img src="../assets/pen.svg" alt="pen"></button>
-                <button id="path" class="setting tool  p-4 rounded-full"><img src="../assets/path.svg" alt="path"></button>
-                <button id="square" class="setting tool  p-4 rounded-full"><img src="../assets/square.svg" alt="square"></button>
-                <button id="polygon" class="setting tool p-4 rounded-full"><img src="../assets/polygon.svg" alt="polygon"></button>
+            <div id="brushModal" class="absolute hidden z-10 bg-slate-50 p-2  right-40 rounded-full border-2 border-black">
+                <button id="pen" class="setting tool p-4 rounded-full"><img src="../assets/pen.svg" alt="pen"></button>
+                <button id="calligraphy" class="setting tool  p-4 rounded-full"><img src="../assets/pen.svg" alt="calligraphy"></button>
+                <button id="spraypaint" class="setting tool  p-4 rounded-full"><img src="../assets/pen.svg" alt="spraypaint"></button>
+                <button id="marker" class="setting tool  p-4 rounded-full"><img src="../assets/pen.svg" alt="marker"></button>
+                <button id="wiggle" class="setting tool  p-4 rounded-full"><img src="../assets/pen.svg" alt="wiggle"></button>
+                <button id="toothpick" class="setting tool  p-4 rounded-full"><img src="../assets/pen.svg" alt="toothpick"></button>
+                <button id="splatter" class="setting tool  p-4 rounded-full"><img src="../assets/pen.svg" alt="splatter"></button>
+                <button id="eraser" class="setting tool  p-4 rounded-full"><img src="../assets/pen.svg" alt="eraser"></button>
+
             </div>
 
             <!--popup color selector-->
-            <button class="bg-black rounded-full justify-center hover:border-2 border-black mb-2 relative flex place-content-center p-6 w-full"
-                    id="color-selector"></button>
+            <button id="color-selector" class="bg-black rounded-full justify-center hover:border-2 border-black mb-2 relative flex place-content-center p-6 w-full"></button>
             <div id="colorModal"
                  class="absolute hidden z-10 bg-slate-50 p-2  right-40 rounded-full border-2 border-black">
                 <div id="colors">
                     <button id="black" class="bg-black setting rounded-full"></button>
-                    <button class="bg-red-500 setting rounded-full"></button>
-                    <button class="bg-green-500 setting rounded-full"></button>
-                    <button class="bg-blue-500 setting rounded-full"></button>
-                    <button class="bg-white setting rounded-full"></button>
-                    <button class="bg-yellow-500 setting rounded-full"></button>
-                    <button class="bg-orange-500 setting rounded-full"></button>
-                    <button class="bg-violet-500 setting rounded-full"></button>
+                    <button id="red" class="bg-red-500 setting rounded-full"></button>
+                    <button id="green" class="bg-green-500 setting rounded-full"></button>
+                    <button id="blue" class="bg-blue-500 setting rounded-full"></button>
+                    <button id="white" class="bg-white setting rounded-full"></button>
+                    <button id="yellow" class="bg-yellow-500 setting rounded-full"></button>
+                    <button id="orange" class="bg-orange-500 setting rounded-full"></button>
+                    <button id="violet" class="bg-violet-500 setting rounded-full"></button>
                 </div>
             </div>
 
