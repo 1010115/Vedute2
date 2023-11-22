@@ -1,18 +1,17 @@
 window.addEventListener('DOMContentLoaded', init);
 
 let img;
-
 let staticImg;
 let imgDiv;
 let confirmImg;
 let imgCorrect = false;
 let dragging = false; // Is the object being dragged?
 let rollover = false; // Is the mouse over the ellipse?
+
 let x, y, w, h; // Location and size
 let staticX, staticY;
 let offsetX, offsetY; // Mouseclick offset
 let imageLayer;
-
 
 function init() {
   //gets the necesarry html elements
@@ -53,7 +52,6 @@ let s1 = function (sketch) {
 
 
 }
-
 
 mainCanvas = new p5(s1);
 
