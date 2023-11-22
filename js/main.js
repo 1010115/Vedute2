@@ -9,6 +9,9 @@ let oldcolor;
 let sizeImg;
 let brushImg
 
+let previousState;
+let saveStates = []
+
 //brush sizes
 const sizes = {
     'small': 5,
@@ -39,6 +42,7 @@ function setup() {
     canvas = createCanvas(406, 560);
     background('#fbf8f3')
     canvas.parent('canvasCanvas');
+    saveState()
 }
 
 function draw() {
@@ -47,6 +51,8 @@ function draw() {
         switch ( Ubrush ) {
             case "pen":
                 pen()
+                saveState()
+                console.log(saveStates)
                 break;
             case "spraypaint":
                 sprayPaint()
@@ -74,6 +80,7 @@ function draw() {
                 break;
         }
     }
+
 }
 
 function setBrush(e, mode){
@@ -392,3 +399,25 @@ function eraser() {
 
 }
 
+function keyPressed(e) {
+    // check if the event parameter (e) has Z (keycode 90) and ctrl or cmnd
+    if (e.keyCode == 90 && (e.ctrlKey || e.metaKey)) {
+        undoToPreviousState();
+    }
+}
+
+function undoToPreviousState() {
+    if (saveStates == 0) {
+        return;
+    } else {
+    background('#fbf8f3')
+        saveStates.pop()
+    image(saveStates[saveStates.length -1],0,0);
+    console.log(saveStates.length)
+    }
+}
+
+function saveState() {
+
+    saveStates.push(previousState = get(0,0,406,560));
+}
