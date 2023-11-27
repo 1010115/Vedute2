@@ -460,13 +460,12 @@ function undoToPreviousState() {
     } else {
     background('#fbf8f3')
         saveStates.pop()
-    image(saveStates[saveStates.length -1],0,0);
+    image(saveStates[saveStates.length -1],0,0,406,560);
     console.log(saveStates.length)
     }
 }
 
 function saveState() {
-
     saveStates.push(previousState = get(0,0,406,560));
 }
 //---imagelayer--
