@@ -22,6 +22,9 @@ let oldcolor;
 let sizeImg;
 let brushImg
 
+let previousState;
+let saveStates = []
+
 //brush sizes
 const sizes = {
     'small': 5,
@@ -46,6 +49,8 @@ const activeEvents = {
     "mouseup": undefined,
     "mousemove": undefined
 };
+
+// For every brush
 
 
 function init() {
@@ -85,10 +90,11 @@ function init() {
     canvas1.parent('canvasCanvas');
     canvas1.background('#fbf8f3')
     input = createFileInput(handleFile);
-    input.parent('image-button')
+    input.parent('image-button');
+      saveState();
   }
 
-  
+
   draw = function () {
     //selects the correct pen and allows you to draw
     if (mouseIsPressed && imgDiv.classList.contains("hidden")) {
@@ -96,6 +102,8 @@ function init() {
         switch ( Ubrush ) {
             case "pen":
                 pen()
+                saveState()
+                console.log(saveStates)
                 break;
             case "spraypaint":
                 sprayPaint()
@@ -129,6 +137,9 @@ function init() {
       console.log(img);
       image(staticImg, staticX, staticY, w, h);
       imgCorrect = false;
+      if (!confirmImg.classList.contains('hidden')) {
+        confirmImg.classList.toggle('hidden');
+      }
     }
 
   }
@@ -141,6 +152,9 @@ function init() {
       img.hide();
       if (imgDiv.classList.contains('hidden')) {
         imgDiv.classList.toggle('hidden');
+      }
+      if (confirmImg.classList.contains('hidden')) {
+        confirmImg.classList.toggle('hidden');
       }
     } else {
       img = null;
@@ -239,7 +253,7 @@ function init() {
 }
 
 
-// ---brushes---
+
 // --- pen---
 
 function pen() {
@@ -436,7 +450,27 @@ function eraser() {
 
 }
 
+function keyPressed(e) {
+    // check if the event parameter (e) has Z (keycode 90) and ctrl or cmnd
+    if (e.keyCode == 90 && (e.ctrlKey || e.metaKey)) {
+        undoToPreviousState();
+    }
+}
 
+function undoToPreviousState() {
+    if (saveStates == 0) {
+        return;
+    } else {
+    background('#fbf8f3')
+        saveStates.pop()
+    image(saveStates[saveStates.length -1],0,0,406,560);
+    console.log(saveStates.length)
+    }
+}
+
+function saveState() {
+    saveStates.push(previousState = get(0,0,406,560));
+}
 //---imagelayer--
 
 let s2 = function (sketch) {
