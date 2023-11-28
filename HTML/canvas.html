@@ -86,10 +86,15 @@
 
             <!--popup custom image import-->
             <button class="bg-slate-50 rounded-full p-6 justify-center hover:border-2 border-black mb-2"
-                    id="image-button">import image
+                    id="image-button">Afbeeldingen
                 </button>
-            <div id="imageModal" class="imageModal">
-
+            <div id="imageModal" class="imageModal absolute hidden w-80 h-fit z-10 bg-slate-50 p-2 top-52 right-popup rounded-lg border-2 border-black grid grid-cols-3 gap-1">
+                <div class="p-1 bg-slate-100 rounded-lg text-center flex justify-center place-items-center">
+                    <button id="import-button" class="text-5xl self-center text-slate-400 font-bold align-middle">+</button>
+                </div>
+                <div class="p-1 bg-slate-100 rounded-lg text-center flex justify-center items-center">
+                    <img src="../Images/placeholder.jpg" alt="imported image" class="rounded-lg">
+                </div>
             </div>
 
             <!--sticker selector-->
