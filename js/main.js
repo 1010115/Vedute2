@@ -178,6 +178,12 @@ draw = function () {
 
     //checks if the image gets pasted into the main canvas and pasts it there
     if (img && imgCorrect) {
+      console.log(img);
+      image(staticImg, staticX, staticY, w, h);
+      imgCorrect = false;
+      if (!confirmImg.classList.contains('hidden')) {
+        confirmImg.classList.toggle('hidden');
+      }
         console.log(img);
         image(staticImg, staticX, staticY, w, h);
         imgCorrect = false;
@@ -189,6 +195,14 @@ draw = function () {
 handleFile = function (file) {
 
     if (file.type === 'image') {
+      img = createImg(file.data, '');
+      img.hide();
+      if (imgDiv.classList.contains('hidden')) {
+        imgDiv.classList.toggle('hidden');
+      }
+      if (confirmImg.classList.contains('hidden')) {
+        confirmImg.classList.toggle('hidden');
+      }
         img = createImg(file.data, '');
         img.hide();
         if (imgDiv.classList.contains('hidden')) {
