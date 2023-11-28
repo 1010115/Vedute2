@@ -90,9 +90,10 @@ function init() {
     canvas1.parent('canvasCanvas');
     canvas1.background('#fbf8f3')
     input = createFileInput(handleFile);
-    input.parent('image-button');
-      saveState();
-  }
+    input.id('image-import');
+    input.parent('image-insert');
+    saveState();
+}
 
 
   draw = function () {
