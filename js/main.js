@@ -51,12 +51,7 @@ const activeEvents = {
 };
 
 // For every brush
-function setup() {
-    canvas = createCanvas(406, 560);
-    background('#fbf8f3')
-    canvas.parent('canvasCanvas');
-    saveState()
-}
+
 
 function init() {
   //gets the necesarry html elements
@@ -95,7 +90,8 @@ function init() {
     canvas1.parent('canvasCanvas');
     canvas1.background('#fbf8f3')
     input = createFileInput(handleFile);
-    input.parent('image-button')
+    input.parent('image-button');
+      saveState();
   }
 
 
