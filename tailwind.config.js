@@ -15,6 +15,7 @@ module.exports = {
       },
       spacing: {
         '128': '32rem',
+        'popup': '29rem',
         'canvasheight': '35.2rem',
         'canvaswidth': '25.6rem',
       }

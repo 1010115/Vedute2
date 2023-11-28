@@ -62,6 +62,7 @@ function selectColorModal() {
 function imageImport() {
     console.log('image import');
     //open image modal
+    ImageModal.classList.remove("hidden")
 }
 
 function selectSticker() {
@@ -81,6 +82,10 @@ document.addEventListener("click", function(event) {
 
     if (!SizeSelector.contains(event.target)) {
         SizeModal.classList.add("hidden");
+    }
+
+    if (!ImageButton.contains(event.target)) {
+        ImageModal.classList.add("hidden")
     }
 });
 

@@ -168,6 +168,7 @@ function init() {
         activeEvents[event] = undefined;
     }
 
+    //when user selects diffrent brush
     switch (mode) {
         case 'pen':
             Ubrush = "pen";
