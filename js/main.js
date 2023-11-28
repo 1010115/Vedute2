@@ -15,15 +15,16 @@ let imageLayer; //p5 object for the imagelayer
 
 //starting variables for brush - color - size
 let Ubrush = "pen"; //user brush
-let UColor = [0,0,0];//user color
+let UColor = [0, 0, 0];//user color
 let USize = 10; //user size
-let Utoothpicklength= 5;//user toothpick length
+let Utoothpicklength = 5;//user toothpick length
 let oldcolor;
 let sizeImg;
 let brushImg
 
 let previousState;
 let saveStates = []
+let drawing = true
 
 //brush sizes
 const sizes = {
@@ -34,14 +35,14 @@ const sizes = {
 
 //alle colors die worden gebruikt
 const colors = {
-    "black": [0,0,0],
-    "white": [255,255,255],
-    "red": [239,68,68],
-    "green": [34,197,94],
-    "blue": [59,130,246],
-    "yellow": [234,179,8],
-    "orange": [249,115,22],
-    "violet": [139,92,246]
+    "black": [0, 0, 0],
+    "white": [255, 255, 255],
+    "red": [239, 68, 68],
+    "green": [34, 197, 94],
+    "blue": [59, 130, 246],
+    "yellow": [234, 179, 8],
+    "orange": [249, 115, 22],
+    "violet": [139, 92, 246]
 }
 
 const activeEvents = {
@@ -54,109 +55,152 @@ const activeEvents = {
 
 
 function init() {
-  //gets the necesarry html elements
-  confirmImg = document.getElementById('image-confirm');
-  confirmImg.addEventListener('click', confirmClickHandler);
-  imgDiv = document.getElementById('imageCanvas');
-  imgDiv.classList.add('hidden');
-  const tools = document.getElementsByClassName('tool')
-        for(const tool of tools) {
-            tool.addEventListener('click', (e) => { setBrush(e, tool.id)} );
-        }
+    //gets the necesarry html elements
+    confirmImg = document.getElementById('image-confirm');
+    confirmImg.addEventListener('click', confirmClickHandler);
+    imgDiv = document.getElementById('imageCanvas');
+    imgDiv.classList.add('hidden');
+    const tools = document.getElementsByClassName('tool')
+    for (const tool of tools) {
+        tool.addEventListener('click', (e) => {
+            setBrush(e, tool.id)
+        });
+    }
 
-        const sizeButtons = document.getElementsByClassName('size')
-        for(const sizeButton of sizeButtons) {
-            sizeButton.addEventListener('click', (e) => { setSize(e, sizes[sizeButton.id])} );
-        }
+    const sizeButtons = document.getElementsByClassName('size')
+    for (const sizeButton of sizeButtons) {
+        sizeButton.addEventListener('click', (e) => {
+            setSize(e, sizes[sizeButton.id])
+        });
+    }
 
-        const colorButtons = document.getElementById('colors').children;
-        for (const colorButton of colorButtons) {
-            colorButton.addEventListener('click', (e) => { setColor(e, colors[colorButton.id], colorButton.id)} );
-        }
+    const colorButtons = document.getElementById('colors').children;
+    for (const colorButton of colorButtons) {
+        colorButton.addEventListener('click', (e) => {
+            setColor(e, colors[colorButton.id], colorButton.id)
+        });
+    }
 
-        sizeImg = document.getElementById("sizeimg")
-        sizeImg.src = "../assets/medium.svg";
+    sizeImg = document.getElementById("sizeimg")
+    sizeImg.src = "../assets/medium.svg";
 
-        brushImg = document.getElementById("brushimg")
-        brushImg.src = "../assets/pen.svg"
+    brushImg = document.getElementById("brushimg")
+    brushImg.src = "../assets/pen.svg"
 
 
-        console.log("init klaar");
+    console.log("init klaar");
 }
 
 //prepares the main canvas and input button
-  setup = function () {
+setup = function () {
     let canvas1 = createCanvas(406, 560);
     canvas1.parent('canvasCanvas');
     canvas1.background('#fbf8f3')
     input = createFileInput(handleFile);
     input.parent('image-button');
-      saveState();
-  }
+    saveState();
+}
 
 
-  draw = function () {
+draw = function () {
     //selects the correct pen and allows you to draw
     if (mouseIsPressed && imgDiv.classList.contains("hidden")) {
-
-        switch ( Ubrush ) {
+        switch (Ubrush) {
             case "pen":
+
                 pen()
-                saveState()
-                console.log(saveStates)
+                if (drawing){
+                    saveState()
+                    drawing = false
+                }
                 break;
             case "spraypaint":
                 sprayPaint()
+                if (drawing){
+                    saveState()
+                    drawing = false
+                }
                 break;
             case "calligraphy":
                 calligraphy()
+                if (drawing){
+                    saveState()
+                    drawing = false
+                }
                 break;
             case "marker":
                 marker()
+                if (drawing){
+                    saveState()
+                    drawing = false
+                }
                 break;
             case "wiggle":
                 wiggle()
+                if (drawing){
+                    saveState()
+                    drawing = false
+                }
                 break;
             case "toothpick":
                 toothpick()
+                if (drawing){
+                    saveState()
+                    drawing = false
+                }
                 break;
             case "hatching":
                 hatching()
+                if (drawing){
+                    saveState()
+                    drawing = false
+                }
                 break;
             case "splatter":
                 splatter()
+                if (drawing){
+                    saveState()
+                    drawing = false
+                }
                 break;
             case "eraser":
                 eraser()
+                if (drawing){
+                    saveState()
+                    drawing = false
+                }
                 break;
         }
+
     }
+
+    addEventListener("mouseup", (event) => {drawing = true})
 
     //checks if the image gets pasted into the main canvas and pasts it there
     if (img && imgCorrect) {
-      console.log(img);
-      image(staticImg, staticX, staticY, w, h);
-      imgCorrect = false;
+        console.log(img);
+        image(staticImg, staticX, staticY, w, h);
+        imgCorrect = false;
     }
 
-  }
+}
 
-  //handles the image file input
-  handleFile = function (file) {
+//handles the image file input
+handleFile = function (file) {
 
     if (file.type === 'image') {
-      img = createImg(file.data, '');
-      img.hide();
-      if (imgDiv.classList.contains('hidden')) {
-        imgDiv.classList.toggle('hidden');
-      }
+        img = createImg(file.data, '');
+        img.hide();
+        if (imgDiv.classList.contains('hidden')) {
+            imgDiv.classList.toggle('hidden');
+        }
     } else {
-      img = null;
+        img = null;
     }
-  }
+}
 
 
-  function setBrush(e, mode){
+function setBrush(e, mode) {
     for (const event in activeEvents) {
         window.removeEventListener(event, activeEvents[event]);
         activeEvents[event] = undefined;
@@ -202,49 +246,49 @@ function init() {
             Ubrush = "eraser";
             console.log(Ubrush);
             break;
-    }}
-
-    function setSize(e, size) {
-        if (size === 5) {
-            USize = 5;
-            console.log(USize);
-            sizeImg.src = "../assets/small.svg";
-        }
-
-        if (size === 10) {
-            USize = 10;
-            console.log(USize);
-            sizeImg.src = "../assets/medium.svg";
-        }
-
-        if (size === 15) {
-            USize = 15;
-            console.log(USize);
-            sizeImg.src = "../assets/big.svg";
-        }
     }
-
-
-    function setColor(e, color, buttonid) {
-
-        let Buttonlist = document.getElementById("color-selector");
-        UColor = color
-
-        console.log(UColor);
-
-
-        if (oldcolor) {
-            Buttonlist.classList.remove("bg-" + oldcolor + "-500")
-        }
-        oldcolor = buttonid
-
-        Buttonlist.classList.add("bg-" + buttonid + "-500");
-    }
-
-    function touchMoved() {
-    return false
 }
 
+function setSize(e, size) {
+    if (size === 5) {
+        USize = 5;
+        console.log(USize);
+        sizeImg.src = "../assets/small.svg";
+    }
+
+    if (size === 10) {
+        USize = 10;
+        console.log(USize);
+        sizeImg.src = "../assets/medium.svg";
+    }
+
+    if (size === 15) {
+        USize = 15;
+        console.log(USize);
+        sizeImg.src = "../assets/big.svg";
+    }
+}
+
+
+function setColor(e, color, buttonid) {
+
+    let Buttonlist = document.getElementById("color-selector");
+    UColor = color
+
+    console.log(UColor);
+
+
+    if (oldcolor) {
+        Buttonlist.classList.remove("bg-" + oldcolor + "-500")
+    }
+    oldcolor = buttonid
+
+    Buttonlist.classList.add("bg-" + buttonid + "-500");
+}
+
+function touchMoved() {
+    return false
+}
 
 
 // --- pen---
@@ -400,7 +444,7 @@ function hatching() {
 function sprayPaint() {
     // set the color and brush style
     stroke(UColor[0], UColor[1], UColor[2], 255)
-    strokeWeight(USize/50)
+    strokeWeight(USize / 50)
 
     // find the speed of the mouse movement
     const speed = abs(mouseX - pmouseX) + abs(mouseY - pmouseY)
@@ -451,85 +495,86 @@ function keyPressed(e) {
 }
 
 function undoToPreviousState() {
-    if (saveStates == 0) {
-        return;
-    } else {
-    background('#fbf8f3')
+    if (saveStates !== 0) {
+        background('#fbf8f3')
+
+        image(saveStates[saveStates.length -1], 0, 0, 406, 560);
         saveStates.pop()
-    image(saveStates[saveStates.length -1],0,0,406,560);
-    console.log(saveStates.length)
     }
 }
 
 function saveState() {
-    saveStates.push(previousState = get(0,0,406,560));
+    saveStates.push(previousState = get(0, 0, 406, 560));
+    console.log(saveStates)
 }
+
 //---imagelayer--
 
 let s2 = function (sketch) {
-  sketch.setup = function () {
-    let canvas2 = sketch.createCanvas(406, 560);
-    canvas2.parent('imageCanvas');
-    // Starting location
-    x = 0;
-    y = 0;
+    sketch.setup = function () {
+        let canvas2 = sketch.createCanvas(406, 560);
+        canvas2.parent('imageCanvas');
+        // Starting location
+        x = 0;
+        y = 0;
 
-    // Dimensions
-    w = 100;
-    h = 100;
-  }
-  sketch.draw = function () {
-    //for canvas 2
+        // Dimensions
+        w = 100;
+        h = 100;
+    }
+    sketch.draw = function () {
+        //for canvas 2
 
-    sketch.clear();
+        sketch.clear();
 
-    // Is mouse over object
-    if (sketch.mouseX > x && sketch.mouseX < x + w && sketch.mouseY > y && sketch.mouseY < y + h) {
-      rollover = true;
-    } else {
-      rollover = false;
+        // Is mouse over object
+        if (sketch.mouseX > x && sketch.mouseX < x + w && sketch.mouseY > y && sketch.mouseY < y + h) {
+            rollover = true;
+        } else {
+            rollover = false;
+        }
+
+        // Adjust location if being dragged
+        if (dragging) {
+            x = sketch.mouseX + offsetX;
+            y = sketch.mouseY + offsetY;
+        }
+
+        sketch.stroke(0);
+        if (img) {
+
+            sketch.image(img, x, y, w, h);
+        }
+
     }
 
-    // Adjust location if being dragged
-    if (dragging) {
-      x = sketch.mouseX + offsetX;
-      y = sketch.mouseY + offsetY;
+    sketch.mousePressed = function () {
+        if (sketch.mouseX > x && sketch.mouseX < x + w && sketch.mouseY > y && sketch.mouseY < y + h) {
+            dragging = true;
+
+            offsetX = x - sketch.mouseX;
+            offsetY = y - sketch.mouseY;
+        }
+
+
     }
+    sketch.mouseReleased = function () {
+        // Quit dragging
+        dragging = false;
 
-    sketch.stroke(0);
-    if (img) {
-
-      sketch.image(img, x, y, w, h);
     }
-
-  }
-
-  sketch.mousePressed = function () {
-    if (sketch.mouseX > x && sketch.mouseX < x + w && sketch.mouseY > y && sketch.mouseY < y + h) {
-      dragging = true;
-
-      offsetX = x - sketch.mouseX;
-      offsetY = y - sketch.mouseY;
-    }
-
-
-  }
-  sketch.mouseReleased = function () {
-    // Quit dragging
-    dragging = false;
-  }
 }
 
 imageLayer = new p5(s2);
 
 function confirmClickHandler() {
-  imgCorrect = true;
-  staticImg = img;
-  staticX = x;
-  staticY = y;
-  if (!imgDiv.classList.contains('hidden') && imgDiv !== undefined) {
-    imgDiv.classList.add('hidden');
-  }
+    imgCorrect = true;
+    staticImg = img;
+    staticX = x;
+    staticY = y;
+    if (!imgDiv.classList.contains('hidden') && imgDiv !== undefined) {
+        imgDiv.classList.add('hidden');
+    }
 }
 
 
