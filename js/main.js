@@ -108,67 +108,77 @@ draw = function () {
         switch (Ubrush) {
             case "pen":
 
-                pen()
+
                 if (drawing){
                     saveState()
                     drawing = false
                 }
+                pen()
                 break;
             case "spraypaint":
-                sprayPaint()
+
                 if (drawing){
                     saveState()
                     drawing = false
                 }
+                sprayPaint()
                 break;
             case "calligraphy":
-                calligraphy()
+
                 if (drawing){
                     saveState()
                     drawing = false
                 }
+                calligraphy()
                 break;
             case "marker":
-                marker()
+
                 if (drawing){
                     saveState()
                     drawing = false
                 }
+                marker()
+                calligraphy()
                 break;
             case "wiggle":
-                wiggle()
+
                 if (drawing){
                     saveState()
                     drawing = false
                 }
+                wiggle()
                 break;
             case "toothpick":
-                toothpick()
+
                 if (drawing){
                     saveState()
                     drawing = false
                 }
+                toothpick()
                 break;
             case "hatching":
-                hatching()
+
                 if (drawing){
                     saveState()
                     drawing = false
                 }
+                hatching()
                 break;
             case "splatter":
-                splatter()
+
                 if (drawing){
                     saveState()
                     drawing = false
                 }
+                splatter()
                 break;
             case "eraser":
-                eraser()
+
                 if (drawing){
                     saveState()
                     drawing = false
                 }
+                eraser()
                 break;
         }
 
