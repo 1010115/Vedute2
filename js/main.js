@@ -12,6 +12,9 @@ let x, y, w, h; // Location and size
 let staticX, staticY; //the location the image gets placed on the main canvas
 let offsetX, offsetY; // Mouseclick offset
 let imageLayer; //p5 object for the imagelayer
+let uploadedImages = [] // array of all images that get saved into localstorage
+let imageName; // Uploaded image name
+let imageB64; // Uploaded
 
 //starting variables for brush - color - size
 let Ubrush = "pen"; //user brush
@@ -79,6 +82,8 @@ function init() {
 
         brushImg = document.getElementById("brushimg")
         brushImg.src = "../assets/pen.svg"
+
+        //get all saved images from localstorage and add to menu
 
 
         console.log("init klaar");
@@ -157,6 +162,10 @@ function init() {
       if (confirmImg.classList.contains('hidden')) {
         confirmImg.classList.toggle('hidden');
       }
+
+        //set name and B64 data
+        imageName = file.name;
+        setB64(file.file)
     } else {
       img = null;
     }
@@ -451,6 +460,7 @@ function eraser() {
 
 }
 
+//---   UNDO FUNCTION   ---
 function keyPressed(e) {
     // check if the event parameter (e) has Z (keycode 90) and ctrl or cmnd
     if (e.keyCode == 90 && (e.ctrlKey || e.metaKey)) {
@@ -535,9 +545,60 @@ function confirmClickHandler() {
   staticImg = img;
   staticX = x;
   staticY = y;
+
+  //save uploaded image to array
+  saveUploadedToLocal();
+
+  console.log(img);
   if (!imgDiv.classList.contains('hidden') && imgDiv !== undefined) {
     imgDiv.classList.add('hidden');
   }
+
+  //uploads image used to localstorage
+                    //imagename, base-64 string
+
 }
+
+function setB64(file) {
+    const reader = new FileReader()
+
+
+    reader.onload = function(event) {
+        imageB64 = event.target.result;
+    };
+
+    reader.readAsDataURL(file);
+}
+
+function saveUploadedToLocal() {
+    ImageObject = {"name":imageName,"base64":imageB64};
+
+    //check if the image already has been uploaded
+    if (uploadedImages.filter(array => array.name === ImageObject.name ).length === 0){
+        uploadedImages.push(ImageObject);
+        console.log(uploadedImages);
+    }
+
+    //add to HTML
+    // Create the div element
+    let divElement = document.createElement("div");
+    divElement.classList.add("p-1", "bg-slate-100", "rounded-lg", "text-center", "flex", "justify-center", "items-center");
+
+// Create the img element
+    let imgElement = document.createElement("img");
+    imgElement.setAttribute("src", imageB64);
+    imgElement.setAttribute("alt", imageName );
+    imgElement.classList.add("rounded-lg","object-cover","w-100px","h-100px");
+
+// Append the img element to the div
+    divElement.appendChild(imgElement);
+
+// Append the div to the document body or any other desired location
+    document.getElementById('imageModal').appendChild(divElement);
+
+    //save to localstorage
+    localStorage.setItem("uploadedImages", JSON.stringify(uploadedImages));
+}
+
 
 

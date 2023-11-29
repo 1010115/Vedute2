@@ -14,6 +14,7 @@ module.exports = {
         'donkergrijs': '#47525E',
       },
       spacing: {
+        '100px': '100px',
         '128': '32rem',
         'popup': '29rem',
         'canvasheight': '35.2rem',
