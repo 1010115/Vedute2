@@ -5,6 +5,7 @@ let img; // the image your currently using
 let staticImg; //the image that gets posted into the canvas
 let imgDiv; //the div that has the img canvas
 let confirmImg; //the button that onfirms the image
+let cancelImg; //the button that cancels the image
 let imgCorrect = false; //wether the image button has been pressed or not
 let dragging = false; // Is the object being dragged?
 let rollover = false; // Is the mouse over the ellipse?
@@ -56,7 +57,9 @@ const activeEvents = {
 function init() {
   //gets the necesarry html elements
   confirmImg = document.getElementById('image-confirm');
+  cancelImg = document.getElementById('image-cancel');
   confirmImg.addEventListener('click', confirmClickHandler);
+  cancelImg.addEventListener('click', cancelClickHandler);
   imgDiv = document.getElementById('imageCanvas');
   imgDiv.classList.add('hidden');
   const tools = document.getElementsByClassName('tool')
@@ -90,6 +93,7 @@ function init() {
     canvas1.parent('canvasCanvas');
     canvas1.background('#fbf8f3')
     input = createFileInput(handleFile);
+    
     input.id('image-import');
     input.parent('image-insert');
     saveState();
@@ -138,25 +142,21 @@ function init() {
       console.log(img);
       image(staticImg, staticX, staticY, w, h);
       imgCorrect = false;
-      if (!confirmImg.classList.contains('hidden')) {
-        confirmImg.classList.toggle('hidden');
-      }
     }
 
   }
 
   //handles the image file input
   handleFile = function (file) {
-
     if (file.type === 'image') {
       img = createImg(file.data, '');
       img.hide();
       if (imgDiv.classList.contains('hidden')) {
         imgDiv.classList.toggle('hidden');
-      }
-      if (confirmImg.classList.contains('hidden')) {
         confirmImg.classList.toggle('hidden');
+        cancelImg.classList.toggle('hidden');
       }
+      
     } else {
       img = null;
     }
@@ -530,6 +530,7 @@ let s2 = function (sketch) {
 
 imageLayer = new p5(s2);
 
+//handles the confirm button for images
 function confirmClickHandler() {
   imgCorrect = true;
   staticImg = img;
@@ -537,7 +538,18 @@ function confirmClickHandler() {
   staticY = y;
   if (!imgDiv.classList.contains('hidden') && imgDiv !== undefined) {
     imgDiv.classList.add('hidden');
+    confirmImg.classList.toggle('hidden');
+        cancelImg.classList.toggle('hidden');
   }
+}
+
+//handles the cancel button for images
+function cancelClickHandler() {
+    if (!imgDiv.classList.contains('hidden') && imgDiv !== undefined) {
+        imgDiv.classList.add('hidden');
+        confirmImg.classList.toggle('hidden');
+        cancelImg.classList.toggle('hidden');
+      }
 }
 
 
