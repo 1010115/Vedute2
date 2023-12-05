@@ -12,6 +12,9 @@ let x, y, w, h; // Location and size
 let staticX, staticY; //the location the image gets placed on the main canvas
 let offsetX, offsetY; // Mouseclick offset
 let imageLayer; //p5 object for the imagelayer
+let uploadedImages = [] // array of all images that get saved into localstorage
+let imageName; // Uploaded image name
+let imageB64; // Uploaded
 
 //starting variables for brush - color - size
 let Ubrush = "pen"; //user brush
@@ -85,8 +88,31 @@ function init() {
     sizeImg.src = "../assets/medium.svg";
 
     brushImg = document.getElementById("brushimg")
-    brushImg.src = "../assets/pen.svg"
+    brushImg.src = "../assets/pen-solid.svg"
 
+    //get all saved images from localstorage and add to menu
+    if (localStorage.getItem("uploadedImages")) {    //if uploadedimages are uploaded to localstorage
+        uploadedImages = JSON.parse(localStorage.getItem("uploadedImages"));
+
+        uploadedImages.forEach((object, index) => {
+            //add to HTML
+            // Create the div element
+            let divElement = document.createElement("div");
+            divElement.classList.add("p-1", "bg-slate-100", "rounded-lg", "text-center", "flex", "justify-center", "items-center");
+
+            // Create the img element
+            let imgElement = document.createElement("img");
+            imgElement.setAttribute("src", object.base64);
+            imgElement.setAttribute("alt", object.name);
+            imgElement.classList.add("rounded-lg", "object-cover", "w-100px", "h-100px");
+
+            // Append the img element to the div
+            divElement.appendChild(imgElement);
+
+            // Append the div to the document body or any other desired location
+            document.getElementById('imageModal').appendChild(divElement);
+        });
+    }
 
     console.log("init klaar");
 }
@@ -97,7 +123,8 @@ setup = function () {
     canvas1.parent('canvasCanvas');
     canvas1.background('#fbf8f3')
     input = createFileInput(handleFile);
-    input.parent('image-button');
+    input.id('image-import');
+    input.parent('image-insert');
     saveState();
 }
 
@@ -108,6 +135,8 @@ draw = function () {
         switch (Ubrush) {
             case "pen":
 
+        switch (Ubrush) {
+            case "pen":
 
                 if (drawing){
                     saveState()
@@ -188,6 +217,12 @@ draw = function () {
 
     //checks if the image gets pasted into the main canvas and pasts it there
     if (img && imgCorrect) {
+        console.log(img);
+        image(staticImg, staticX, staticY, w, h);
+        imgCorrect = false;
+        if (!confirmImg.classList.contains('hidden')) {
+            confirmImg.classList.toggle('hidden');
+        }
       console.log(img);
       image(staticImg, staticX, staticY, w, h);
       imgCorrect = false;
@@ -205,6 +240,18 @@ draw = function () {
 handleFile = function (file) {
 
     if (file.type === 'image') {
+        img = createImg(file.data, '');
+        img.hide();
+        if (imgDiv.classList.contains('hidden')) {
+            imgDiv.classList.toggle('hidden');
+        }
+        if (confirmImg.classList.contains('hidden')) {
+            confirmImg.classList.toggle('hidden');
+        }
+
+        //set name and B64 data
+        imageName = file.name;
+        setB64(file.file)
       img = createImg(file.data, '');
       img.hide();
       if (imgDiv.classList.contains('hidden')) {
@@ -235,41 +282,55 @@ function setBrush(e, mode) {
         case 'pen':
             Ubrush = "pen";
             console.log(Ubrush);
+            brushImg.src = "../assets/pen-solid.svg";
             noErase()
             break;
         case 'spraypaint':
             Ubrush = "spraypaint";
             console.log(Ubrush);
+            brushImg.src = "../assets/spraypaint.svg";
             noErase()
             break;
         case 'calligraphy':
             Ubrush = "calligraphy";
             console.log(Ubrush);
+            brushImg.src = "../assets/calligraphy.svg";
             noErase()
             break;
         case 'marker':
             Ubrush = "marker";
             console.log(Ubrush);
+            brushImg.src = "../assets/marker.svg";
             noErase()
             break;
         case 'wiggle':
             Ubrush = "wiggle";
             console.log(Ubrush);
             noErase()
+            brushImg.src = "../assets/wiggle.svg";
             break;
         case 'toothpick':
             Ubrush = "toothpick";
             console.log(Ubrush);
             noErase()
+            brushImg.src = "../assets/pen.svg";
             break;
         case 'splatter':
             Ubrush = "splatter";
             console.log(Ubrush);
             noErase()
+            brushImg.src = "../assets/splatter.svg";
+            break;
+        case 'hatching':
+            Ubrush = "hatching"
+            console.log(Ubrush);
+            noErase()
+            brushImg.src = "../assets/hatching.svg";
             break;
         case 'eraser':
             Ubrush = "eraser";
             console.log(Ubrush);
+            brushImg.src = "../assets/eraser.svg";
             break;
     }
 }
@@ -512,6 +573,7 @@ function eraser() {
 
 }
 
+//---   UNDO FUNCTION   ---
 function keyPressed(e) {
     // check if the event parameter (e) has Z (keycode 90) and ctrl or cmnd
     if (e.keyCode == 90 && (e.ctrlKey || e.metaKey)) {
@@ -572,6 +634,11 @@ let s2 = function (sketch) {
         }
 
     }
+    sketch.mouseReleased = function () {
+        // Quit dragging
+        dragging = false;
+    }
+}
 
     sketch.mousePressed = function () {
         if (sketch.mouseX > x && sketch.mouseX < x + w && sketch.mouseY > y && sketch.mouseY < y + h) {
@@ -581,6 +648,12 @@ let s2 = function (sketch) {
             offsetY = y - sketch.mouseY;
         }
 
+    //save uploaded image to array
+    saveUploadedToLocal();
+
+    console.log(img);
+    if (!imgDiv.classList.contains('hidden') && imgDiv !== undefined) {
+        imgDiv.classList.add('hidden');
 
     }
     sketch.mouseReleased = function () {
@@ -590,7 +663,16 @@ let s2 = function (sketch) {
     }
 }
 
-imageLayer = new p5(s2);
+function setB64(file) {
+    const reader = new FileReader()
+
+
+    reader.onload = function (event) {
+        imageB64 = event.target.result;
+    };
+
+    reader.readAsDataURL(file);
+}
 
 function confirmClickHandler() {
     imgCorrect = true;
@@ -601,5 +683,36 @@ function confirmClickHandler() {
         imgDiv.classList.add('hidden');
     }
 }
+
+function saveUploadedToLocal() {
+    ImageObject = {"name": imageName, "base64": imageB64};
+
+    //check if the image already has been uploaded
+    if (uploadedImages.filter(array => array.name === ImageObject.name).length === 0) {
+        uploadedImages.push(ImageObject);
+        console.log(uploadedImages);
+    }
+
+    //add to HTML
+    // Create the div element
+    let divElement = document.createElement("div");
+    divElement.classList.add("p-1", "bg-slate-100", "rounded-lg", "text-center", "flex", "justify-center", "items-center");
+
+// Create the img element
+    let imgElement = document.createElement("img");
+    imgElement.setAttribute("src", imageB64);
+    imgElement.setAttribute("alt", imageName);
+    imgElement.classList.add("rounded-lg", "object-cover", "w-100px", "h-100px");
+
+// Append the img element to the div
+    divElement.appendChild(imgElement);
+
+// Append the div to the document body or any other desired location
+    document.getElementById('imageModal').appendChild(divElement);
+
+    //save to localstorage
+    localStorage.setItem("uploadedImages", JSON.stringify(uploadedImages));
+}
+
 
 
