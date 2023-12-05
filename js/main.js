@@ -164,7 +164,6 @@ draw = function () {
                     drawing = false
                 }
                 marker()
-                calligraphy()
                 break;
             case "wiggle":
 
