@@ -87,7 +87,7 @@ function init() {
     sizeImg.src = "../assets/medium.svg";
 
     brushImg = document.getElementById("brushimg")
-    brushImg.src = "../assets/pen.svg"
+    brushImg.src = "../assets/pen-solid.svg"
 
     //get all saved images from localstorage and add to menu
     if (localStorage.getItem("uploadedImages")) {    //if uploadedimages are uploaded to localstorage
@@ -112,7 +112,6 @@ function init() {
             document.getElementById('imageModal').appendChild(divElement);
         });
     }
-
 
     console.log("init klaar");
 }
@@ -211,41 +210,55 @@ function setBrush(e, mode) {
         case 'pen':
             Ubrush = "pen";
             console.log(Ubrush);
+            brushImg.src = "../assets/pen-solid.svg";
             noErase()
             break;
         case 'spraypaint':
             Ubrush = "spraypaint";
             console.log(Ubrush);
+            brushImg.src = "../assets/spraypaint.svg";
             noErase()
             break;
         case 'calligraphy':
             Ubrush = "calligraphy";
             console.log(Ubrush);
+            brushImg.src = "../assets/calligraphy.svg";
             noErase()
             break;
         case 'marker':
             Ubrush = "marker";
             console.log(Ubrush);
+            brushImg.src = "../assets/marker.svg";
             noErase()
             break;
         case 'wiggle':
             Ubrush = "wiggle";
             console.log(Ubrush);
             noErase()
+            brushImg.src = "../assets/wiggle.svg";
             break;
         case 'toothpick':
             Ubrush = "toothpick";
             console.log(Ubrush);
             noErase()
+            brushImg.src = "../assets/pen.svg";
             break;
         case 'splatter':
             Ubrush = "splatter";
             console.log(Ubrush);
             noErase()
+            brushImg.src = "../assets/splatter.svg";
+            break;
+        case 'hatching':
+            Ubrush = "hatching"
+            console.log(Ubrush);
+            noErase()
+            brushImg.src = "../assets/hatching.svg";
             break;
         case 'eraser':
             Ubrush = "eraser";
             console.log(Ubrush);
+            brushImg.src = "../assets/eraser.svg";
             break;
     }
 }
