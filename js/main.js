@@ -135,10 +135,7 @@ draw = function () {
         switch (Ubrush) {
             case "pen":
 
-        switch (Ubrush) {
-            case "pen":
-
-                if (drawing){
+                if (drawing) {
                     saveState()
                     drawing = false
                 }
@@ -146,7 +143,7 @@ draw = function () {
                 break;
             case "spraypaint":
 
-                if (drawing){
+                if (drawing) {
                     saveState()
                     drawing = false
                 }
@@ -154,7 +151,7 @@ draw = function () {
                 break;
             case "calligraphy":
 
-                if (drawing){
+                if (drawing) {
                     saveState()
                     drawing = false
                 }
@@ -162,7 +159,7 @@ draw = function () {
                 break;
             case "marker":
 
-                if (drawing){
+                if (drawing) {
                     saveState()
                     drawing = false
                 }
@@ -171,7 +168,7 @@ draw = function () {
                 break;
             case "wiggle":
 
-                if (drawing){
+                if (drawing) {
                     saveState()
                     drawing = false
                 }
@@ -179,7 +176,7 @@ draw = function () {
                 break;
             case "toothpick":
 
-                if (drawing){
+                if (drawing) {
                     saveState()
                     drawing = false
                 }
@@ -187,7 +184,7 @@ draw = function () {
                 break;
             case "hatching":
 
-                if (drawing){
+                if (drawing) {
                     saveState()
                     drawing = false
                 }
@@ -195,7 +192,7 @@ draw = function () {
                 break;
             case "splatter":
 
-                if (drawing){
+                if (drawing) {
                     saveState()
                     drawing = false
                 }
@@ -203,7 +200,7 @@ draw = function () {
                 break;
             case "eraser":
 
-                if (drawing){
+                if (drawing) {
                     saveState()
                     drawing = false
                 }
@@ -213,7 +210,9 @@ draw = function () {
 
     }
 
-    addEventListener("mouseup", (event) => {drawing = true})
+    addEventListener("mouseup", (event) => {
+        drawing = true
+    })
 
     //checks if the image gets pasted into the main canvas and pasts it there
     if (img && imgCorrect) {
@@ -223,17 +222,16 @@ draw = function () {
         if (!confirmImg.classList.contains('hidden')) {
             confirmImg.classList.toggle('hidden');
         }
-      console.log(img);
-      image(staticImg, staticX, staticY, w, h);
-      imgCorrect = false;
-      if (!confirmImg.classList.contains('hidden')) {
-        confirmImg.classList.toggle('hidden');
-      }
+        console.log(img);
+        image(staticImg, staticX, staticY, w, h);
+        imgCorrect = false;
+        if (!confirmImg.classList.contains('hidden')) {
+            confirmImg.classList.toggle('hidden');
+        }
         console.log(img);
         image(staticImg, staticX, staticY, w, h);
         imgCorrect = false;
     }
-
 }
 
 //handles the image file input
@@ -252,14 +250,14 @@ handleFile = function (file) {
         //set name and B64 data
         imageName = file.name;
         setB64(file.file)
-      img = createImg(file.data, '');
-      img.hide();
-      if (imgDiv.classList.contains('hidden')) {
-        imgDiv.classList.toggle('hidden');
-      }
-      if (confirmImg.classList.contains('hidden')) {
-        confirmImg.classList.toggle('hidden');
-      }
+        img = createImg(file.data, '');
+        img.hide();
+        if (imgDiv.classList.contains('hidden')) {
+            imgDiv.classList.toggle('hidden');
+        }
+        if (confirmImg.classList.contains('hidden')) {
+            confirmImg.classList.toggle('hidden');
+        }
         img = createImg(file.data, '');
         img.hide();
         if (imgDiv.classList.contains('hidden')) {
@@ -378,7 +376,6 @@ function touchMoved() {
 
 
 // --- pen---
-
 function pen() {
     // set the color and weight of the stroke
     stroke(UColor[0], UColor[1], UColor[2], 255)
@@ -389,7 +386,6 @@ function pen() {
 }
 
 // --- marker ---
-
 function marker() {
     // set the color and brush style
     fill(UColor[0], UColor[1], UColor[2], 40)
@@ -400,7 +396,6 @@ function marker() {
 }
 
 // --- wiggle ---
-
 function wiggle() {
     // set the color and brush style
     stroke(UColor[0], UColor[1], UColor[2], 255)
@@ -425,7 +420,6 @@ function wiggle() {
 }
 
 // ---toothpick---
-
 function toothpick() {
     // set the color and brush style
     fill(UColor[0], UColor[1], UColor[2], 150)
@@ -450,7 +444,6 @@ function toothpick() {
 }
 
 // ---calligraphy---
-
 function calligraphy() {
     // set the color and brush style
     stroke(UColor[0], UColor[1], UColor[2], 255)
@@ -473,7 +466,6 @@ function calligraphy() {
 }
 
 // ---splatter---
-
 function splatter() {
     // set the color and brush style
     stroke(UColor[0], UColor[1], UColor[2], 160)
@@ -495,7 +487,6 @@ function splatter() {
 }
 
 // ---hatching ---
-
 function hatching() {
     // set the color and brush style
     stroke(UColor[0], UColor[1], UColor[2], 220)
@@ -526,7 +517,6 @@ function hatching() {
 }
 
 // --- spraypaint---
-
 function sprayPaint() {
     // set the color and brush style
     stroke(UColor[0], UColor[1], UColor[2], 255)
@@ -585,7 +575,7 @@ function undoToPreviousState() {
     if (saveStates !== 0) {
         background('#fbf8f3')
 
-        image(saveStates[saveStates.length -1], 0, 0, 406, 560);
+        image(saveStates[saveStates.length - 1], 0, 0, 406, 560);
         saveStates.pop()
     }
 }
@@ -596,7 +586,6 @@ function saveState() {
 }
 
 //---imagelayer--
-
 let s2 = function (sketch) {
     sketch.setup = function () {
         let canvas2 = sketch.createCanvas(406, 560);
@@ -638,7 +627,7 @@ let s2 = function (sketch) {
         // Quit dragging
         dragging = false;
     }
-}
+
 
     sketch.mousePressed = function () {
         if (sketch.mouseX > x && sketch.mouseX < x + w && sketch.mouseY > y && sketch.mouseY < y + h) {
@@ -648,18 +637,19 @@ let s2 = function (sketch) {
             offsetY = y - sketch.mouseY;
         }
 
-    //save uploaded image to array
-    saveUploadedToLocal();
+        //save uploaded image to array
+        saveUploadedToLocal();
 
-    console.log(img);
-    if (!imgDiv.classList.contains('hidden') && imgDiv !== undefined) {
-        imgDiv.classList.add('hidden');
+        console.log(img);
+        if (!imgDiv.classList.contains('hidden') && imgDiv !== undefined) {
+            imgDiv.classList.add('hidden');
 
-    }
-    sketch.mouseReleased = function () {
-        // Quit dragging
-        dragging = false;
+        }
+        sketch.mouseReleased = function () {
+            // Quit dragging
+            dragging = false;
 
+        }
     }
 }
 
@@ -698,16 +688,16 @@ function saveUploadedToLocal() {
     let divElement = document.createElement("div");
     divElement.classList.add("p-1", "bg-slate-100", "rounded-lg", "text-center", "flex", "justify-center", "items-center");
 
-// Create the img element
+    // Create the img element
     let imgElement = document.createElement("img");
     imgElement.setAttribute("src", imageB64);
     imgElement.setAttribute("alt", imageName);
     imgElement.classList.add("rounded-lg", "object-cover", "w-100px", "h-100px");
 
-// Append the img element to the div
+    // Append the img element to the div
     divElement.appendChild(imgElement);
 
-// Append the div to the document body or any other desired location
+    // Append the div to the document body or any other desired location
     document.getElementById('imageModal').appendChild(divElement);
 
     //save to localstorage
