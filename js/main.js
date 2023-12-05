@@ -122,7 +122,7 @@ function init() {
 }
 
 //prepares the main canvas and input button
-setup = function () {
+function setup() {
     let canvas1 = createCanvas(406, 560);
     canvas1.parent('canvasCanvas');
     canvas1.background('#fbf8f3')
@@ -133,7 +133,7 @@ setup = function () {
 }
 
 
-draw = function () {
+function draw() {
     //selects the correct pen and allows you to draw
     if (mouseIsPressed && imgDiv.classList.contains("hidden")) {
         switch (Ubrush) {
@@ -210,6 +210,7 @@ draw = function () {
                 eraser()
                 break;
         }
+    }
 
     }
 
@@ -235,7 +236,6 @@ draw = function () {
         image(staticImg, staticX, staticY, w, h);
         imgCorrect = false;
     }
-}
 
 //handles the image file input
 handleFile = function (file) {
@@ -569,7 +569,7 @@ function eraser() {
 //---   UNDO FUNCTION   ---
 function keyPressed(e) {
     // check if the event parameter (e) has Z (keycode 90) and ctrl or cmnd
-    if (e.keyCode == 90 && (e.ctrlKey || e.metaKey)) {
+    if (e.keyCode === 90 && (e.ctrlKey || e.metaKey)) {
         undoToPreviousState();
     }
 }
