@@ -15,6 +15,7 @@ let imageLayer; //p5 object for the imagelayer
 let uploadedImages = [] // array of all images that get saved into localstorage
 let imageName; // Uploaded image name
 let imageB64; // Uploaded
+let downloadImg;
 
 //starting variables for brush - color - size
 let Ubrush = "pen"; //user brush
@@ -113,6 +114,9 @@ function init() {
             document.getElementById('imageModal').appendChild(divElement);
         });
     }
+
+    downloadImg = document.getElementById('finish')
+    downloadImg.addEventListener('click', finish)
 
     console.log("init klaar");
 }
@@ -701,6 +705,14 @@ function saveUploadedToLocal() {
 
     //save to localstorage
     localStorage.setItem("uploadedImages", JSON.stringify(uploadedImages));
+}
+
+//export canvas to B64
+function finish() {
+    let eindvedute =  get(0,0,406,560)
+    let code= eindvedute.canvas.toDataURL();
+    window.location.href="./end.html"
+    localStorage.setItem("img",code)
 }
 
 

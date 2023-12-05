@@ -32,12 +32,10 @@
              class="h-canvasheight w-canvaswidth mx-4 bottom-auto aspect-video border-2 border-black border-solid mb-6 rounded bg-slate-50 bg-opacity-30 absolute">
         </div>
 
-        <a href="./end.html">
-            <button id="finish"
-                    class="p-6 w-96 text-center rounded-md bg-slate-50 bg-opacity-70 hover:bg-opacity-100 text-black text-xl font-medium mb-2">
-                Mijn kunstwerk is af
-            </button>
-        </a>
+        <button id="finish"
+                class="p-6 w-96 text-center rounded-md bg-slate-50 bg-opacity-70 hover:bg-opacity-100 text-black text-xl font-medium mb-2">
+            Mijn kunstwerk is af
+        </button>
     </div>
 
     <div class="col-span-3 flex flex-col items-center justify-center">
@@ -47,7 +45,8 @@
                     id="brush-selector"><img src="#" id="brushimg" alt="selected brush" class="mt-2"></button>
             <div id="brushModal"
                  class="absolute hidden z-10 bg-slate-50 p-2  right-40 rounded-full border-2 border-black">
-                <button id="pen" class="setting tool p-4 rounded-full"><img src="../assets/pen-solid.svg" alt="pen"></button>
+                <button id="pen" class="setting tool p-4 rounded-full"><img src="../assets/pen-solid.svg" alt="pen">
+                </button>
                 <button id="calligraphy" class="setting tool  p-4 rounded-full"><img src="../assets/calligraphy.svg"
                                                                                      alt="calligraphy"></button>
                 <button id="spraypaint" class="setting tool  p-4 rounded-full"><img src="../assets/spraypaint.svg"
@@ -105,14 +104,15 @@
                  class="imageModal absolute hidden w-80 h-fit z-10 bg-slate-50 p-2 top-52 right-popup rounded-lg border-2 border-black grid grid-cols-3 gap-1">
                 <label for="image-import" id="image-insert">
                     <div class="p-1 bg-slate-100 rounded-lg text-center flex justify-center place-items-center">
-                        <img src="../Images/addimage.png" alt="add image" class="rounded-lg object-cover w-100px h-100px">
+                        <img src="../Images/addimage.png" alt="add image"
+                             class="rounded-lg object-cover w-100px h-100px">
                     </div>
                 </label>
 
                 <!--                Placeholder uploaded image-->
-<!--                <div class="p-1 bg-slate-100 rounded-lg text-center flex justify-center items-center">-->
-<!--                    <img src="../Images/placeholder.jpg" alt="imported image" class="rounded-lg object-cover w-100px h-100px">-->
-<!--                </div>-->
+                <!--                <div class="p-1 bg-slate-100 rounded-lg text-center flex justify-center items-center">-->
+                <!--                    <img src="../Images/placeholder.jpg" alt="imported image" class="rounded-lg object-cover w-100px h-100px">-->
+                <!--                </div>-->
 
             </div>
 
