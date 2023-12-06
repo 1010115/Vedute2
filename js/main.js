@@ -640,9 +640,6 @@ let s2 = function (sketch) {
             offsetY = y - sketch.mouseY;
         }
 
-        //save uploaded image to array
-        saveUploadedToLocal();
-
         console.log(img);
         sketch.mouseReleased = function () {
             // Quit dragging
@@ -670,6 +667,10 @@ function confirmClickHandler() {
     staticImg = img;
     staticX = x;
     staticY = y;
+
+    //save uploaded image to array
+    saveUploadedToLocal();
+    
     if (!imgDiv.classList.contains('hidden') && imgDiv !== undefined) {
         imgDiv.classList.add('hidden');
     }
