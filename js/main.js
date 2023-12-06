@@ -644,10 +644,6 @@ let s2 = function (sketch) {
         saveUploadedToLocal();
 
         console.log(img);
-        if (!imgDiv.classList.contains('hidden') && imgDiv !== undefined) {
-            imgDiv.classList.add('hidden');
-
-        }
         sketch.mouseReleased = function () {
             // Quit dragging
             dragging = false;
@@ -666,6 +662,8 @@ function setB64(file) {
 
     reader.readAsDataURL(file);
 }
+
+imageLayer = new p5(s2);
 
 function confirmClickHandler() {
     imgCorrect = true;
