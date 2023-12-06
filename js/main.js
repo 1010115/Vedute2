@@ -130,6 +130,11 @@ setup = function () {
     input.id('image-import');
     input.parent('image-insert');
     saveState();
+    if(localStorage.getItem("img")){
+        img = createImg(
+            localStorage.getItem('img'), "verder met de vedute");
+        img.position(406, 560)
+    }
 }
 
 
@@ -710,7 +715,7 @@ function saveUploadedToLocal() {
 //export canvas to B64
 function finish() {
     let eindvedute =  get(0,0,406,560)
-    let code= eindvedute.canvas.toDataURL();
+    let code = eindvedute.canvas.toDataURL();
     window.location.href="./end.html"
     localStorage.setItem("img",code)
 }
