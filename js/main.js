@@ -131,9 +131,10 @@ setup = function () {
     input.parent('image-insert');
     saveState();
     if(localStorage.getItem("img")){
-        img = createImg(
-            localStorage.getItem('img'), "verder met de vedute");
-        img.position(406, 560)
+        console.log("ahh")
+        loadImage(localStorage.getItem("img"),img => {
+        image(img,0,0,406,560);
+        });
     }
 }
 
