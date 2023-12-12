@@ -138,11 +138,11 @@ setup = function () {
     input.parent('image-insert');
     saveState();
     if(localStorage.getItem("img")){
-        console.log("ahh")
         loadImage(localStorage.getItem("img"),img => {
         image(img,0,0,406,560);
         });
     }
+    localStorage.removeItem('img');
 }
 
 
@@ -250,14 +250,9 @@ draw = function () {
         imgCorrect = false;
         if (!confirmImg.classList.contains('hidden')) {
             confirmImg.classList.toggle('hidden');
+            cancelImg.classList.toggle('hidden');
+            imgDiv.classList.toggle('hidden');
         }
-        console.log(img);
-        image(staticImg, staticX, staticY, w, h);
-        imgCorrect = false;
-        if (!confirmImg.classList.contains('hidden')) {
-            confirmImg.classList.toggle('hidden');
-        }
-        console.log(img);
         image(staticImg, staticX, staticY, w, h);
         imgCorrect = false;
     }
@@ -268,15 +263,6 @@ draw = function () {
 handleFile = function (file) {
 
     if (file.type === 'image') {
-        img = createImg(file.data, '');
-        img.hide();
-      
-        if (imgDiv.classList.contains('hidden')) {
-        imgDiv.classList.toggle('hidden');
-        confirmImg.classList.toggle('hidden');
-        cancelImg.classList.toggle('hidden');
-      }
-
         //set name and B64 data
         imageName = file.name;
         setB64(file.file)
@@ -284,14 +270,8 @@ handleFile = function (file) {
         img.hide();
         if (imgDiv.classList.contains('hidden')) {
             imgDiv.classList.toggle('hidden');
-        }
-        if (confirmImg.classList.contains('hidden')) {
             confirmImg.classList.toggle('hidden');
-        }
-        img = createImg(file.data, '');
-        img.hide();
-        if (imgDiv.classList.contains('hidden')) {
-            imgDiv.classList.toggle('hidden');
+            cancelImg.classList.toggle('hidden')
         }
 
     } else {
@@ -308,6 +288,7 @@ function handleGallery(b64) {
     img.hide();
     if (imgDiv.classList.contains('hidden')) {
         imgDiv.classList.toggle('hidden');
+        cancelImg.classList.toggle('hidden');
         confirmImg.classList.toggle('hidden');
     }
 }
@@ -683,9 +664,6 @@ let s2 = function (sketch) {
             offsetX = x - sketch.mouseX;
             offsetY = y - sketch.mouseY;
         }
-
-        //save uploaded image to array
-        saveUploadedToLocal();
 
         console.log(img);
         sketch.mouseReleased = function () {
