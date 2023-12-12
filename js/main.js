@@ -16,8 +16,8 @@ let imageLayer; //p5 object for the imagelayer
 let uploadedImages = [] // array of all images that get saved into localstorage
 let imageName; // Uploaded image name
 let imageB64; // Uploaded
-let downloadImg;
-let usingGallery = false;
+let downloadImg;// img to use for downloadimg
+let usingGallery = false; //usinggallery wont save to localstorage if you use gallery
 let inCanvas = false;
 
 //starting variables for brush - color - size
@@ -131,7 +131,7 @@ function init() {
 setup = function () {
     let canvas1 = createCanvas(406, 560);
     canvas1.parent('canvasCanvas');
-    canvas1.background('#fbf8f3')
+    // canvas1.background('#fbf8f3')
     input = createFileInput(handleFile);
     
     input.id('image-import');
@@ -395,10 +395,6 @@ function setColor(e, color, buttonid) {
     Buttonlist.classList.add("bg-" + buttonid + "-500");
 }
 
-function touchMoved() {
-    return false
-}
-
 
 // --- pen---
 function pen() {
@@ -591,7 +587,7 @@ function eraser() {
 //---   UNDO FUNCTION   ---
 function keyPressed(e) {
     // check if the event parameter (e) has Z (keycode 90) and ctrl or cmnd
-    if (e.keyCode == 90 && (e.ctrlKey || e.metaKey)) {
+    if (e.keyCode === 90 && (e.ctrlKey || e.metaKey)) {
         undoToPreviousState();
     }
 }
@@ -752,7 +748,7 @@ function finish() {
     let eindvedute =  get(0,0,406,560)
     let code = eindvedute.canvas.toDataURL();
     window.location.href="./end.html"
-    localStorage.setItem("img",code)
+    localStorage.setItem("img", code)
 }
 
 function imageFromGallery(imgName) {
