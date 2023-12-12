@@ -885,6 +885,14 @@ video {
   aspect-ratio: 16 / 9;
 }
 
+.h-100px {
+  height: 100px;
+}
+
+.h-4 {
+  height: 1rem;
+}
+
 .h-canvasheight {
   height: 35.2rem;
 }
@@ -898,8 +906,20 @@ video {
   height: 100%;
 }
 
+.h-8 {
+  height: 2rem;
+}
+
+.h-12 {
+  height: 3rem;
+}
+
 .min-h-screen {
   min-height: 100vh;
+}
+
+.w-100px {
+  width: 100px;
 }
 
 .w-80 {
@@ -2187,11 +2207,6 @@ video {
   line-height: 2rem;
 }
 
-.text-5xl {
-  font-size: 3rem;
-  line-height: 1;
-}
-
 .text-8xl {
   font-size: 6rem;
   line-height: 1;
@@ -2299,11 +2314,6 @@ video {
 .text-donkergrijs {
   --tw-text-opacity: 1;
   color: rgb(71 82 94 / var(--tw-text-opacity));
-}
-
-.text-slate-200 {
-  --tw-text-opacity: 1;
-  color: rgb(226 232 240 / var(--tw-text-opacity));
 }
 
 .text-slate-400 {

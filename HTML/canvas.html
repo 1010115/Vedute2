@@ -32,33 +32,43 @@
              class="h-canvasheight w-canvaswidth mx-4 bottom-auto aspect-video border-2 border-black border-solid mb-6 rounded bg-slate-50 bg-opacity-30 absolute">
         </div>
 
-        <a href="./end.html">
-            <button id="finish"
-                    class="p-6 w-96 text-center rounded-md bg-slate-50 bg-opacity-70 hover:bg-opacity-100 text-black text-xl font-medium mb-2">
-                Mijn kunstwerk is af
-            </button>
-        </a>
+        <button id="finish"
+                class="p-6 w-96 text-center rounded-md bg-slate-50 bg-opacity-70 hover:bg-opacity-100 text-black text-xl font-medium mb-2">
+            Mijn kunstwerk is af
+        </button>
     </div>
 
     <div class="col-span-3 flex flex-col items-center justify-center">
         <div class="flex flex-col">
             <!--popup brush-->
-            <button class="bg-slate-50 rounded-full justify-center hover:border-2 border-black mb-2 relative flex place-content-center w-full p-2"
-                    id="brush-selector"><img src="#" id="brushimg"></button>
-            <div id="brushModal" class="absolute hidden z-10 bg-slate-50 p-2  right-40 rounded-full border-2 border-black">
-                <button id="pen" class="setting tool p-4 rounded-full"><img src="../assets/pen.svg" alt="pen"></button>
-                <button id="calligraphy" class="setting tool  p-4 rounded-full"><img src="../assets/pen.svg" alt="calligraphy"></button>
-                <button id="spraypaint" class="setting tool  p-4 rounded-full"><img src="../assets/pen.svg" alt="spraypaint"></button>
-                <button id="marker" class="setting tool  p-4 rounded-full"><img src="../assets/pen.svg" alt="marker"></button>
-                <button id="wiggle" class="setting tool  p-4 rounded-full"><img src="../assets/pen.svg" alt="wiggle"></button>
-                <button id="toothpick" class="setting tool  p-4 rounded-full"><img src="../assets/pen.svg" alt="toothpick"></button>
-                <button id="splatter" class="setting tool  p-4 rounded-full"><img src="../assets/pen.svg" alt="splatter"></button>
-                <button id="eraser" class="setting tool  p-4 rounded-full"><img src="../assets/pen.svg" alt="eraser"></button>
+            <button class="bg-slate-50 rounded-full justify-center hover:border-2 border-black mb-2 relative flex place-content-center w-full p-2 h-12"
+                    id="brush-selector"><img src="#" id="brushimg" alt="selected brush" class="mt-2"></button>
+            <div id="brushModal"
+                 class="absolute hidden z-10 bg-slate-50 p-2  right-40 rounded-full border-2 border-black">
+                <button id="pen" class="setting tool p-4 rounded-full"><img src="../assets/pen-solid.svg" alt="pen">
+                </button>
+                <button id="calligraphy" class="setting tool  p-4 rounded-full"><img src="../assets/calligraphy.svg"
+                                                                                     alt="calligraphy"></button>
+                <button id="spraypaint" class="setting tool  p-4 rounded-full"><img src="../assets/spraypaint.svg"
+                                                                                    alt="spraypaint"></button>
+                <button id="marker" class="setting tool  p-4 rounded-full"><img src="../assets/marker.svg" alt="marker">
+                </button>
+                <button id="wiggle" class="setting tool  p-4 rounded-full"><img src="../assets/wiggle.svg" alt="wiggle">
+                </button>
+                <button id="toothpick" class="setting tool  p-4 rounded-full"><img src="../assets/pen.svg"
+                                                                                   alt="toothpick"></button>
+                <button id="hatching" class="setting tool  p-4 rounded-full"><img src="../assets/hatching.svg"
+                                                                                  alt="hatching"></button>
+                <button id="splatter" class="setting tool  p-4 rounded-full"><img src="../assets/splatter.svg"
+                                                                                  alt="splatter"></button>
+                <button id="eraser" class="setting tool  p-4 rounded-full"><img src="../assets/eraser.svg" alt="eraser">
+                </button>
 
             </div>
 
             <!--popup color selector-->
-            <button id="color-selector" class="bg-black rounded-full justify-center hover:border-2 border-black mb-2 relative flex place-content-center p-6 w-full"></button>
+            <button id="color-selector"
+                    class="bg-black rounded-full justify-center hover:border-2 border-black mb-2 relative flex place-content-center p-6 w-full"></button>
             <div id="colorModal"
                  class="absolute hidden z-10 bg-slate-50 p-2  right-40 rounded-full border-2 border-black">
                 <div id="colors">
@@ -86,32 +96,40 @@
             </div>
 
             <!--popup custom image import-->
-            <button class="bg-slate-50 rounded-full p-6 justify-center hover:border-2 border-black mb-2"
-                    id="image-button">Afbeeldingen
-                </button>
-            <div id="imageModal" class="imageModal absolute hidden w-80 h-fit z-10 bg-slate-50 p-2 top-52 right-popup rounded-lg border-2 border-black grid grid-cols-3 gap-1">
+            <button class="bg-slate-50 rounded-full justify-center hover:border-2 border-black mb-2 relative flex place-content-center w-full p-2 h-12"
+                    id="image-button"><img src="../assets/image.svg"
+                                           alt="add image" class="mt-2">
+            </button>
+            <div id="imageModal"
+                 class="imageModal absolute hidden w-80 h-fit z-10 bg-slate-50 p-2 top-52 right-popup rounded-lg border-2 border-black grid grid-cols-3 gap-1">
                 <label for="image-import" id="image-insert">
-                <div class="p-1 bg-slate-100 rounded-lg text-center flex justify-center place-items-center">
-                    <img src="../Images/placeholder.jpg" alt="add image" class="rounded-lg">
-                </div>
-                
-            </label>
-                
-                <div class="p-1 bg-slate-100 rounded-lg text-center flex justify-center items-center">
-                    <img src="../Images/placeholder.jpg" alt="imported image" class="rounded-lg">
-                </div>
-            
+                    <div class="p-1 bg-slate-100 rounded-lg text-center flex justify-center place-items-center">
+                        <img src="../Images/addimage.png" alt="add image"
+                             class="rounded-lg object-cover w-100px h-100px">
+                    </div>
+                </label>
+
+                <!--                Placeholder uploaded image-->
+                <!--                <div class="p-1 bg-slate-100 rounded-lg text-center flex justify-center items-center">-->
+                <!--                    <img src="../Images/placeholder.jpg" alt="imported image" class="rounded-lg object-cover w-100px h-100px">-->
+                <!--                </div>-->
+
             </div>
 
             <!--sticker selector-->
-            <button class="bg-slate-50 rounded-full p-6 justify-center hover:border-2 border-black mb-2"
-                    id="sticker-selector">sticker selector
+            <button class="bg-slate-50 rounded-full justify-center hover:border-2 border-black mb-2 relative flex place-content-center w-full p-2 h-12"
+                    id="sticker-selector"><img src="../assets/sticker.svg"
+                                               alt="add sticker" class="mt-2">
             </button>
             <div id="stickerModal" class="stickerModal">
 
             </div>
-             <!--sticker selector-->
-             
+
+            <!--sticker selector-->
+            <button class="bg-slate-50 rounded-full p-6 justify-center hover:border-2 border-black mb-2 hidden"
+                    id="image-confirm">image confirm
+            </button>
+
             <div id="settings" class="grid grid-rows-4 grid-cols-2 gap-1 justify-self-end mt-1">
                 <button class="bg-slate-50 rounded-full p-6 justify-center hover:border-2 border-black mb-2 hidden"
                 id="image-confirm">image confirm
