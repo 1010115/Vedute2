@@ -17,6 +17,7 @@ let uploadedImages = [] // array of all images that get saved into localstorage
 let imageName; // Uploaded image name
 let imageB64; // Uploaded
 let downloadImg;
+let inCanvas = false;
 
 //starting variables for brush - color - size
 let Ubrush = "pen"; //user brush
@@ -139,7 +140,7 @@ setup = function () {
 
 draw = function () {
     //selects the correct pen and allows you to draw
-    if (mouseIsPressed && imgDiv.classList.contains("hidden")) {
+    if (mouseIsPressed && imgDiv.classList.contains("hidden") && inCanvas === true) {
         switch (Ubrush) {
             case "pen":
 
@@ -218,7 +219,19 @@ draw = function () {
     }
 
     addEventListener("mouseup", (event) => {
-        drawing = true
+         drawing = true;
+        
+        
+    })
+
+    addEventListener("mousedown", (event) => {
+        let canvas1 = document.getElementById('defaultCanvas0');
+        if(event.target === canvas1) {
+            inCanvas = true;
+        } else {
+            inCanvas = false;
+        }
+        
     })
 
     //checks if the image gets pasted into the main canvas and pasts it there
@@ -591,8 +604,11 @@ function undoToPreviousState() {
 }
 
 function saveState() {
-    saveStates.push(previousState = get(0, 0, 406, 560));
-    console.log(saveStates)
+    if(inCanvas === true){
+        saveStates.push(previousState = get(0, 0, 406, 560));
+        console.log(saveStates)
+    }
+    
 }
 
 //---imagelayer--
@@ -647,8 +663,7 @@ let s2 = function (sketch) {
             offsetY = y - sketch.mouseY;
         }
 
-        //save uploaded image to array
-        saveUploadedToLocal();
+        
 
         console.log(img);
         sketch.mouseReleased = function () {
@@ -679,6 +694,9 @@ function confirmClickHandler() {
   staticImg = img;
   staticX = x;
   staticY = y;
+
+  //save uploaded image to array
+        saveUploadedToLocal();
   if (!imgDiv.classList.contains('hidden') && imgDiv !== undefined) {
     imgDiv.classList.add('hidden');
     confirmImg.classList.toggle('hidden');
