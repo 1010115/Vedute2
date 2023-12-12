@@ -134,6 +134,12 @@ setup = function () {
     input.id('image-import');
     input.parent('image-insert');
     saveState();
+    if(localStorage.getItem("img")){
+        console.log("ahh")
+        loadImage(localStorage.getItem("img"),img => {
+        image(img,0,0,406,560);
+        });
+    }
 }
 
 
@@ -728,7 +734,7 @@ function saveUploadedToLocal() {
 //export canvas to B64
 function finish() {
     let eindvedute =  get(0,0,406,560)
-    let code= eindvedute.canvas.toDataURL();
+    let code = eindvedute.canvas.toDataURL();
     window.location.href="./end.html"
     localStorage.setItem("img",code)
 }
