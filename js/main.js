@@ -16,6 +16,7 @@ let uploadedImages = [] // array of all images that get saved into localstorage
 let imageName; // Uploaded image name
 let imageB64; // Uploaded
 let downloadImg;
+let usingGallery = false;
 
 //starting variables for brush - color - size
 let Ubrush = "pen"; //user brush
@@ -106,6 +107,7 @@ function init() {
             imgElement.setAttribute("src", object.base64);
             imgElement.setAttribute("alt", object.name);
             imgElement.classList.add("rounded-lg", "object-cover", "w-100px", "h-100px");
+            imgElement.addEventListener('click', imageFromGallery, object.name);
 
             // Append the img element to the div
             divElement.appendChild(imgElement);
@@ -268,6 +270,19 @@ handleFile = function (file) {
         }
     } else {
         img = null;
+    }
+}
+
+//handles image import to canvas from image gallery
+function handleGallery(b64) {
+    img = createImg(b64);
+
+    usingGallery = true;
+
+    img.hide();
+    if (imgDiv.classList.contains('hidden')) {
+        imgDiv.classList.toggle('hidden');
+        confirmImg.classList.toggle('hidden');
     }
 }
 
@@ -669,8 +684,12 @@ function confirmClickHandler() {
     staticY = y;
 
     //save uploaded image to array
-    saveUploadedToLocal();
-    
+    if (usingGallery === false) {
+        saveUploadedToLocal();
+    }
+
+    usingGallery = false;
+
     if (!imgDiv.classList.contains('hidden') && imgDiv !== undefined) {
         imgDiv.classList.add('hidden');
     }
@@ -695,6 +714,7 @@ function saveUploadedToLocal() {
     imgElement.setAttribute("src", imageB64);
     imgElement.setAttribute("alt", imageName);
     imgElement.classList.add("rounded-lg", "object-cover", "w-100px", "h-100px");
+    imgElement.addEventListener('click', imageFromGallery, imageName);
 
     // Append the img element to the div
     divElement.appendChild(imgElement);
@@ -712,6 +732,19 @@ function finish() {
     let code= eindvedute.canvas.toDataURL();
     window.location.href="./end.html"
     localStorage.setItem("img",code)
+}
+
+function imageFromGallery(imgName) {
+    //get image name
+    let clickedName = imgName.target.alt;
+
+    //get image from localstorage and use b64 in handleFile
+    uploadedImages.forEach((image, index) => {
+        if (image.name === clickedName){
+            handleGallery(image.base64);
+        }
+    });
+
 }
 
 
