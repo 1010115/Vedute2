@@ -45,7 +45,6 @@ function setup() {
     layer1.start(3);
     layer2.start(3);
     layer3.start(3);
-
 }
 
 function draw() {
@@ -58,4 +57,11 @@ function draw() {
     layer1.move();
     layer2.move();
     layer3.move();
+}
+
+function keyPressed() {
+    if (key === 's') {
+        //saveGif method with parameters: fileName and duration (in seconds)
+        saveGif('myVedute', 5);
+    }
 }
