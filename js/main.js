@@ -16,6 +16,7 @@ let uploadedImages = [] // array of all images that get saved into localstorage
 let imageName; // Uploaded image name
 let imageB64; // Uploaded
 let downloadImg;
+let color;
 
 //starting variables for brush - color - size
 let Ubrush = "pen"; //user brush
@@ -29,6 +30,7 @@ let brushImg
 let previousState;
 let saveStates = []
 let drawing = true
+
 
 //brush sizes
 const sizes = {
@@ -46,7 +48,8 @@ const colors = {
     "blue": [59, 130, 246],
     "yellow": [234, 179, 8],
     "orange": [249, 115, 22],
-    "violet": [139, 92, 246]
+    "violet": [139, 92, 246],
+    // "mypicker": color
 }
 
 const activeEvents = {
@@ -59,6 +62,7 @@ const activeEvents = {
 
 
 function init() {
+
     //gets the necesarry html elements
     confirmImg = document.getElementById('image-confirm');
     confirmImg.addEventListener('click', confirmClickHandler);
@@ -77,6 +81,8 @@ function init() {
             setSize(e, sizes[sizeButton.id])
         });
     }
+
+
 
     const colorButtons = document.getElementById('colors').children;
     for (const colorButton of colorButtons) {
@@ -123,6 +129,8 @@ function init() {
 
 //prepares the main canvas and input button
 setup = function () {
+    myPicker = createColorPicker('deeppink');
+    myPicker.parent("colors");
     let canvas1 = createCanvas(406, 560);
     canvas1.parent('canvasCanvas');
     canvas1.background('#fbf8f3')
@@ -139,7 +147,14 @@ setup = function () {
 }
 
 
+
 draw = function () {
+    color = myPicker.color();
+    color = color.toString();
+    color= color.replace(/rgba?|\(|\)/g,'').split(',');
+    color = color.slice(0,3)
+    console.log(color)
+    // Display the current color as a hex string.
     //selects the correct pen and allows you to draw
     if (mouseIsPressed && imgDiv.classList.contains("hidden")) {
         switch (Ubrush) {
@@ -363,20 +378,17 @@ function setSize(e, size) {
 }
 
 
-function setColor(e, color, buttonid) {
+
+function setColor() {
 
     let Buttonlist = document.getElementById("color-selector");
-    UColor = color
-
-    console.log(UColor);
-
 
     if (oldcolor) {
-        Buttonlist.classList.remove("bg-" + oldcolor + "-500")
+        Buttonlist.classList.remove("bg-[" + oldcolor+ "]")
     }
-    oldcolor = buttonid
+    oldcolor = myPicker.value()
 
-    Buttonlist.classList.add("bg-" + buttonid + "-500");
+    Buttonlist.classList.add("bg-[" + myPicker.value() + "]");
 }
 
 function touchMoved() {
@@ -387,7 +399,7 @@ function touchMoved() {
 // --- pen---
 function pen() {
     // set the color and weight of the stroke
-    stroke(UColor[0], UColor[1], UColor[2], 255)
+    stroke(color[0], color[1], color[2], 255)
     strokeWeight(USize)
 
     // draw a line from current mouse point to previous mouse point
@@ -397,7 +409,7 @@ function pen() {
 // --- marker ---
 function marker() {
     // set the color and brush style
-    fill(UColor[0], UColor[1], UColor[2], 40)
+    fill(color[0], color[1], color[2], 40)
     noStroke()
 
     // draw a circle at the current mouse point, with diameter of 50 pixels
@@ -407,7 +419,7 @@ function marker() {
 // --- wiggle ---
 function wiggle() {
     // set the color and brush style
-    stroke(UColor[0], UColor[1], UColor[2], 255)
+    stroke(color, 255)
     strokeWeight(USize)
     noFill()
 
@@ -431,7 +443,7 @@ function wiggle() {
 // ---toothpick---
 function toothpick() {
     // set the color and brush style
-    fill(UColor[0], UColor[1], UColor[2], 150)
+    fill(color, 150)
     noStroke()
 
     // move the origin (0,0) to the current mouse point
@@ -455,7 +467,7 @@ function toothpick() {
 // ---calligraphy---
 function calligraphy() {
     // set the color and brush style
-    stroke(UColor[0], UColor[1], UColor[2], 255)
+    stroke(color, 255)
     strokeWeight(1)
     const width = USize
 
@@ -477,7 +489,7 @@ function calligraphy() {
 // ---splatter---
 function splatter() {
     // set the color and brush style
-    stroke(UColor[0], UColor[1], UColor[2], 160)
+    stroke(color, 160)
     strokeWeight(USize)
 
     // set the number of times we lerp the point in the for loop
@@ -498,7 +510,7 @@ function splatter() {
 // ---hatching ---
 function hatching() {
     // set the color and brush style
-    stroke(UColor[0], UColor[1], UColor[2], 220)
+    stroke(color, 220)
     strokeWeight(USize)
 
     // calculate the speed of the mouse
@@ -528,7 +540,7 @@ function hatching() {
 // --- spraypaint---
 function sprayPaint() {
     // set the color and brush style
-    stroke(UColor[0], UColor[1], UColor[2], 255)
+    stroke(color, 255)
     strokeWeight(USize / 50)
 
     // find the speed of the mouse movement
@@ -591,7 +603,6 @@ function undoToPreviousState() {
 
 function saveState() {
     saveStates.push(previousState = get(0, 0, 406, 560));
-    console.log(saveStates)
 }
 
 //---imagelayer--
