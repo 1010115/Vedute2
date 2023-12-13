@@ -33,6 +33,13 @@ let previousState;
 let saveStates = []
 let drawing = true
 
+//multiple canvases
+let l1, l2, l3; //used as the extra layers
+let prevLayerButton, nextLayerButton; //buttons to switch layers
+let currentLayer = 0; //checks the current layer;
+let layerSwitch = false;
+let canvasImg;
+
 //brush sizes
 const sizes = {
     'small': 5,
@@ -70,6 +77,10 @@ function init() {
   cancelImg.addEventListener('click', cancelClickHandler);
   imgDiv = document.getElementById('imageCanvas');
   imgDiv.classList.add('hidden');
+  nextLayerButton = document.getElementById('nextLayer');
+  nextLayerButton.addEventListener('click', nextLayerHandler)
+  prevLayerButton = document.getElementById('prevLayer');
+  prevLayerButton.addEventListener('click', prevLayerHandler);
   const tools = document.getElementsByClassName('tool')
         for(const tool of tools) {
             tool.addEventListener('click', (e) => { setBrush(e, tool.id)} );
@@ -131,6 +142,10 @@ function init() {
 setup = function () {
     let canvas1 = createCanvas(406, 560);
     canvas1.parent('canvasCanvas');
+    l1 = createGraphics(406, 560);
+    l2 = createGraphics(406, 560);
+    l3 = createGraphics(406, 560);
+    
     // canvas1.background('#fbf8f3')
     input = createFileInput(handleFile);
     
@@ -241,6 +256,13 @@ draw = function () {
         }
         
     })
+
+    //sets the current canvas to new layer
+    if(canvasImg && layerSwitch) {
+        clear();
+        image(canvasImg, 0, 0, 406, 560);
+        layerSwitch = false;
+    }
 
     //checks if the image gets pasted into the main canvas and pasts it there
     if (img && imgCorrect) {
@@ -747,8 +769,28 @@ function saveUploadedToLocal() {
 function finish() {
     let eindvedute =  get(0,0,406,560)
     let code = eindvedute.canvas.toDataURL();
-    window.location.href="./end.html"
+    let prevCanvas = get( 0, 0, 406, 560);
+    switch(currentLayer){
+        case(0):  
+            l1.image(prevCanvas, 0,0, 406, 560);
+            break;
+            case(1):
+        l2.image(prevCanvas, 0,0, 406, 560);
+        break;
+        case(2):
+        l3.image(prevCanvas, 0,0, 406, 560);
+        break;
+    }
+    let code1 = l1.canvas.toDataURL();
+    let code2 = l2.canvas.toDataURL();
+    let code3 = l3.canvas.toDataURL();
+    console.log(code1);
+    //window.location.href="./end.html"
     localStorage.setItem("img", code)
+    localStorage.setItem("img1", code1);
+    localStorage.setItem("img2", code2);
+    localStorage.setItem("img3", code3);
+
 }
 
 function imageFromGallery(imgName) {
@@ -763,4 +805,60 @@ function imageFromGallery(imgName) {
     });
 
 }
+
+function nextLayerHandler() {
+    currentLayer ++;
+    let prevCanvas = get( 0, 0, 406, 560);
+    if(currentLayer > 2) {
+        currentLayer = 0
+    }
+    switch(currentLayer){
+        case(0): 
+            canvasImg = l1;
+            l3.image(prevCanvas, 0,0, 406, 560);
+            layerSwitch = true;
+            break;
+        case(1):
+        l1.image(prevCanvas, 0,0, 406, 560);
+        canvasImg = l2;
+        layerSwitch = true;
+        break;
+        case(2):
+        l2.image(prevCanvas, 0,0, 406, 560);
+        canvasImg = l3;
+        layerSwitch = true;
+        break;
+    }
+}
+
+function prevLayerHandler() {
+    currentLayer --;
+    
+    let prevCanvas = get( 0, 0, 406, 560);
+    if(currentLayer < 0) {
+        currentLayer = 2
+    }
+    console.log(currentLayer)
+    switch(currentLayer){
+        case(0): 
+            canvasImg = l1;
+            l2.image(prevCanvas, 0,0, 406, 560);
+            layerSwitch = true;
+            break;
+            case(1):
+        l3.image(prevCanvas, 0,0, 406, 560);
+        canvasImg = l2;
+        layerSwitch = true;
+        break;
+        case(2):
+        l1.image(prevCanvas, 0,0, 406, 560);
+        canvasImg = l3;
+        layerSwitch = true;
+        break;
+    }
+        
+    }
+
+
+
 
