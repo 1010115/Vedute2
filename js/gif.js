@@ -40,7 +40,7 @@ function setup() {
     layer3 = new Layer("pink", 30, 30);
 
 
-    //call start methods of Car instances
+    //call start methods of layer instances
     //the start method expects a number for speed
     layer1.start(3);
     layer2.start(3);
