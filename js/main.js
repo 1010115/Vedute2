@@ -39,6 +39,7 @@ let prevLayerButton, nextLayerButton; //buttons to switch layers
 let currentLayer = 0; //checks the current layer;
 let layerSwitch = false;
 let canvasImg;
+let layerImg;
 
 //brush sizes
 const sizes = {
@@ -77,6 +78,7 @@ function init() {
   cancelImg.addEventListener('click', cancelClickHandler);
   imgDiv = document.getElementById('imageCanvas');
   imgDiv.classList.add('hidden');
+  layerImg = document.getElementById('layerImg');
   nextLayerButton = document.getElementById('nextLayer');
   nextLayerButton.addEventListener('click', nextLayerHandler)
   prevLayerButton = document.getElementById('prevLayer');
@@ -145,6 +147,7 @@ setup = function () {
     l1 = createGraphics(406, 560);
     l2 = createGraphics(406, 560);
     l3 = createGraphics(406, 560);
+
     
     // canvas1.background('#fbf8f3')
     input = createFileInput(handleFile);
@@ -817,16 +820,19 @@ function nextLayerHandler() {
             canvasImg = l1;
             l3.image(prevCanvas, 0,0, 406, 560);
             layerSwitch = true;
+            layerImg.src = "../Images/layer1.png"
             break;
         case(1):
         l1.image(prevCanvas, 0,0, 406, 560);
         canvasImg = l2;
         layerSwitch = true;
+        layerImg.src = "../Images/layer2.png"
         break;
         case(2):
         l2.image(prevCanvas, 0,0, 406, 560);
         canvasImg = l3;
         layerSwitch = true;
+        layerImg.src = "../Images/layer3.png"
         break;
     }
 }
@@ -844,16 +850,19 @@ function prevLayerHandler() {
             canvasImg = l1;
             l2.image(prevCanvas, 0,0, 406, 560);
             layerSwitch = true;
+            layerImg.src = "../Images/layer1.png"
             break;
             case(1):
         l3.image(prevCanvas, 0,0, 406, 560);
         canvasImg = l2;
         layerSwitch = true;
+        layerImg.src = "../Images/layer2.png"
         break;
         case(2):
         l1.image(prevCanvas, 0,0, 406, 560);
         canvasImg = l3;
         layerSwitch = true;
+        layerImg.src = "../Images/layer3.png"
         break;
     }
         
