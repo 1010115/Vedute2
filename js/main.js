@@ -141,7 +141,7 @@ setup = function () {
     myPicker = createColorPicker('black');
     myPicker.parent("color-picker");
     //change opacity to 1 to see color picker input
-    myPicker.style('position:fixed; width:330px; height:60px; top: 260px; right: 65px; opacity:0;');
+    myPicker.style('position:fixed; width:330px; height:60px; top: 205px; right: 65px; opacity:0;');
     myPicker.changed(ButtonColor);
 
     //p5 canvas
