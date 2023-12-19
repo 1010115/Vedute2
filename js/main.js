@@ -76,6 +76,8 @@ function init() {
   cancelImg = document.getElementById('image-cancel');
   confirmImg.addEventListener('click', confirmClickHandler);
   cancelImg.addEventListener('click', cancelClickHandler);
+  const clearButton = document.getElementById('clear-button');
+  clearButton.addEventListener('click', clearClickHandler)
   imgDiv = document.getElementById('imageCanvas');
   imgDiv.classList.add('hidden');
   layerImg = document.getElementById('layerImg');
@@ -265,6 +267,12 @@ draw = function () {
         clear();
         image(canvasImg, 0, 0, 406, 560);
         layerSwitch = false;
+        if(Ubrush === "eraser") {
+            Ubrush = "pen";
+            console.log(Ubrush);
+            brushImg.src = "../assets/pen-solid.svg";
+            noErase()
+        }
     }
 
     //checks if the image gets pasted into the main canvas and pasts it there
@@ -426,6 +434,15 @@ function setColor(e, color, buttonid) {
     oldcolor = buttonid
 
     Buttonlist.classList.add("bg-" + buttonid + "-500");
+}
+
+function clearClickHandler(e) {
+    imgSaveState();
+    if(confirm("wil je echt je canvas clearen? Dit verwijderd alles wat op de huidige laag is getekent, als je dit terug wil halen kan je op de undo button clicken (ctrl + z)")){
+        
+        clear();
+    }
+    
 }
 
 
@@ -627,7 +644,7 @@ function keyPressed(e) {
 
 function undoToPreviousState() {
     if (saveStates !== 0) {
-        background('#fbf8f3')
+        clear();
 
         image(saveStates[saveStates.length - 1], 0, 0, 406, 560);
         saveStates.pop()
@@ -803,7 +820,7 @@ function finish() {
     let code2 = l2.canvas.toDataURL();
     let code3 = l3.canvas.toDataURL();
     console.log(code1);
-    //window.location.href="./end.html"
+    window.location.href="./end.html"
     localStorage.setItem("img", code)
     localStorage.setItem("img1", code1);
     localStorage.setItem("img2", code2);
