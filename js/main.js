@@ -263,6 +263,10 @@ draw = function () {
 handleFile = function (file) {
 
     if (file.type === 'image') {
+        
+        //add savestate for undo function
+        imgSaveState()
+
         //set name and B64 data
         imageName = file.name;
         setB64(file.file)
@@ -281,6 +285,10 @@ handleFile = function (file) {
 
 //handles image import to canvas from image gallery
 function handleGallery(b64) {
+
+    //image savestate to add undo from gallery
+    imgSaveState()
+
     img = createImg(b64);
 
     usingGallery = true;
@@ -601,12 +609,19 @@ function undoToPreviousState() {
     }
 }
 
+//savestatue function for undo function
 function saveState() {
     if(inCanvas === true){
         saveStates.push(previousState = get(0, 0, 406, 560));
         console.log(saveStates)
     }
     
+}
+
+//savestate for importing images
+function imgSaveState() {
+        saveStates.push(previousState = get(0, 0, 406, 560));
+        console.log(saveStates)
 }
 
 //---imagelayer--
@@ -719,31 +734,31 @@ function saveUploadedToLocal() {
     if (uploadedImages.filter(array => array.name === ImageObject.name).length === 0) {
         uploadedImages.push(ImageObject);
         console.log(uploadedImages);
+
+        //add to HTML
+        // Create the div element
+        let divElement = document.createElement("div");
+        divElement.classList.add("p-1", "bg-slate-100", "rounded-lg", "text-center", "flex", "justify-center", "items-center");
+
+        // Create the img element
+        let imgElement = document.createElement("img");
+        imgElement.setAttribute("src", imageB64);
+        imgElement.setAttribute("alt", imageName);
+        imgElement.classList.add("rounded-lg", "object-cover", "w-100px", "h-100px");
+        imgElement.addEventListener('click', imageFromGallery, imageName);
+
+        // Append the img element to the div
+        divElement.appendChild(imgElement);
+
+        // Append the div to the document body or any other desired location
+        document.getElementById('imageModal').appendChild(divElement);
+
+        //save to localstorage
+        localStorage.setItem("uploadedImages", JSON.stringify(uploadedImages));
     }
-
-    //add to HTML
-    // Create the div element
-    let divElement = document.createElement("div");
-    divElement.classList.add("p-1", "bg-slate-100", "rounded-lg", "text-center", "flex", "justify-center", "items-center");
-
-    // Create the img element
-    let imgElement = document.createElement("img");
-    imgElement.setAttribute("src", imageB64);
-    imgElement.setAttribute("alt", imageName);
-    imgElement.classList.add("rounded-lg", "object-cover", "w-100px", "h-100px");
-    imgElement.addEventListener('click', imageFromGallery, imageName);
-
-    // Append the img element to the div
-    divElement.appendChild(imgElement);
-
-    // Append the div to the document body or any other desired location
-    document.getElementById('imageModal').appendChild(divElement);
-
-    //save to localstorage
-    localStorage.setItem("uploadedImages", JSON.stringify(uploadedImages));
 }
 
-//export canvas to B64
+//export canvas to B64 and save in localastorage
 function finish() {
     let eindvedute =  get(0,0,406,560)
     let code = eindvedute.canvas.toDataURL();
