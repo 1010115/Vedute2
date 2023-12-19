@@ -19,13 +19,12 @@ let imageB64; // Uploaded
 let downloadImg;// img to use for downloadimg
 let usingGallery = false; //usinggallery wont save to localstorage if you use gallery
 let inCanvas = false;
+let color;
 
 //starting variables for brush - color - size
 let Ubrush = "pen"; //user brush
-let UColor = [0, 0, 0];//user color
 let USize = 10; //user size
 let Utoothpicklength = 5;//user toothpick length
-let oldcolor;
 let sizeImg;
 let brushImg
 
@@ -57,7 +56,8 @@ const colors = {
     "blue": [59, 130, 246],
     "yellow": [234, 179, 8],
     "orange": [249, 115, 22],
-    "violet": [139, 92, 246]
+    "violet": [139, 92, 246],
+    // "mypicker": color
 }
 
 const activeEvents = {
@@ -93,13 +93,6 @@ function init() {
     for (const sizeButton of sizeButtons) {
         sizeButton.addEventListener('click', (e) => {
             setSize(e, sizes[sizeButton.id])
-        });
-    }
-
-    const colorButtons = document.getElementById('colors').children;
-    for (const colorButton of colorButtons) {
-        colorButton.addEventListener('click', (e) => {
-            setColor(e, colors[colorButton.id], colorButton.id)
         });
     }
 
@@ -142,19 +135,29 @@ function init() {
 
 //prepares the main canvas and input button
 setup = function () {
+    //color picker
+    myPicker = createColorPicker('black');
+    myPicker.parent("color-picker");
+    myPicker.style('position:fixed; width:140px; height:60px; top: 155px; right: 155px; opacity:0;');
+    myPicker.changed(ButtonColor);
+
+    //p5 canvas
     let canvas1 = createCanvas(406, 560);
     canvas1.parent('canvasCanvas');
     l1 = createGraphics(406, 560);
     l2 = createGraphics(406, 560);
     l3 = createGraphics(406, 560);
 
-    
-    // canvas1.background('#fbf8f3')
+    //image input file
     input = createFileInput(handleFile);
     
     input.id('image-import');
     input.parent('image-insert');
+
+    //savestate for undo function
     saveState();
+
+    //get last vedute from localstorage (if one is in there)
     if(localStorage.getItem("img")){
         loadImage(localStorage.getItem("img"),img => {
         image(img,0,0,406,560);
@@ -164,7 +167,13 @@ setup = function () {
 }
 
 
+
 draw = function () {
+    color = myPicker.color();
+    color = color.toString();
+    color= color.replace(/rgba?|\(|\)/g,'').split(',');
+    color = color.slice(0,3)
+    // Display the current color as a hex string.
     //selects the correct pen and allows you to draw
     if (mouseIsPressed && imgDiv.classList.contains("hidden") && inCanvas === true) {
         switch (Ubrush) {
@@ -411,28 +420,19 @@ function setSize(e, size) {
     }
 }
 
+function ButtonColor() {
+    // change button color to selected color
 
-function setColor(e, color, buttonid) {
+    colorButton = document.getElementById("color-selector");
+    colorButton.style = `background-color: rgb(${color});`;
 
-    let Buttonlist = document.getElementById("color-selector");
-    UColor = color
-
-    console.log(UColor);
-
-
-    if (oldcolor) {
-        Buttonlist.classList.remove("bg-" + oldcolor + "-500")
-    }
-    oldcolor = buttonid
-
-    Buttonlist.classList.add("bg-" + buttonid + "-500");
 }
 
 
 // --- pen---
 function pen() {
     // set the color and weight of the stroke
-    stroke(UColor[0], UColor[1], UColor[2], 255)
+    stroke(color[0], color[1], color[2], 255)
     strokeWeight(USize)
 
     // draw a line from current mouse point to previous mouse point
@@ -442,7 +442,7 @@ function pen() {
 // --- marker ---
 function marker() {
     // set the color and brush style
-    fill(UColor[0], UColor[1], UColor[2], 40)
+    fill(color[0], color[1], color[2], 40)
     noStroke()
 
     // draw a circle at the current mouse point, with diameter of 50 pixels
@@ -452,7 +452,7 @@ function marker() {
 // --- wiggle ---
 function wiggle() {
     // set the color and brush style
-    stroke(UColor[0], UColor[1], UColor[2], 255)
+    stroke(color, 255)
     strokeWeight(USize)
     noFill()
 
@@ -476,7 +476,7 @@ function wiggle() {
 // ---toothpick---
 function toothpick() {
     // set the color and brush style
-    fill(UColor[0], UColor[1], UColor[2], 150)
+    fill(color, 150)
     noStroke()
 
     // move the origin (0,0) to the current mouse point
@@ -500,7 +500,7 @@ function toothpick() {
 // ---calligraphy---
 function calligraphy() {
     // set the color and brush style
-    stroke(UColor[0], UColor[1], UColor[2], 255)
+    stroke(color, 255)
     strokeWeight(1)
     const width = USize
 
@@ -522,7 +522,7 @@ function calligraphy() {
 // ---splatter---
 function splatter() {
     // set the color and brush style
-    stroke(UColor[0], UColor[1], UColor[2], 160)
+    stroke(color, 160)
     strokeWeight(USize)
 
     // set the number of times we lerp the point in the for loop
@@ -543,7 +543,7 @@ function splatter() {
 // ---hatching ---
 function hatching() {
     // set the color and brush style
-    stroke(UColor[0], UColor[1], UColor[2], 220)
+    stroke(color, 220)
     strokeWeight(USize)
 
     // calculate the speed of the mouse
@@ -573,7 +573,7 @@ function hatching() {
 // --- spraypaint---
 function sprayPaint() {
     // set the color and brush style
-    stroke(UColor[0], UColor[1], UColor[2], 255)
+    stroke(color, 255)
     strokeWeight(USize / 50)
 
     // find the speed of the mouse movement
