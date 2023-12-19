@@ -437,9 +437,8 @@ function setColor(e, color, buttonid) {
 }
 
 function clearClickHandler(e) {
-    imgSaveState();
     if(confirm("wil je echt je canvas clearen? Dit verwijderd alles wat op de huidige laag is getekent, als je dit terug wil halen kan je op de undo button clicken (ctrl + z)")){
-        
+        imgSaveState();
         clear();
     }
     
