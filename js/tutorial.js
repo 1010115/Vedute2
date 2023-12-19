@@ -1,5 +1,6 @@
 let tutorialField = document.getElementById('tutorialField')
 let tutorialBtn = document.getElementById('tutorialBtn')
+let screen = document.getElementById('screen')
 let pageNmbr = 0
 let popUpState = false
 
@@ -11,6 +12,8 @@ tutorialImg.src = `../assets/tutorial_${pageNmbr}.png`
 nextBtn.innerText = '>'
 prevBtn.innerText = '<'
 
+nextBtn.classList = ' fixed right-1000'
+prevBtn.classList = ' fixed left-100 top-300'
 // tutorialImg.tagName = "h-50% fit"
 
 
@@ -24,12 +27,14 @@ function popUp() {
         tutorialField.appendChild(tutorialImg)
         tutorialField.appendChild(prevBtn)
         tutorialField.appendChild(nextBtn)
+        screen.classList = 'display: hidden overflow-y: hidden'
 
         popUpState = true
     } else {
         tutorialField.removeChild(tutorialImg)
         tutorialField.removeChild(prevBtn)
         tutorialField.removeChild(nextBtn)
+        screen.classList = 'grid grid-cols-10 place-content-center min-w-screen min-h-screen h-full bg-clouds2 bg-cover'
 
         popUpState = false
     }
