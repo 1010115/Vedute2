@@ -6,11 +6,16 @@
     <script src="../js/popup.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.8.0/p5.js"></script>
     <script src="../js/main.js"></script>
+
     <link href="../css/output.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/imgCanvas.css">
     <title>Vedute maker - editor</title>
 </head>
 <body>
+
+<div id="tutorialField" class="absolute bg-green-500 h-full" ></div>
+<button id="tutorialBtn" class="text-2xl absolute">?</button>
+
 <div class="grid grid-cols-10 place-content-center min-w-screen min-h-screen h-full bg-clouds2 bg-cover">
     <div class="col-span-3 flex flex-col items-center">
         <p class="text-center text-2xl font-semibold text-black">Kies je laag :</p>
@@ -19,6 +24,7 @@
         <div class="place-content-around">
             <button class="bg-slate-50 p-2 rounded-lg mx-2"><-</button>
             <button class="bg-slate-50 p-2 rounded-lg mx-2">-></button>
+
         </div>
     </div>
 
@@ -39,6 +45,7 @@
     </div>
 
     <div class="col-span-3 flex flex-col items-center justify-center">
+
         <div class="flex flex-col">
             <!--popup brush-->
             <button class="bg-slate-50 rounded-full justify-center hover:border-2 border-black mb-2 relative flex place-content-center w-full p-2 h-12"
@@ -101,7 +108,7 @@
                                            alt="add image" class="mt-2">
             </button>
             <div id="imageModal"
-                 class="imageModal absolute hidden w-80 h-fit z-10 bg-slate-50 p-2 top-52 right-popup rounded-lg border-2 border-black grid grid-cols-3 gap-1">
+                 class="imageModal absolute hidden w-80 h-fit z-10 bg-slate-50 p-2 to2p-52 right-popup rounded-lg border-2 border-black grid grid-cols-3 gap-1">
                 <label for="image-import" id="image-insert">
                     <div class="p-1 bg-slate-100 rounded-lg text-center flex justify-center place-items-center">
                         <img src="../Images/addimage.png" alt="add image"
@@ -134,5 +141,6 @@
         </div>
     </div>
 </div>
+<script src="../js/tutorial.js"></script>
 </body>
 </html>
