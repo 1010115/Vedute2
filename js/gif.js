@@ -11,12 +11,12 @@ class Layer {
         this.speed = speed;
     }
 
-    display() { // method
+    display() {
         fill(this.color);
         rect(this.x, this.y, 32, 44);
     }
 
-    move() { // method
+    move() {
         this.x += this.speed;
         // Wrap x around boundaries
         if (this.x < -20) {
@@ -28,6 +28,7 @@ class Layer {
 
 } //end class Layer
 
+//initialize layers
 let layer1;
 let layer2;
 let layer3;
@@ -35,6 +36,8 @@ let layer3;
 function setup() {
     createCanvas(108, 192);//10% from an instagram story so we can easily making it 100% by adding a 0s
 //add the layes
+
+    //give layers inheritance from class "Layer"
     layer1 = new Layer("pink", 10, 10);
     layer2 = new Layer("pink", 20, 20);
     layer3 = new Layer("pink", 30, 30);
