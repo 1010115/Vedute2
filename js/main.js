@@ -20,10 +20,8 @@ let color;
 
 //starting variables for brush - color - size
 let Ubrush = "pen"; //user brush
-let UColor = [0, 0, 0];//user color
 let USize = 10; //user size
 let Utoothpicklength = 5;//user toothpick length
-let oldcolor;
 let sizeImg;
 let brushImg
 
@@ -82,15 +80,6 @@ function init() {
         });
     }
 
-
-
-    const colorButtons = document.getElementById('colors').children;
-    for (const colorButton of colorButtons) {
-        colorButton.addEventListener('click', (e) => {
-            setColor(e, colors[colorButton.id], colorButton.id)
-        });
-    }
-
     sizeImg = document.getElementById("sizeimg")
     sizeImg.src = "../assets/medium.svg";
 
@@ -129,17 +118,26 @@ function init() {
 
 //prepares the main canvas and input button
 setup = function () {
-    myPicker = createColorPicker('deeppink');
-    myPicker.parent("colors");
+    //color picker
+    myPicker = createColorPicker('black');
+    myPicker.parent("color-picker");
+    myPicker.style('position:fixed; width:140px; height:60px; top: 155px; right: 155px; opacity:0;');
+    myPicker.changed(ButtonColor);
+
+    //p5 canvas
     let canvas1 = createCanvas(406, 560);
     canvas1.parent('canvasCanvas');
-    canvas1.background('#fbf8f3')
+
+    //image input file
     input = createFileInput(handleFile);
     input.id('image-import');
     input.parent('image-insert');
+
+    //savestate for undo function
     saveState();
+
+    //get last vedute from localstorage (if one is in there)
     if(localStorage.getItem("img")){
-        console.log("ahh")
         loadImage(localStorage.getItem("img"),img => {
         image(img,0,0,406,560);
         });
@@ -153,7 +151,6 @@ draw = function () {
     color = color.toString();
     color= color.replace(/rgba?|\(|\)/g,'').split(',');
     color = color.slice(0,3)
-    console.log(color)
     // Display the current color as a hex string.
     //selects the correct pen and allows you to draw
     if (mouseIsPressed && imgDiv.classList.contains("hidden")) {
@@ -377,18 +374,12 @@ function setSize(e, size) {
     }
 }
 
+function ButtonColor() {
+    // change button color to selected color
 
+    colorButton = document.getElementById("color-selector");
+    colorButton.style = `background-color: rgb(${color});`;
 
-function setColor() {
-
-    let Buttonlist = document.getElementById("color-selector");
-
-    if (oldcolor) {
-        Buttonlist.classList.remove("bg-[" + oldcolor+ "]")
-    }
-    oldcolor = myPicker.value()
-
-    Buttonlist.classList.add("bg-[" + myPicker.value() + "]");
 }
 
 function touchMoved() {

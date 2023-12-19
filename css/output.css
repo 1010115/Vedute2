@@ -914,12 +914,20 @@ video {
   width: 100px;
 }
 
+.w-12 {
+  width: 3rem;
+}
+
 .w-80 {
   width: 20rem;
 }
 
 .w-96 {
   width: 24rem;
+}
+
+.w-auto {
+  width: auto;
 }
 
 .w-canvaswidth {
