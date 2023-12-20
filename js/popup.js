@@ -18,11 +18,6 @@ function init() {
 
     BrushSelector.addEventListener("click", selectBrushModal );
 
-    ColorSelector = document.getElementById('color-selector');
-    ColorModal = document.getElementById('colorModal');
-
-    ColorSelector.addEventListener("click", selectColorModal);
-
     ImageButton = document.getElementById("image-button");
     ImageModal = document.getElementById('imageModal');
 
@@ -53,12 +48,6 @@ function selectSizeModal() {
     SizeModal.classList.remove("hidden");
 }
 
-function selectColorModal() {
-    console.log('color-select');
-    //open color modal
-    ColorModal.classList.remove("hidden");
-}
-
 function imageImport() {
     console.log('image import');
     //open image modal
@@ -74,10 +63,6 @@ function selectSticker() {
 document.addEventListener("click", function(event) {
     if (!BrushSelector.contains(event.target)) {
         BrushModal.classList.add("hidden");
-    }
-
-    if (!ColorSelector.contains(event.target)) {
-        ColorModal.classList.add("hidden");
     }
 
     if (!SizeSelector.contains(event.target)) {
