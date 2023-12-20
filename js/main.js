@@ -17,6 +17,8 @@ let imageName; // Uploaded image name
 let imageB64; // Uploaded
 let downloadImg;
 let color;
+let slider;
+let sizeBrush;
 
 //starting variables for brush - color - size
 let Ubrush = "pen"; //user brush
@@ -129,6 +131,9 @@ function init() {
 
 //prepares the main canvas and input button
 setup = function () {
+    slider = createSlider(1, 150, 5, 1);
+    slider.parent("sizeModal");
+    slider.size(80);
     myPicker = createColorPicker('deeppink');
     myPicker.parent("colors");
     let canvas1 = createCanvas(406, 560);
@@ -149,11 +154,17 @@ setup = function () {
 
 
 draw = function () {
+    sizeBrush = slider.value();
+    console.log(sizeBrush)
+    let output = document.getElementById("demo");
+    output.innerHTML = slider.value();
+    slider.oninput = function() {
+        output.innerHTML = this.value;
+    }
     color = myPicker.color();
     color = color.toString();
     color= color.replace(/rgba?|\(|\)/g,'').split(',');
     color = color.slice(0,3)
-    console.log(color)
     // Display the current color as a hex string.
     //selects the correct pen and allows you to draw
     if (mouseIsPressed && imgDiv.classList.contains("hidden")) {
@@ -400,7 +411,7 @@ function touchMoved() {
 function pen() {
     // set the color and weight of the stroke
     stroke(color[0], color[1], color[2], 255)
-    strokeWeight(USize)
+    strokeWeight(sizeBrush)
 
     // draw a line from current mouse point to previous mouse point
     line(mouseX, mouseY, pmouseX, pmouseY)
@@ -413,14 +424,14 @@ function marker() {
     noStroke()
 
     // draw a circle at the current mouse point, with diameter of 50 pixels
-    circle(mouseX, mouseY, USize)
+    circle(mouseX, mouseY, sizeBrush)
 }
 
 // --- wiggle ---
 function wiggle() {
     // set the color and brush style
-    stroke(color, 255)
-    strokeWeight(USize)
+    stroke(color[0], color[1], color[2], 255)
+    strokeWeight(sizeBrush)
     noFill()
 
     // find the distance between the current and previous mouse points
@@ -443,7 +454,7 @@ function wiggle() {
 // ---toothpick---
 function toothpick() {
     // set the color and brush style
-    fill(color, 150)
+    fill(color[0], color[1], color[2], 150)
     noStroke()
 
     // move the origin (0,0) to the current mouse point
@@ -455,7 +466,7 @@ function toothpick() {
     rotate(angle)
 
     // set minumum width and height of the toothpick-shaped ellipse
-    const minSize = USize
+    const minSize = sizeBrush
 
     // find the distance between current mouse point and previous mouse point
     const distance = dist(mouseX, mouseY, pmouseX, pmouseY)
@@ -467,9 +478,9 @@ function toothpick() {
 // ---calligraphy---
 function calligraphy() {
     // set the color and brush style
-    stroke(color, 255)
+    stroke(color[0], color[1], color[2], 255)
     strokeWeight(1)
-    const width = USize
+    const width = sizeBrush
 
     // set the number of times we lerp the line in the for loop
     const lerps = 1000
@@ -489,8 +500,8 @@ function calligraphy() {
 // ---splatter---
 function splatter() {
     // set the color and brush style
-    stroke(color, 160)
-    strokeWeight(USize)
+    stroke(color[0], color[1], color[2], 160)
+    strokeWeight(sizeBrush)
 
     // set the number of times we lerp the point in the for loop
     const lerps = 8
@@ -510,8 +521,8 @@ function splatter() {
 // ---hatching ---
 function hatching() {
     // set the color and brush style
-    stroke(color, 220)
-    strokeWeight(USize)
+    stroke(color[0], color[1], color[2], 220)
+    strokeWeight(sizeBrush)
 
     // calculate the speed of the mouse
     let speed = abs(mouseX - pmouseX) + abs(mouseY - pmouseY)
@@ -540,14 +551,14 @@ function hatching() {
 // --- spraypaint---
 function sprayPaint() {
     // set the color and brush style
-    stroke(color, 255)
-    strokeWeight(USize / 50)
+    stroke(color[0], color[1], color[2], 255)
+    strokeWeight(sizeBrush / 50)
 
     // find the speed of the mouse movement
     const speed = abs(mouseX - pmouseX) + abs(mouseY - pmouseY)
 
     // set minimum radius and spray density of spraypaint brush
-    const minRadius = USize;
+    const minRadius = sizeBrush;
     const sprayDensity = 80
 
     // find radius of the spray paint brush and radius squared
@@ -731,6 +742,14 @@ function finish() {
     window.location.href="./end.html"
     localStorage.setItem("img",code)
 }
+
+// let output = document.getElementById("demo");
+// output.innerHTML = slider.value;
+
+// slider.oninput = function() {
+//     output.innerHTML = this.value;
+// }
+    console.log(slider)
 
 
 
