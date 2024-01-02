@@ -13,8 +13,8 @@ downloadBtn.innerText = 'Download mijn Vedute'
 buttons.appendChild(downloadBtn)
 function placeImg (img){
     img.alt= "jouw Vedute"
-    img.src= localStorage.getItem('img')
-    placeHolder.appendChild(img)
+    img.src= localStorage.getItem('img1')
+    //placeHolder.appendChild(img)
     eindvedute = localStorage.getItem("img")
 }
 

@@ -1,26 +1,57 @@
+document.addEventListener("DOMContentLoaded", init);
 //initialize layers
 let layer1;
 let layer2;
 let layer3;
 
+//loadedimages
+let veduteImage1;
+let veduteImage2;
+let veduteImage3;
+
+//dom tags
+let canvas;
+let canvasParent;
+
+let img1;
+let img2;
+let img3;
+
+function init() {
+    canvasParent = document.getElementById("canvas");
+}
+
+//preloads images
+function preload() {
+    getImageFromLocalstorage();
+    img1 = loadImage(veduteImage1);
+    img2 = loadImage(veduteImage2);
+    img3 = loadImage(veduteImage3);
+}
+
 //function setup
 function setup() {
     //create canvas
-    createCanvas(108, 192);
+    canvas = createCanvas(406, 560);
+    canvas.background(155)
+    canvas.parent(canvasParent);
+    
+    console.log("image")
+    console.log(img1);
 
     //give layers inheritance from class "Layer" and set their initial positions
-    layer1 = new Layer("pink", 10, 10);
-    layer2 = new Layer("pink", 20, 20);
-    layer3 = new Layer("pink", 30, 30);
+    layer1 = new Layer("pink", img1, 40, 40);
+    layer2 = new Layer("pink", img2, 80, 80);
+    layer3 = new Layer("pink", img3, 120, 120);
 
     //call start methods of layer instances with target positions
-    layer1.start(3, 20, 20);
-    layer2.start(3, 20, 20);
-    layer3.start(3, 20, 20);
+    layer1.start(3, 80, 80);
+    layer2.start(3, 80, 80);
+    layer3.start(3, 80, 80);
 
     //create a button and place it beneath the canvas.
     let button = createButton('save gif');
-    button.position(0, 192);
+    button.parent(canvasParent);
 
     //use the button to change download the gif
     button.mousePressed(() => {
@@ -46,8 +77,10 @@ function draw() {
 //add a class named "Layer" wich represents the layers from the vedute.
 class Layer {
     //constructor function to put layers properties
-    constructor(lColor, x, y) {
+    constructor(lColor, image, x, y) {
         this.color = lColor; //for color
+        this.image = image;
+        console.log(this.image)
         this.x = x; //for initial position horizontal
         this.y = y; //for initial position vertical
         this.speed = 0; //for speed
@@ -71,8 +104,9 @@ class Layer {
     display() {
         //set the fill color and draw a rectangle at the layer's position
         //this rect is a placeholder for the images from the vedute
-        fill(this.color);
-        rect(this.x, this.y, 32, 44);
+        rect(this.x, this.y, 128, 176);
+        image(this.image, this.x, this.y, 128, 176);
+        
     }
 
     //method to update the layer's position for animation
@@ -115,5 +149,12 @@ class Layer {
             this.x = -20;
         }
     }
+
+    
+}
+function getImageFromLocalstorage() {
+   veduteImage1 = localStorage.getItem("img1");
+   veduteImage2 = localStorage.getItem("img2");
+   veduteImage3 = localStorage.getItem("img3");
 }
 
