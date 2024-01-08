@@ -25,11 +25,6 @@ downloadBtn.addEventListener('click', ()=>{
 
 })
 
-let download = document.createElement('a')
-
-download.download = "vedute.png"
-download.innerText = "DOWNLOAD VEDUTE"
-document.body.appendChild(download)
 
 function downloadImage (canvas){
     console.log(canvas)
