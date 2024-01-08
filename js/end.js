@@ -2,9 +2,11 @@ let placeHolder = document.getElementById('placeHolder')
 let buttons = document.getElementById('buttons')
 let downloadableImg = document.createElement('img')
 let downloadBtn = document.createElement('a')
+let eindvedute;
+let back = document.getElementById("back");
 //finishBtn.addEventListener('click', () => downloadImage(canvas))
 
-
+back.addEventListener("click",backfunctie)
 downloadBtn.href = localStorage.getItem('img')
 downloadBtn.download = "vedute.png"
 downloadBtn.innerText = 'Download mijn Vedute'
@@ -13,7 +15,7 @@ function placeImg (img){
     img.alt= "jouw Vedute"
     img.src= localStorage.getItem('img')
     placeHolder.appendChild(img)
-
+    eindvedute = localStorage.getItem("img")
 }
 
 placeImg(downloadableImg)
@@ -23,17 +25,21 @@ downloadBtn.addEventListener('click', ()=>{
 
 })
 
-let download = document.createElement('a')
-
-download.download = "vedute.png"
-download.innerText = "DOWNLOAD VEDUTE"
-document.body.appendChild(download)
 
 function downloadImage (canvas){
     console.log(canvas)
     download.href = canvas.toDataURL("image/png")
     console.log('pew')
 }
+
+
+function backfunctie() {
+localStorage.setItem("img",eindvedute)
+    window.location.href="./canvas.html"
+}
+
+localStorage.removeItem("img")
+
 
 
 

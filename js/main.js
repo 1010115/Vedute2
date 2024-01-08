@@ -5,6 +5,7 @@ let img; // the image your currently using
 let staticImg; //the image that gets posted into the canvas
 let imgDiv; //the div that has the img canvas
 let confirmImg; //the button that onfirms the image
+let cancelImg; //the button that cancels the image
 let imgCorrect = false; //wether the image button has been pressed or not
 let dragging = false; // Is the object being dragged?
 let rollover = false; // Is the mouse over the ellipse?
@@ -15,20 +16,29 @@ let imageLayer; //p5 object for the imagelayer
 let uploadedImages = [] // array of all images that get saved into localstorage
 let imageName; // Uploaded image name
 let imageB64; // Uploaded
-let downloadImg;
+let downloadImg;// img to use for downloadimg
+let usingGallery = false; //usinggallery wont save to localstorage if you use gallery
+let inCanvas = false;
+let color;
 
 //starting variables for brush - color - size
 let Ubrush = "pen"; //user brush
-let UColor = [0, 0, 0];//user color
 let USize = 10; //user size
 let Utoothpicklength = 5;//user toothpick length
-let oldcolor;
 let sizeImg;
 let brushImg
 
 let previousState;
 let saveStates = []
 let drawing = true
+
+//multiple canvases
+let l1, l2, l3; //used as the extra layers
+let prevLayerButton, nextLayerButton; //buttons to switch layers
+let currentLayer = 0; //checks the current layer;
+let layerSwitch = false;
+let canvasImg;
+let layerImg;
 
 //brush sizes
 const sizes = {
@@ -46,7 +56,8 @@ const colors = {
     "blue": [59, 130, 246],
     "yellow": [234, 179, 8],
     "orange": [249, 115, 22],
-    "violet": [139, 92, 246]
+    "violet": [139, 92, 246],
+    // "mypicker": color
 }
 
 const activeEvents = {
@@ -59,29 +70,31 @@ const activeEvents = {
 
 
 function init() {
-    //gets the necesarry html elements
-    confirmImg = document.getElementById('image-confirm');
-    confirmImg.addEventListener('click', confirmClickHandler);
-    imgDiv = document.getElementById('imageCanvas');
-    imgDiv.classList.add('hidden');
-    const tools = document.getElementsByClassName('tool')
-    for (const tool of tools) {
-        tool.addEventListener('click', (e) => {
-            setBrush(e, tool.id)
-        });
-    }
+
+  //gets the necesarry html elements
+  confirmImg = document.getElementById('image-confirm');
+  cancelImg = document.getElementById('image-cancel');
+  confirmImg.addEventListener('click', confirmClickHandler);
+  cancelImg.addEventListener('click', cancelClickHandler);
+  const clearButton = document.getElementById('clear-button');
+  clearButton.addEventListener('click', clearClickHandler)
+  imgDiv = document.getElementById('imageCanvas');
+  imgDiv.classList.add('hidden');
+  layerImg = document.getElementById('layerImg');
+  nextLayerButton = document.getElementById('nextLayer');
+  nextLayerButton.addEventListener('click', nextLayerHandler)
+  prevLayerButton = document.getElementById('prevLayer');
+  prevLayerButton.addEventListener('click', prevLayerHandler);
+  const tools = document.getElementsByClassName('tool')
+        for(const tool of tools) {
+            tool.addEventListener('click', (e) => { setBrush(e, tool.id)} );
+        }
+
 
     const sizeButtons = document.getElementsByClassName('size')
     for (const sizeButton of sizeButtons) {
         sizeButton.addEventListener('click', (e) => {
             setSize(e, sizes[sizeButton.id])
-        });
-    }
-
-    const colorButtons = document.getElementById('colors').children;
-    for (const colorButton of colorButtons) {
-        colorButton.addEventListener('click', (e) => {
-            setColor(e, colors[colorButton.id], colorButton.id)
         });
     }
 
@@ -106,6 +119,7 @@ function init() {
             imgElement.setAttribute("src", object.base64);
             imgElement.setAttribute("alt", object.name);
             imgElement.classList.add("rounded-lg", "object-cover", "w-100px", "h-100px");
+            imgElement.addEventListener('click', imageFromGallery, object.name);
 
             // Append the img element to the div
             divElement.appendChild(imgElement);
@@ -122,20 +136,49 @@ function init() {
 }
 
 //prepares the main canvas and input button
-function setup() {
+setup = function () {
+    //color picker
+    myPicker = createColorPicker('black');
+    myPicker.parent("color-picker");
+    //change opacity to 1 to see color picker input
+    myPicker.style('position:absolute; width:330px; height:60px; top: 0vw; right: 0vw; opacity:0;');
+    myPicker.changed(ButtonColor);
+
+    //p5 canvas
     let canvas1 = createCanvas(406, 560);
     canvas1.parent('canvasCanvas');
-    canvas1.background('#fbf8f3')
+    l1 = createGraphics(406, 560);
+    l2 = createGraphics(406, 560);
+    l3 = createGraphics(406, 560);
+
+    //image input file
     input = createFileInput(handleFile);
+    
     input.id('image-import');
     input.parent('image-insert');
+
+    //savestate for undo function
     saveState();
+
+    //get last vedute from localstorage (if one is in there)
+    if(localStorage.getItem("img")){
+        loadImage(localStorage.getItem("img"),img => {
+        image(img,0,0,406,560);
+        });
+    }
+    localStorage.removeItem('img');
 }
 
 
-function draw() {
+
+draw = function () {
+    color = myPicker.color();
+    color = color.toString();
+    color= color.replace(/rgba?|\(|\)/g,'').split(',');
+    color = color.slice(0,3)
+    // Display the current color as a hex string.
     //selects the correct pen and allows you to draw
-    if (mouseIsPressed && imgDiv.classList.contains("hidden")) {
+    if (mouseIsPressed && imgDiv.classList.contains("hidden") && inCanvas === true) {
         switch (Ubrush) {
             case "pen":
 
@@ -210,45 +253,62 @@ function draw() {
                 eraser()
                 break;
         }
-    }
 
     }
 
     addEventListener("mouseup", (event) => {
-        drawing = true
+         drawing = true;
+        
+        
     })
+
+    addEventListener("mousedown", (event) => {
+        let canvas1 = document.getElementById('defaultCanvas0');
+        if(event.target === canvas1) {
+            inCanvas = true;
+        } else {
+            inCanvas = false;
+        }
+        
+    })
+
+    //sets the current canvas to new layer
+    if(canvasImg && layerSwitch) {
+        clear();
+        image(canvasImg, 0, 0, 406, 560);
+        layerSwitch = false;
+        if(Ubrush === "eraser") {
+            Ubrush = "pen";
+            console.log(Ubrush);
+            brushImg.src = "../assets/pen-solid.svg";
+            noErase()
+        }
+    }
 
     //checks if the image gets pasted into the main canvas and pasts it there
     if (img && imgCorrect) {
+
         console.log(img);
         image(staticImg, staticX, staticY, w, h);
         imgCorrect = false;
         if (!confirmImg.classList.contains('hidden')) {
             confirmImg.classList.toggle('hidden');
+            cancelImg.classList.toggle('hidden');
+            imgDiv.classList.toggle('hidden');
         }
-        console.log(img);
-        image(staticImg, staticX, staticY, w, h);
-        imgCorrect = false;
-        if (!confirmImg.classList.contains('hidden')) {
-            confirmImg.classList.toggle('hidden');
-        }
-        console.log(img);
         image(staticImg, staticX, staticY, w, h);
         imgCorrect = false;
     }
+}
+
 
 //handles the image file input
 handleFile = function (file) {
 
     if (file.type === 'image') {
-        img = createImg(file.data, '');
-        img.hide();
-        if (imgDiv.classList.contains('hidden')) {
-            imgDiv.classList.toggle('hidden');
-        }
-        if (confirmImg.classList.contains('hidden')) {
-            confirmImg.classList.toggle('hidden');
-        }
+        
+        //add savestate for undo function
+        imgSaveState()
 
         //set name and B64 data
         imageName = file.name;
@@ -257,17 +317,30 @@ handleFile = function (file) {
         img.hide();
         if (imgDiv.classList.contains('hidden')) {
             imgDiv.classList.toggle('hidden');
-        }
-        if (confirmImg.classList.contains('hidden')) {
             confirmImg.classList.toggle('hidden');
+            cancelImg.classList.toggle('hidden')
         }
-        img = createImg(file.data, '');
-        img.hide();
-        if (imgDiv.classList.contains('hidden')) {
-            imgDiv.classList.toggle('hidden');
-        }
+
     } else {
         img = null;
+    }
+}
+
+//handles image import to canvas from image gallery
+function handleGallery(b64) {
+
+    //image savestate to add undo from gallery
+    imgSaveState()
+
+    img = createImg(b64);
+
+    usingGallery = true;
+
+    img.hide();
+    if (imgDiv.classList.contains('hidden')) {
+        imgDiv.classList.toggle('hidden');
+        cancelImg.classList.toggle('hidden');
+        confirmImg.classList.toggle('hidden');
     }
 }
 
@@ -356,32 +429,27 @@ function setSize(e, size) {
     }
 }
 
+function ButtonColor() {
+    // change button color to selected color
 
-function setColor(e, color, buttonid) {
+    colorButton = document.getElementById("color-selector");
+    colorButton.style = `background-color: rgb(${color});`;
 
-    let Buttonlist = document.getElementById("color-selector");
-    UColor = color
-
-    console.log(UColor);
-
-
-    if (oldcolor) {
-        Buttonlist.classList.remove("bg-" + oldcolor + "-500")
-    }
-    oldcolor = buttonid
-
-    Buttonlist.classList.add("bg-" + buttonid + "-500");
 }
 
-function touchMoved() {
-    return false
+function clearClickHandler(e) {
+    if(confirm("wil je echt je canvas clearen? Dit verwijderd alles wat op de huidige laag is getekent, als je dit terug wil halen kan je op de undo button clicken (ctrl + z)")){
+        imgSaveState();
+        clear();
+    }
+    
 }
 
 
 // --- pen---
 function pen() {
     // set the color and weight of the stroke
-    stroke(UColor[0], UColor[1], UColor[2], 255)
+    stroke(color[0], color[1], color[2], 255)
     strokeWeight(USize)
 
     // draw a line from current mouse point to previous mouse point
@@ -391,7 +459,7 @@ function pen() {
 // --- marker ---
 function marker() {
     // set the color and brush style
-    fill(UColor[0], UColor[1], UColor[2], 40)
+    fill(color[0], color[1], color[2], 40)
     noStroke()
 
     // draw a circle at the current mouse point, with diameter of 50 pixels
@@ -401,7 +469,7 @@ function marker() {
 // --- wiggle ---
 function wiggle() {
     // set the color and brush style
-    stroke(UColor[0], UColor[1], UColor[2], 255)
+    stroke(color, 255)
     strokeWeight(USize)
     noFill()
 
@@ -425,7 +493,7 @@ function wiggle() {
 // ---toothpick---
 function toothpick() {
     // set the color and brush style
-    fill(UColor[0], UColor[1], UColor[2], 150)
+    fill(color, 150)
     noStroke()
 
     // move the origin (0,0) to the current mouse point
@@ -449,7 +517,7 @@ function toothpick() {
 // ---calligraphy---
 function calligraphy() {
     // set the color and brush style
-    stroke(UColor[0], UColor[1], UColor[2], 255)
+    stroke(color, 255)
     strokeWeight(1)
     const width = USize
 
@@ -471,7 +539,7 @@ function calligraphy() {
 // ---splatter---
 function splatter() {
     // set the color and brush style
-    stroke(UColor[0], UColor[1], UColor[2], 160)
+    stroke(color, 160)
     strokeWeight(USize)
 
     // set the number of times we lerp the point in the for loop
@@ -492,7 +560,7 @@ function splatter() {
 // ---hatching ---
 function hatching() {
     // set the color and brush style
-    stroke(UColor[0], UColor[1], UColor[2], 220)
+    stroke(color, 220)
     strokeWeight(USize)
 
     // calculate the speed of the mouse
@@ -522,7 +590,7 @@ function hatching() {
 // --- spraypaint---
 function sprayPaint() {
     // set the color and brush style
-    stroke(UColor[0], UColor[1], UColor[2], 255)
+    stroke(color, 255)
     strokeWeight(USize / 50)
 
     // find the speed of the mouse movement
@@ -576,16 +644,26 @@ function keyPressed(e) {
 
 function undoToPreviousState() {
     if (saveStates !== 0) {
-        background('#fbf8f3')
+        clear();
 
         image(saveStates[saveStates.length - 1], 0, 0, 406, 560);
         saveStates.pop()
     }
 }
 
+//savestatue function for undo function
 function saveState() {
-    saveStates.push(previousState = get(0, 0, 406, 560));
-    console.log(saveStates)
+    if(inCanvas === true){
+        saveStates.push(previousState = get(0, 0, 406, 560));
+        console.log(saveStates)
+    }
+    
+}
+
+//savestate for importing images
+function imgSaveState() {
+        saveStates.push(previousState = get(0, 0, 406, 560));
+        console.log(saveStates)
 }
 
 //---imagelayer--
@@ -640,14 +718,7 @@ let s2 = function (sketch) {
             offsetY = y - sketch.mouseY;
         }
 
-        //save uploaded image to array
-        saveUploadedToLocal();
-
         console.log(img);
-        if (!imgDiv.classList.contains('hidden') && imgDiv !== undefined) {
-            imgDiv.classList.add('hidden');
-
-        }
         sketch.mouseReleased = function () {
             // Quit dragging
             dragging = false;
@@ -667,13 +738,34 @@ function setB64(file) {
     reader.readAsDataURL(file);
 }
 
+imageLayer = new p5(s2);
+
+//handles the confirm button for images
 function confirmClickHandler() {
     imgCorrect = true;
     staticImg = img;
     staticX = x;
     staticY = y;
-    if (!imgDiv.classList.contains('hidden') && imgDiv !== undefined) {
+
+    //save uploaded image to array
+    if (usingGallery === false) {
+        saveUploadedToLocal();
+    }
+    
+    usingGallery = false;
+    
+  if (!imgDiv.classList.contains('hidden') && imgDiv !== undefined) {
         imgDiv.classList.add('hidden');
+        confirmImg.classList.toggle('hidden');
+        cancelImg.classList.toggle('hidden');
+      }
+}
+
+function cancelClickHandler() {
+    if (!imgDiv.classList.contains('hidden') && imgDiv !== undefined) {
+        imgDiv.classList.toggle('hidden');
+        confirmImg.classList.toggle('hidden');
+        cancelImg.classList.toggle('hidden');
     }
 }
 
@@ -684,36 +776,130 @@ function saveUploadedToLocal() {
     if (uploadedImages.filter(array => array.name === ImageObject.name).length === 0) {
         uploadedImages.push(ImageObject);
         console.log(uploadedImages);
+
+        //add to HTML
+        // Create the div element
+        let divElement = document.createElement("div");
+        divElement.classList.add("p-1", "bg-slate-100", "rounded-lg", "text-center", "flex", "justify-center", "items-center");
+
+        // Create the img element
+        let imgElement = document.createElement("img");
+        imgElement.setAttribute("src", imageB64);
+        imgElement.setAttribute("alt", imageName);
+        imgElement.classList.add("rounded-lg", "object-cover", "w-100px", "h-100px");
+        imgElement.addEventListener('click', imageFromGallery, imageName);
+
+        // Append the img element to the div
+        divElement.appendChild(imgElement);
+
+        // Append the div to the document body or any other desired location
+        document.getElementById('imageModal').appendChild(divElement);
+
+        //save to localstorage
+        localStorage.setItem("uploadedImages", JSON.stringify(uploadedImages));
     }
-
-    //add to HTML
-    // Create the div element
-    let divElement = document.createElement("div");
-    divElement.classList.add("p-1", "bg-slate-100", "rounded-lg", "text-center", "flex", "justify-center", "items-center");
-
-    // Create the img element
-    let imgElement = document.createElement("img");
-    imgElement.setAttribute("src", imageB64);
-    imgElement.setAttribute("alt", imageName);
-    imgElement.classList.add("rounded-lg", "object-cover", "w-100px", "h-100px");
-
-    // Append the img element to the div
-    divElement.appendChild(imgElement);
-
-    // Append the div to the document body or any other desired location
-    document.getElementById('imageModal').appendChild(divElement);
-
-    //save to localstorage
-    localStorage.setItem("uploadedImages", JSON.stringify(uploadedImages));
 }
 
-//export canvas to B64
+//export canvas to B64 and save in localastorage
 function finish() {
     let eindvedute =  get(0,0,406,560)
-    let code= eindvedute.canvas.toDataURL();
+    let code = eindvedute.canvas.toDataURL();
+    let prevCanvas = get( 0, 0, 406, 560);
+    switch(currentLayer){
+        case(0):  
+            l1.image(prevCanvas, 0,0, 406, 560);
+            break;
+            case(1):
+        l2.image(prevCanvas, 0,0, 406, 560);
+        break;
+        case(2):
+        l3.image(prevCanvas, 0,0, 406, 560);
+        break;
+    }
+    let code1 = l1.canvas.toDataURL();
+    let code2 = l2.canvas.toDataURL();
+    let code3 = l3.canvas.toDataURL();
+    console.log(code1);
     window.location.href="./end.html"
-    localStorage.setItem("img",code)
+    localStorage.setItem("img", code)
+    localStorage.setItem("img1", code1);
+    localStorage.setItem("img2", code2);
+    localStorage.setItem("img3", code3);
+
 }
+
+function imageFromGallery(imgName) {
+    //get image name
+    let clickedName = imgName.target.alt;
+
+    //get image from localstorage and use b64 in handleFile
+    uploadedImages.forEach((image, index) => {
+        if (image.name === clickedName){
+            handleGallery(image.base64);
+        }
+    });
+
+}
+
+function nextLayerHandler() {
+    currentLayer ++;
+    let prevCanvas = get( 0, 0, 406, 560);
+    if(currentLayer > 2) {
+        currentLayer = 0
+    }
+    switch(currentLayer){
+        case(0): 
+            canvasImg = l1;
+            l3.image(prevCanvas, 0,0, 406, 560);
+            layerSwitch = true;
+            layerImg.src = "../Images/layer1.png"
+            break;
+        case(1):
+        l1.image(prevCanvas, 0,0, 406, 560);
+        canvasImg = l2;
+        layerSwitch = true;
+        layerImg.src = "../Images/layer2.png"
+        break;
+        case(2):
+        l2.image(prevCanvas, 0,0, 406, 560);
+        canvasImg = l3;
+        layerSwitch = true;
+        layerImg.src = "../Images/layer3.png"
+        break;
+    }
+}
+
+function prevLayerHandler() {
+    currentLayer --;
+    
+    let prevCanvas = get( 0, 0, 406, 560);
+    if(currentLayer < 0) {
+        currentLayer = 2
+    }
+    console.log(currentLayer)
+    switch(currentLayer){
+        case(0): 
+            canvasImg = l1;
+            l2.image(prevCanvas, 0,0, 406, 560);
+            layerSwitch = true;
+            layerImg.src = "../Images/layer1.png"
+            break;
+            case(1):
+        l3.image(prevCanvas, 0,0, 406, 560);
+        canvasImg = l2;
+        layerSwitch = true;
+        layerImg.src = "../Images/layer2.png"
+        break;
+        case(2):
+        l1.image(prevCanvas, 0,0, 406, 560);
+        canvasImg = l3;
+        layerSwitch = true;
+        layerImg.src = "../Images/layer3.png"
+        break;
+    }
+        
+    }
+
 
 
 
