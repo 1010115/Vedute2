@@ -13,6 +13,17 @@ GIF's, die levendige fragmenten van leuke animaties, boordevol verzadigde kleure
 Daarom hebben we besloten GIF’s te verwerken in ons product. Als je je vedute hebt afgerond, wordt je beloont met een grappig clipje waar je de verschillende lagen ziet bewegen. Bewegende Vedute’s zijn leuk en makkelijk online te delen.
 ### P5.js Library
 Om de gebruiker van een gemakkelijke teken- en edit ervaring te verzekeren, hebben we gebruik gemaakt van de P5.js library. Deze library is speciaal ontwikkeld voor creatieve doeleindes, en sluit goed aan bij ons project.
+### Teken Opties
+##### Kwast Aanpassingen
+<img src="./images/readme/drawingoptions.png" height="150">
+
+##### Kleuren Selecteren
+<img src="./images/readme/colorselecter.png" height="150">
+##### Afbeeldingen Toevoegen
+<img src="./images/readme/ imgselector.png" height="150">
+##### Lagen Selecter
+<img src="./images/readme/ layerselector &picker.png" height="150">
+
 ### Samenvatting van de code
 ###### Js bestanden
 
