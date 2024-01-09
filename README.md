@@ -13,8 +13,8 @@ GIF's, die levendige fragmenten van leuke animaties, boordevol verzadigde kleure
 Daarom hebben we besloten GIF’s te verwerken in ons product. Als je je vedute hebt afgerond, wordt je beloont met een grappig clipje waar je de verschillende lagen ziet bewegen. Bewegende Vedute’s zijn leuk en makkelijk online te delen.
 ### P5.js Library
 Om de gebruiker van een gemakkelijke teken- en edit ervaring te verzekeren, hebben we gebruik gemaakt van de P5.js library. Deze library is speciaal ontwikkeld voor creatieve doeleindes, en sluit goed aan bij ons project.
-### Summery of our code
-###### Js files
+### Samenvatting van de code
+###### Js bestanden
 
 main.js: In dit bestand staat de code voor de meeste functionaliteiten, zoals het aanpassen van je Vedute. Dit zijn functionaliteiten zoals de kwasten, de kleuren, de grotes van de kwasten, het toevoegen van fotos, kleur selector, color picker etc, etc. 
 
@@ -23,7 +23,7 @@ tutorial.js: Door middel van deze tutorial weet de gebruiker precies waar die me
 popup.js: Deze code wordt gebruikt voor de pop-ups.
 
 end.js: Deze code is voor nadat je je Vedute hebt afgerond.
-### Our developers
+### Onze developers
 [Zino Schubert](https://github.com/1010115); Groepsleider, Ondernemende Technoloog
 
 [Xander Koen](https://github.com/xanderkoen); Techlead, Betrokken Technoloog
