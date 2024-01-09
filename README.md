@@ -17,7 +17,7 @@ Om de gebruiker van een gemakkelijke teken- en edit ervaring te verzekeren, hebb
 ##### Kwast Aanpassingen
 Gebruikers kunnen genieten van ons brede scala aan opties watbetreft kwasten.
 
-<img src="./Images/readme/drawingoptions.png" height="150">
+<img src="./Images/readme/drawingoptions.png" height="100">
 
 ##### Kleuren Selecteren
 Onze Vedute Maker is uitgerust met een kleurmenu waarop alle kleuren op de regenboog beschikbaar zijn. Daarnaast krijgt de kunstenaar een pipet waarmee kleuren op je kunstwerk overnieuw gebruikt kunnen worden.
@@ -32,7 +32,7 @@ De Vedute kunstenaar wordt niet gelimiteerd door eventuele lage illustratievaard
 ##### Lagen Selecter
 Doormiddel van de lagen selector zijn de 'Painter's Algorithm'-principes zonder enige moeite toe te passen.
 
-<img src="./Images/readme/layerselector.png" height="150">
+<img src="./Images/readme/layerselector.png" height="200">
 
 ### Samenvatting van de code
 ###### Js bestanden
