@@ -8,7 +8,6 @@ module.exports = {
         'clouds2' : "url('/Images/clouds2.png')",
         'clouds3' : "url('/Images/clouds3.png')",
         'clouds4' : "url('/Images/clouds4.png')"
-
       },
       colors: {
         'donkergrijs': '#47525E',

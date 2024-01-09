@@ -17,9 +17,9 @@ nextBtn.innerText = '->'
 prevBtn.innerText = '<-'
 exitBtn.innerText = 'X'
 
-nextBtn.classList = ' m-1 rounded-full bg-slate-50 hover:border-2 border-black w-1/6'
-prevBtn.classList = ' m-1 rounded-full bg-slate-50 hover:border-2 border-black w-1/6'
-exitBtn.classList = ' m-1 rounded-full bg-slate-50 hover:border-2 border-black w-1/6'
+nextBtn.classList = 'absolute left-3/4 bottom-2 rounded-full bg-slate-50 hover:border-2 border-black w-1/6'
+prevBtn.classList = 'absolute left-1/4 bottom-2 rounded-full bg-slate-50 hover:border-2 border-black w-1/6'
+exitBtn.classList = 'absolute left-2/4 bottom-2 rounded-full bg-slate-50 hover:border-2 border-black w-1/6'
 tutorialImg.classList = ''
 
 
@@ -38,7 +38,7 @@ function popUp() {
         tutorialField.appendChild(prevBtn)
         tutorialField.appendChild(nextBtn)
         tutorialField.appendChild(exitBtn)
-        tutorialField.classList = 'h-full w-full flex flex-wrap gap-x-20 justify-center overflow-hidden'
+        tutorialField.classList = 'h-screen w-screen gap-x-20 justify-center relative'
         screen.classList = 'display: hidden overflow-y: hidden'
 
         popUpState = true
