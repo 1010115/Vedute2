@@ -15,7 +15,7 @@ Daarom hebben we besloten GIF’s te verwerken in ons product. Als je je vedute 
 Om de gebruiker van een gemakkelijke teken- en edit ervaring te verzekeren, hebben we gebruik gemaakt van de P5.js library. Deze library is speciaal ontwikkeld voor creatieve doeleindes, en sluit goed aan bij ons project.
 ### Teken Opties
 ##### Kwast Aanpassingen
-Gebruikers kunnen genieten van onze breed scala aan opties watbetreft kwasten.
+Gebruikers kunnen genieten van ons brede scala aan opties watbetreft kwasten.
 
 <img src="./images/readme/drawingoptions.png" height="150">
 
@@ -31,6 +31,7 @@ De Vedute kunstenaar wordt niet gelimiteerd door eventuele lage illustratievaard
 
 ##### Lagen Selecter
 Doormiddel van de lagen selector zijn de 'Painter's Algorithm'-principes zonder enige moeite toe te passen.
+
 <img src="./images/readme/layerselector.png" height="150">
 
 ### Samenvatting van de code
