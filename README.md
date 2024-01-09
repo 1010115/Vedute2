@@ -16,17 +16,13 @@ Om de gebruiker van een gemakkelijke teken- en edit ervaring te verzekeren, hebb
 ### Summery of our code
 ###### Js files
 
-###### main.js:
-In dit bestand staat de code voor de meeste functionaliteiten, zoals het aanpassen van je Vedute. Dit zijn functionaliteiten zoals de kwasten, de kleuren, de grotes van de kwasten, het toevoegen van fotos, kleur selector, color picker etc, etc. 
+main.js: In dit bestand staat de code voor de meeste functionaliteiten, zoals het aanpassen van je Vedute. Dit zijn functionaliteiten zoals de kwasten, de kleuren, de grotes van de kwasten, het toevoegen van fotos, kleur selector, color picker etc, etc. 
 
-###### tutorial.js
-Door middel van deze tutorial weet de gebruiker precies waar die mee aan de slag kan.
+tutorial.js: Door middel van deze tutorial weet de gebruiker precies waar die mee aan de slag kan.
 
-###### popup.js
-Deze code wordt gebruikt voor de pop-ups.
+popup.js: Deze code wordt gebruikt voor de pop-ups.
 
-###### popup.js
-Deze code is voor nadat je je Vedute hebt afgerond.
+end.js: Deze code is voor nadat je je Vedute hebt afgerond.
 ### Our developers
 [Zino Schubert](https://github.com/1010115); Groepsleider, Ondernemende Technoloog
 
