@@ -1,18 +1,16 @@
 document.addEventListener("DOMContentLoaded", init)
 
+//HTML variables
 let BrushSelector;
 let BrushModal;
-let ColorSelector;
-let ColorModal;
 let ImageButton;
 let ImageModal;
-let StickerSelector;
-let StickerModal;
 let SizeSelector;
 let SizeModal;
 
 function init() {
 
+    //assign html elements to variables
     BrushSelector = document.getElementById('brush-selector');
     BrushModal = document.getElementById('brushModal');
 
@@ -22,11 +20,6 @@ function init() {
     ImageModal = document.getElementById('imageModal');
 
     ImageButton.addEventListener("click", imageImport);
-
-    StickerSelector = document.getElementById('sticker-selector');
-    StickerModal = document.getElementById('stickerModal');
-
-    StickerSelector.addEventListener("click", selectSticker);
 
     SizeSelector = document.getElementById('size-selector');
     SizeModal = document.getElementById('sizeModal');
@@ -52,11 +45,6 @@ function imageImport() {
     console.log('image import');
     //open image modal
     ImageModal.classList.remove("hidden")
-}
-
-function selectSticker() {
-    console.log('sticker selector');
-    //open sticker modal
 }
 
 //close brushmodal
