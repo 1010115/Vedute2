@@ -34,6 +34,9 @@ let drawing = true
 
 //multiple canvases
 let l1, l2, l3; //used as the extra layers
+let img1, img2, img3; //makes p5 image from localstorage images
+let existingLayers = false;
+let veduteImage1, veduteImage2, veduteImage3; //loaded images from local storage
 let prevLayerButton, nextLayerButton; //buttons to switch layers
 let currentLayer = 0; //checks the current layer;
 let layerSwitch = false;
@@ -151,6 +154,23 @@ setup = function () {
     l2 = createGraphics(406, 560);
     l3 = createGraphics(406, 560);
 
+    if(localStorage.getItem('img1')) {
+        loadImage(localStorage.getItem("img1"),img1 => {
+            l1.image(img1, 0,0, 406, 560);
+            image(l1, 0, 0, 406, 560);
+        })
+        loadImage(localStorage.getItem("img2"),img2 => {
+            l2.image(img2, 0,0, 406, 560);
+        })
+        loadImage(localStorage.getItem("img3"),img3 => {
+            l3.image(img3, 0,0, 406, 560);
+        })
+    };
+    
+    
+    
+    
+
     //image input file
     input = createFileInput(handleFile);
     
@@ -166,7 +186,7 @@ setup = function () {
         image(img,0,0,406,560);
         });
     }
-    localStorage.removeItem('img');
+
 }
 
 
@@ -276,6 +296,17 @@ draw = function () {
     if(canvasImg && layerSwitch) {
         clear();
         image(canvasImg, 0, 0, 406, 560);
+        switch(currentLayer) {
+            case(0):
+            l1.clear();
+            break;
+            case(1):
+            l2.clear();
+            break;
+            case(2):
+            l3.clear();
+            break;
+        }
         layerSwitch = false;
         if(Ubrush === "eraser") {
             Ubrush = "pen";
@@ -821,7 +852,6 @@ function finish() {
     let code3 = l3.canvas.toDataURL();
     console.log(code1);
     window.location.href="./end.html"
-    localStorage.setItem("img", code)
     localStorage.setItem("img1", code1);
     localStorage.setItem("img2", code2);
     localStorage.setItem("img3", code3);
@@ -899,6 +929,14 @@ function prevLayerHandler() {
     }
         
     }
+
+    function getImageFromLocalstorage() {
+        veduteImage1 = localStorage.getItem("img1");
+        veduteImage2 = localStorage.getItem("img2");
+        veduteImage3 = localStorage.getItem("img3");
+    if(localStorage.getItem("img1"))
+        existingLayers = true;
+     }
 
 
 

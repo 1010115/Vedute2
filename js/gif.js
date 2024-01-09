@@ -12,6 +12,7 @@ let veduteImage3;
 //dom tags
 let canvas;
 let canvasParent;
+let GifSave;
 
 let img1;
 let img2;
@@ -19,21 +20,25 @@ let img3;
 
 function init() {
     canvasParent = document.getElementById("canvas");
+    GifSave = document.getElementById('saveGif');
 }
 
 //preloads images
 function preload() {
     getImageFromLocalstorage();
-    img1 = loadImage(veduteImage1);
-    img2 = loadImage(veduteImage2);
-    img3 = loadImage(veduteImage3);
+    if(localStorage.getItem('img1')) {
+        img1 = loadImage(veduteImage1);
+        img2 = loadImage(veduteImage2);
+        img3 = loadImage(veduteImage3);
+    }
+    
 }
 
 //function setup
 function setup() {
     //create canvas
     canvas = createCanvas(406, 560);
-    canvas.background(155)
+    canvas.background(155);
     canvas.parent(canvasParent);
     
     console.log("image")
@@ -50,8 +55,8 @@ function setup() {
     layer3.start(3, 80, 80);
 
     //create a button and place it beneath the canvas.
-    let button = createButton('save gif');
-    button.parent(canvasParent);
+    let button = createButton('Gif opslaan');
+    button.parent(GifSave);
 
     //use the button to change download the gif
     button.mousePressed(() => {
@@ -104,8 +109,12 @@ class Layer {
     display() {
         //set the fill color and draw a rectangle at the layer's position
         //this rect is a placeholder for the images from the vedute
+        fill(255, 255, 255, 0.5)
         rect(this.x, this.y, 128, 176);
-        image(this.image, this.x, this.y, 128, 176);
+        if(localStorage.getItem('img1')) {
+            image(this.image, this.x, this.y, 128, 176);
+        }
+        
         
     }
 
@@ -153,8 +162,11 @@ class Layer {
     
 }
 function getImageFromLocalstorage() {
-   veduteImage1 = localStorage.getItem("img1");
-   veduteImage2 = localStorage.getItem("img2");
-   veduteImage3 = localStorage.getItem("img3");
+    veduteImage1 = localStorage.getItem("img1");
+    veduteImage2 = localStorage.getItem("img2");
+    veduteImage3 = localStorage.getItem("img3");
+    localStorage.removeItem('img1');
+    localStorage.removeItem("img2");
+    localStorage.removeItem("img3");
 }
 
