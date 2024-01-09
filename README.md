@@ -27,12 +27,12 @@ Onze Vedute Maker is uitgerust met een kleurmenu waarop alle kleuren op de regen
 ##### Afbeeldingen Toevoegen
 De Vedute kunstenaar wordt niet gelimiteerd door eventuele lage illustratievaardigdheden, aangezien hen alle fotos op het internet en uit hen persoonlijk archief ter beschikking heeft! Deze kunnen gemakkelijk toegoevoegd worden doormiddel van de afbeeldingen-selector.
 
-<img src="./Images/readme/imgselector.png" height="200">
+<img src="./Images/readme/imgselector.png" height="250">
 
 ##### Lagen Selecter
 Doormiddel van de lagen selector zijn de 'Painter's Algorithm'-principes zonder enige moeite toe te passen.
 
-<img src="./Images/readme/layerselector.png" height="250">
+<img src="./Images/readme/layerselector.png" height="300">
 
 ### Samenvatting van de code
 ###### Js bestanden
