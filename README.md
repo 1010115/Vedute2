@@ -32,7 +32,7 @@ De Vedute kunstenaar wordt niet gelimiteerd door eventuele lage illustratievaard
 ##### Lagen Selecter
 Doormiddel van de lagen selector zijn de 'Painter's Algorithm'-principes zonder enige moeite toe te passen.
 
-<img src="./images/readme/layerselector.png" height="150">
+<img src="./Images/readme/layerselector.png" height="150">
 
 ### Samenvatting van de code
 ###### Js bestanden
