@@ -12,15 +12,15 @@ let nextBtn = document.createElement('button')
 let prevBtn = document.createElement('button')
 let exitBtn = document.createElement('button')
 
-tutorialImg.src = `../assets/tutorial_${pageNmbr}.png`
-nextBtn.innerText = '->'
-prevBtn.innerText = '<-'
-exitBtn.innerText = 'X'
+tutorialImg.src = `../Images/tutorial_${pageNmbr}.png`
+nextBtn.innerHTML = `<img src="../Images/arrow-right.png" alt="->"/>`
+prevBtn.innerHTML = `<img src="../Images/arrow-left.png" alt="<-"/>`
+exitBtn.innerHTML = `<img src="../Images/cross.png" alt="X"/>`
 
-nextBtn.classList = 'absolute left-3/4 bottom-2 rounded-full bg-slate-50 hover:border-2 border-black w-1/6'
-prevBtn.classList = 'absolute left-1/4 bottom-2 rounded-full bg-slate-50 hover:border-2 border-black w-1/6'
-exitBtn.classList = 'absolute left-2/4 bottom-2 rounded-full bg-slate-50 hover:border-2 border-black w-1/6'
-tutorialImg.classList = ''
+nextBtn.classList = 'absolute left-3/4 bottom-2 rounded-full bg-slate-50 hover:border-2 border-black w-1/6 flex justify-center'
+prevBtn.classList = 'absolute left-1/4 bottom-2 rounded-full bg-slate-50 hover:border-2 border-black w-1/6 flex justify-center'
+exitBtn.classList = 'absolute left-2/4 bottom-2 rounded-full bg-slate-50 hover:border-2 border-black w-1/6 flex justify-center'
+tutorialImg.classList = 'w-screen h-screen'
 
 
 tutorialBtn.addEventListener('click', () => {
@@ -57,7 +57,7 @@ function popUp() {
         } else if (pageNmbr > tutorialLength) {
             pageNmbr = tutorialLength
         }
-        tutorialImg.src = `../assets/tutorial_${pageNmbr}.png`
+        tutorialImg.src = `../Images/tutorial_${pageNmbr}.png`
     }
 
     nextBtn.addEventListener('click', () => {
