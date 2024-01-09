@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.8.0/p5.js"></script>
     <link href="../css/output.css" rel="stylesheet">
+    
     <title>Vedute maker</title>
 </head>
 <body>
@@ -24,13 +27,19 @@
            <button id="back" class="p-6 w-80 text-center rounded-md bg-slate-50 bg-opacity-70 hover:bg-opacity-100 text-black text-xl font-medium mr-4 mt-2">Terug naar bewerken</button>
                 <a href="./start.html"><p class="p-6 w-80 text-center rounded-md bg-slate-50 bg-opacity-70 hover:bg-opacity-100 text-black text-xl font-medium mt-2">Klaar</p></a>
             </div>
+            <div>
+                <button id="saveGif" class="p-6 w-80 text-center rounded-md bg-slate-50 bg-opacity-70 hover:bg-opacity-100 text-black text-xl font-medium mr-4 mt-2"></button>
+            </div>
+            
         </div>
-        <div id="placeHolder" class="col-span-2 flex flex-col flex-wrap place-content-center">
+        <!-- <div id="placeHolder" class="col-span-2 flex flex-col flex-wrap place-content-center">
             <p>Hier komt het resultaat van de vedute</p>
-
-
+        </div> -->
+        <div id="canvas" class="col-span-2 flex flex-col flex-wrap place-content-center">
+            <!-- Images will be drawn here using p5.js -->
         </div>
     </div>
-    <script src="../js/end.js"></script>
+    <script src="../js/gif.js" defer></script>
+    <script src="../js/end.js" defer></script>
 </body>
 </html>
