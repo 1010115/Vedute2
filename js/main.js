@@ -154,6 +154,8 @@ setup = function () {
     l2 = createGraphics(406, 560);
     l3 = createGraphics(406, 560);
 
+
+    //redrawds the layers when continuing
     if(localStorage.getItem('img1')) {
         loadImage(localStorage.getItem("img1"),img1 => {
             l1.image(img1, 0,0, 406, 560);
