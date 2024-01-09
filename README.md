@@ -12,4 +12,10 @@ Zo werkt de Vedute Maker ook. Je tekent eerst wat het verste weg is, daarna wat 
 GIF's, die levendige fragmenten van leuke animaties, boordevol verzadigde kleuren, flitsende lichten en versnelde bewegingen, zijn één van de favoriete expressietalen van Gen Z geworden. In een digitaal tijdperk leggen deze geanimeerde clips emoties en reacties vast, een dynamische en visueel aantrekkelijke vorm van communicatie.
 Daarom hebben we besloten GIF’s te verwerken in ons product. Als je je vedute hebt afgerond, wordt je beloont met een grappig clipje waar je de verschillende lagen ziet bewegen. Bewegende Vedute’s zijn leuk en makkelijk online te delen.
 
+##### Bijlage
+###### Bronnen
+Vedute. Collection Vedute. https://vedute.nl/
+Wikipedia contributors. (2023, December 31). Painter’s algorithm. Wikipedia. https://en.wikipedia.org/wiki/Painter%27s_algorithm
+
+
 
