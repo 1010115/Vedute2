@@ -13,6 +13,27 @@ GIF's, die levendige fragmenten van leuke animaties, boordevol verzadigde kleure
 Daarom hebben we besloten GIF’s te verwerken in ons product. Als je je vedute hebt afgerond, wordt je beloont met een grappig clipje waar je de verschillende lagen ziet bewegen. Bewegende Vedute’s zijn leuk en makkelijk online te delen.
 ### P5.js Library
 Om de gebruiker van een gemakkelijke teken- en edit ervaring te verzekeren, hebben we gebruik gemaakt van de P5.js library. Deze library is speciaal ontwikkeld voor creatieve doeleindes, en sluit goed aan bij ons project.
+### Teken Opties
+##### Kwast Aanpassingen
+Gebruikers kunnen genieten van ons brede scala aan opties watbetreft kwasten.
+
+<img src="./Images/readme/drawingoptions.png" height="100">
+
+##### Kleuren Selecteren
+Onze Vedute Maker is uitgerust met een kleurmenu waarop alle kleuren op de regenboog beschikbaar zijn. Daarnaast krijgt de kunstenaar een pipet waarmee kleuren op je kunstwerk overnieuw gebruikt kunnen worden.
+
+<img src="./Images/readme/colorselecter.png" height="250">
+
+##### Afbeeldingen Toevoegen
+De Vedute kunstenaar wordt niet gelimiteerd door eventuele lage illustratievaardigdheden, aangezien hen alle fotos op het internet en uit hen persoonlijk archief ter beschikking heeft! Deze kunnen gemakkelijk toegoevoegd worden doormiddel van de afbeeldingen-selector.
+
+<img src="./Images/readme/imgselector.png" height="200">
+
+##### Lagen Selector
+Doormiddel van de lagen selector zijn de 'Painter's Algorithm'-principes zonder enige moeite toe te passen.
+
+<img src="./Images/readme/layerselector.png" height="300">
+
 ### Samenvatting van de code
 ###### Js bestanden
 
