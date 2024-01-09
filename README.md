@@ -11,11 +11,24 @@ Zo werkt de Vedute Maker ook. Je tekent eerst wat het verste weg is, daarna wat 
 ### Gif-ication
 GIF's, die levendige fragmenten van leuke animaties, boordevol verzadigde kleuren, flitsende lichten en versnelde bewegingen, zijn één van de favoriete expressietalen van Gen Z geworden. In een digitaal tijdperk leggen deze geanimeerde clips emoties en reacties vast, een dynamische en visueel aantrekkelijke vorm van communicatie.
 Daarom hebben we besloten GIF’s te verwerken in ons product. Als je je vedute hebt afgerond, wordt je beloont met een grappig clipje waar je de verschillende lagen ziet bewegen. Bewegende Vedute’s zijn leuk en makkelijk online te delen.
-
-##### Bijlage
-###### Bronnen
-Vedute. Collection Vedute. https://vedute.nl/
-Wikipedia contributors. (2023, December 31). Painter’s algorithm. Wikipedia. https://en.wikipedia.org/wiki/Painter%27s_algorithm
+### P5.js Library
+Om de gebruiker van een gemakkelijke teken- en edit ervaring te verzekeren, hebben we gebruik gemaakt van de P5.js library. Deze library is speciaal ontwikkeld voor creatieve doeleindes, en sluit goed aan bij ons project.
+### Summery of our code
+######Js files
+######main.js:
+In dit bestand staat de code voor de meeste functionaliteiten, zoals het aanpassen van je Vedute. Dit zijn functionaliteiten zoals de kwasten, de kleuren, de grotes van de kwasten, het toevoegen van fotos, kleur selector, color picker etc, etc. 
+######tutorial.js
+Door middel van deze tutorial weet de gebruiker precies waar die mee aan de slag kan.
+######popup.js
+Deze code wordt gebruikt voor de pop-ups.
+######popup.js
+Deze code is voor nadat je je Vedute hebt afgerond.
+### Our developers
+[Zino Schubert](https://github.com/1010115); Groepsleider, Ondernemende Technoloog
+[Xander Koen](https://github.com/xanderkoen); Techlead, Betrokken Technoloog
+[Youri de Gier](https://github.com/vultouri03); Ontwerpende Technoloog
+[Dieuwe van Rijnswou](https://github.com/soapinmysight); Onderzoekende Technoloog
+[Jens Verhoeff](https://github.com/JensV72); Ondernemende Technoloog
 
 
 
