@@ -17,6 +17,7 @@ let GifSave;
 let img1;
 let img2;
 let img3;
+let imagesLoaded = false;
 
 function init() {
     canvasParent = document.getElementById("canvas");
@@ -26,7 +27,7 @@ function init() {
 //preloads images
 function preload() {
     getImageFromLocalstorage();
-    if(localStorage.getItem('img1')) {
+    if(imagesLoaded) {
         img1 = loadImage(veduteImage1);
         img2 = loadImage(veduteImage2);
         img3 = loadImage(veduteImage3);
@@ -111,7 +112,7 @@ class Layer {
         //this rect is a placeholder for the images from the vedute
         fill(255, 255, 255, 0.5)
         rect(this.x, this.y, 128, 176);
-        if(localStorage.getItem('img1')) {
+         if(imagesLoaded) {
             image(this.image, this.x, this.y, 128, 176);
         }
         
@@ -162,11 +163,15 @@ class Layer {
     
 }
 function getImageFromLocalstorage() {
-    veduteImage1 = localStorage.getItem("img1");
-    veduteImage2 = localStorage.getItem("img2");
-    veduteImage3 = localStorage.getItem("img3");
-    localStorage.removeItem('img1');
-    localStorage.removeItem("img2");
-    localStorage.removeItem("img3");
+    if(localStorage.getItem('img1')) {
+        veduteImage1 = localStorage.getItem("img1");
+        veduteImage2 = localStorage.getItem("img2");
+        veduteImage3 = localStorage.getItem("img3");
+        localStorage.removeItem('img1');
+        localStorage.removeItem("img2");
+        localStorage.removeItem("img3");
+        imagesLoaded = true;
+    }
+    
 }
 
