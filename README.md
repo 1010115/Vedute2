@@ -22,12 +22,12 @@ Gebruikers kunnen genieten van ons brede scala aan opties watbetreft kwasten.
 ##### Kleuren Selecteren
 Onze Vedute Maker is uitgerust met een kleurmenu waarop alle kleuren op de regenboog beschikbaar zijn. Daarnaast krijgt de kunstenaar een pipet waarmee kleuren op je kunstwerk overnieuw gebruikt kunnen worden.
 
-<img src="./Images/readme/colorselecter.png" height="200">
+<img src="./Images/readme/colorselecter.png" height="250">
 
 ##### Afbeeldingen Toevoegen
 De Vedute kunstenaar wordt niet gelimiteerd door eventuele lage illustratievaardigdheden, aangezien hen alle fotos op het internet en uit hen persoonlijk archief ter beschikking heeft! Deze kunnen gemakkelijk toegoevoegd worden doormiddel van de afbeeldingen-selector.
 
-<img src="./Images/readme/imgselector.png" height="250">
+<img src="./Images/readme/imgselector.png" height="200">
 
 ##### Lagen Selecter
 Doormiddel van de lagen selector zijn de 'Painter's Algorithm'-principes zonder enige moeite toe te passen.
