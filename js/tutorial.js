@@ -3,7 +3,7 @@ let tutorialBtn = document.getElementById('tutorial-button')
 let screen = document.getElementById('screen')
 let pageNmbr = 0
 let popUpState = false
-let tutorialLength = 7
+let tutorialLength = 6
 
 console.log(tutorialBtn)
 
