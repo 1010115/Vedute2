@@ -1,16 +1,23 @@
-let placeHolder = document.getElementById('placeHolder')
-let buttons = document.getElementById('buttons')
-let downloadableImg = document.createElement('img')
+document.addEventListener("DOMContentLoaded", init);
+
+let placeholder;
+let buttons;
+let downloadableImg;
 
 let eindvedute;
-let back = document.getElementById("back");
+let back;
 let frame1, frame2, frame3;
 let downloadUrl;
 
-back.addEventListener("click", backfunctie);
-console.log(back)
+function init() {
+    back = document.getElementById('back');
+    back.addEventListener("click", backfunctie);
 
-    
+    placeHolder = document.getElementById('placeHolder');
+    buttons = document.getElementById('buttons');
+    downloadableImg = document.createElement('img');
+
+    //put down download layer buttons if something is drawn
     if(localStorage.getItem("img1")) {
         let downloadDiv = document.createElement('div');
         downloadDiv.classList.add("mt-8")
@@ -22,10 +29,12 @@ console.log(back)
             downloadBtn.href = localStorage.getItem(`img${i}`);
             downloadBtn.download = `vedute${i}.png`
             downloadBtn.innerText = `Download laag ${i}` 
-            document.getElementById("buttonlayerdiv").appendChild(downloadBtn)
+            document.getElementById("buttonlayerdiv").appendChild(downloadBtn);
         }
     }
 
+    placeImg();
+}
 
 function placeImg (){
     console.log(localStorage.getItem("img1"));
@@ -37,15 +46,10 @@ function placeImg (){
     }
 }
 
-placeImg();
-
-downloadBtn.addEventListener('click', ()=>{
-    
-})
-
 function backfunctie() {
-localStorage.setItem("img1", frame1)
-localStorage.setItem("img2",frame2)
-localStorage.setItem("img3", frame3)
-window.location.href="./canvas.html";
+    localStorage.setItem("img1", frame1)
+    localStorage.setItem("img2",frame2)
+    localStorage.setItem("img3", frame3)
+    console.log(back)
+    window.location.href="./canvas.html";   
 }
