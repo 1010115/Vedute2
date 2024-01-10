@@ -142,7 +142,7 @@ setup = function () {
     l3 = createGraphics(406, 560);
 
 
-    //redrawds the layers when continuing
+    //redraws the layers when continuing
     if(localStorage.getItem('img1')) {
         loadImage(localStorage.getItem("img1"),img1 => {
             l1.image(img1, 0,0, 406, 560);
@@ -154,12 +154,20 @@ setup = function () {
         loadImage(localStorage.getItem("img3"),img3 => {
             l3.image(img3, 0,0, 406, 560);
         })
-    };
-    
-    
-    
-    
 
+        //after importing layers clear localhost again
+        //clear old canvas to prevent overlapping changes
+        if( localStorage.getItem("img1")){
+            localStorage.removeItem("img1");
+        }
+        if( localStorage.getItem("img2")){
+            localStorage.removeItem("img2");
+        }
+        if( localStorage.getItem("img3")){
+            localStorage.removeItem("img3");
+        }
+    }
+    
     //image input file
     input = createFileInput(handleFile);
     
@@ -817,6 +825,17 @@ function saveUploadedToLocal() {
 
 //export canvas to B64 and save in localastorage
 function finish() {
+    switch(currentLayer) {
+        case(0):
+            l1.clear();
+            break;
+        case(1):
+            l2.clear();
+            break;
+        case(2):
+            l3.clear();
+            break;
+    }
     let eindvedute =  get(0,0,406,560)
     let code = eindvedute.canvas.toDataURL();
     let prevCanvas = get( 0, 0, 406, 560);
@@ -831,6 +850,7 @@ function finish() {
         l3.image(prevCanvas, 0,0, 406, 560);
         break;
     }
+
     let code1 = l1.canvas.toDataURL();
     let code2 = l2.canvas.toDataURL();
     let code3 = l3.canvas.toDataURL();
