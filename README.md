@@ -1,6 +1,6 @@
 # Vedute Maker
 ###### Door Team Vedute 2
-Begin dit schooljaar kregen wij, team Vedute2, een opdracht van [Vedute](https://vedute.nl/). Vedute is een kunstgemeenschap die opdrachten geeft aan kunstenaars om een ruimtelijk manuscript van 32x44x7cm te maken. Deze verzamelen in hun bibliotheek die zich bevind in het Depot Museum Boijmans Van Beuningen.
+Begin dit schooljaar kregen wij, team Vedute2, een opdracht van [Vedute](https://vedute.nl/). Vedute is een kunstgemeenschap die opdrachten geeft aan kunstenaars om een ruimtelijk manuscript van 44 x 32 x 7 cm te maken. Deze manuscripten verzamelen in hun bibliotheek die zich bevind in het Depot Museum Boijmans Van Beuningen.
 Vedute heeft echter een probleem. De aandacht naar Vedute wordt steeds minder, de doelgroep wordt ouder, en door de gelimiteerde aandacht komen ze niet in aanmerking voor subsidies en fondsen.
 
 ### Wie maakt de eerste digitale vedute?
