@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/output.css" rel="stylesheet">
+    <script src="../Vedute2/js/info.js"></script>
+    <title>Vedute maker</title>
+</head>
+<body>
+    <div class="grid grid-cols-1 place-items-center bg-clouds4 bg-cover min-h-screen min-w-screen relative">
+
+            <div class="flex flex-col">
+                <img src="Images/Vedute-logo_groot.png" alt="vedute logo">
+                <p class="font-semibold text-center text-donkergrijs text-8xl">Maker</p>
+            </div>
+
+            <div class="flex flex-row justify-between items-center">
+                <a href="HTML/canvas.html"><p class="p-6 w-96 text-center rounded-md bg-slate-50 bg-opacity-70 hover:bg-opacity-100 text-black text-xl font-medium mb-2 grow mx-2 transition duration-150 ease-in-out">Starten</p></a>
+                <button class="bg-slate-50 rounded-full bg-opacity-70 h-min self-center hover:bg-opacity-100 transition duration-150 ease-in-out p-1" id="infobutton"><img src="../Vedute2/assets/circle-info-solid.svg" alt="info"></button>
+            </div>
+
+            <div class="p-2 bg-slate-50 rounded-lg absolute hidden transition duration-150 ease-in-out" id="infopopup">
+                <p class="text-xl font-medium">Alle data die deze webapp gebruikt wordt opgeslagen in de localhost</p>
+                <p class="text-xl">De afbeeldingen worden pas opgeslagen zodra je op de confirm knop drukt</p>
+                <p class="text-xl">Als je wilt kan je alle opgeslagen data hier verwijderen</p>
+                <p>icons by <a href="https://fontawesome.com/" target="_blank" class="text-blue-500 underline">fontawesome</a></p>
+                <div class="flex flex-row justify-between mt-6">
+                    <button class="p-2 bg-blue-100 rounded-lg hover:bg-red-300 transition duration-150 ease-in-out" id="delete-data">Verwijder mijn gegevens</button>
+                    <button class="p-2 bg-blue-100 px-4 rounded-lg hover:bg-blue-300 transition duration-150 ease-in-out" id="ok-button">Ok</button>
+                </div>
+            </div>
+    </div>
+
+
+</body>
+</html>

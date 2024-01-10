@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/popup.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.8.0/p5.js"></script>
+    <script src="../js/main.js"></script>
+
+    <link href="../css/output.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/imgCanvas.css">
+    <title>Vedute maker - editor</title>
+</head>
+<body class="overflow-hidden">
+<div id="tutorial-field"
+></div>
+<div id="screen" class="grid grid-cols-10 place-content-center min-w-screen min-h-screen h-full bg-clouds2 bg-cover">
+    <div class="col-span-3 flex flex-col items-center justify-center">
+        <p class="text-center text-2xl font-semibold text-black">Kies je laag :</p>
+        <img class="w-96 my-2" src="../Images/layer1.png" alt="placeholder" id="layerImg">
+
+        <div class="place-content-around">
+            <button id="prevLayer" class="bg-slate-50 p-2 rounded-lg mx-2 border border-2 hover:border-black transition duration-150 ease-in-out"><img src="../assets/arrow-left.svg" alt="<-"/></button>
+            <button id="nextLayer" class="bg-slate-50 p-2 rounded-lg mx-2 border border-2 hover:border-black transition duration-150 ease-in-out"><img src="../assets/arrow-right.svg" alt="->"></button>
+        </div>
+    </div>
+
+
+
+    <div id="canvasContainer" class="col-span-4 flex flex-col items-center h-full">
+        <p class="text-center text-2xl font-semibold">Versier je laag : </p>
+
+        <div id="canvasCanvas"
+             class="h-canvasheight w-canvaswidth mx-4 aspect-video border-2 border-black border-solid mb-6 rounded bg-slate-50 bg-opacity-30">
+        </div>
+        <div id="imageCanvas"
+             class="h-canvasheight w-canvaswidth mx-4 bottom-auto aspect-video border-2 border-black border-solid mb-6 rounded bg-slate-50 bg-opacity-30 absolute">
+        </div>
+
+        <button id="finish"
+                class="p-6 w-96 text-center rounded-md bg-slate-50 bg-opacity-70 hover:bg-opacity-100 text-black text-xl font-medium mb-2 transition duration-150 ease-in-out">
+            Mijn kunstwerk is af
+        </button>
+    </div>
+
+    <div class="col-span-3 flex flex-col items-center justify-center">
+        <div class="flex flex-col w-80">
+            <button class="bg-slate-50 rounded-full justify-center border border-2 hover:border-black mb-2 relative flex place-content-center w-full p-2 h-12 transition duration-150 ease-in-out"
+                    id="brush-selector"><img src="#" id="brushimg" alt="selected brush" class="mt-2"></button>
+            <div id="brushModal"
+                 class="absolute hidden z-10 bg-slate-50 p-2  right-popup rounded-md border-2 border-black">
+                <button id="pen" class="setting tool p-4 rounded-full"><img src="../assets/pen-solid.svg" alt="pen">
+                </button>
+                <button id="calligraphy" class="setting tool  p-4 rounded-full"><img src="../assets/calligraphy.svg"
+                                                                                     alt="calligraphy"></button>
+                <button id="spraypaint" class="setting tool  p-4 rounded-full"><img src="../assets/spraypaint.svg"
+                                                                                    alt="spraypaint"></button>
+                <button id="marker" class="setting tool  p-4 rounded-full"><img src="../assets/marker.svg" alt="marker">
+                </button>
+                <button id="wiggle" class="setting tool  p-4 rounded-full"><img src="../assets/wiggle.svg" alt="wiggle">
+                </button>
+                <button id="toothpick" class="setting tool  p-4 rounded-full"><img src="../assets/pen.svg"
+                                                                                   alt="toothpick"></button>
+                <button id="hatching" class="setting tool  p-4 rounded-full"><img src="../assets/hatching.svg"
+                                                                                  alt="hatching"></button>
+                <button id="splatter" class="setting tool  p-4 rounded-full"><img src="../assets/splatter.svg"
+                                                                                  alt="splatter"></button>
+                <button id="eraser" class="setting tool  p-4 rounded-full"><img src="../assets/eraser.svg" alt="eraser">
+                </button>
+            </div>
+
+            <button id="color-selector"
+                    class="bg-[#000000] rounded-full justify-center border border-2 hover:border-black mb-2 relative flex place-content-center p-6 w-auto h-12 transition duration-150 ease-in-out">
+                <label id="color-picker"></label>
+            </button>
+
+            <button class="bg-slate-50 rounded-full justify-center border border-2 hover:border-black mb-2 relative flex place-content-center w-full p-2 h-12 transition duration-150 ease-in-out"
+                    id="size-selector"><img src="#" id="sizeimg"></button>
+            <div id="sizeModal"
+                 class="absolute hidden z-10 bg-slate-50 p-2  right-popup rounded-md border-2 border-black">
+                <button id="small" class="setting size rounded-full"><img src="../assets/small.svg" alt="small">
+                </button>
+                <button id="medium" class="setting size rounded-full"><img src="../assets/medium.svg" alt="medium">
+                </button>
+                <button id="big" class="setting size rounded-full"><img src="../assets/big.svg" alt="big"></button>
+            </div>
+
+            <button class="bg-slate-50 rounded-full justify-center border border-2 hover:border-black mb-2 relative flex place-content-center w-full p-2 h-12 transition duration-150 ease-in-out"
+                    id="image-button"><img src="../assets/image.svg"
+                                           alt="add image" class="mt-2">
+            </button>
+            <div id="imageModal"
+                 class="imageModal absolute hidden w-80 h-fit z-10 bg-slate-50 p-2 top-52 right-popup rounded-lg border-2 border-black grid grid-cols-3 gap-1">
+                <label for="image-import" id="image-insert">
+                    <div class="p-1 bg-slate-100 rounded-lg text-center flex justify-center place-items-center">
+                        <img src="../Images/addimage.png" alt="add image"
+                             class="rounded-lg object-cover w-100px h-100px">
+                    </div>
+                </label>
+            </div>
+
+            <div id="settings" class="grid grid-cols-2 gap-1 justify-self-end mt-1">
+                <button class="bg-slate-50 rounded-full p-6 justify-center border border-2 hover:border-black mb-2 hidden transition duration-150 ease-in-out"
+                id="image-confirm">afbeelding bevestigen
+               </button>
+               <button class="bg-slate-50 rounded-full p-6 justify-center border border-2 hover:border-black mb-2 hidden transition duration-150 ease-in-out"
+                id="image-cancel">afbeelding annuleren
+               </button>
+            </div>
+
+
+            <button class="bg-slate-50 rounded-full justify-center border border-2 hover:border-black mb-2 relative flex place-content-center items-center w-full p-2 h-12 transition duration-150 ease-in-out"
+            id="clear-button"><img src="../assets/clear.svg"
+            alt="clear canvas">
+           </button>
+           <button class="bg-slate-50 rounded-full justify-center border border-2 hover:border-black mb-2 relative flex place-content-center w-full p-2 h-12 transition duration-150 ease-in-out"
+            id="tutorial-button">?
+           </button>
+        </div>
+    </div>
+</div>
+<script src="../js/tutorial.js"></script>
+</body>
+</html>
