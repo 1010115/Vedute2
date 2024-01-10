@@ -802,14 +802,6 @@ video {
   margin-bottom: 0.5rem;
 }
 
-<<<<<<< HEAD
-=======
-.mx-12 {
-  margin-left: 3rem;
-  margin-right: 3rem;
-}
-
->>>>>>> origin/gif-changes
 .mb-2 {
   margin-bottom: 0.5rem;
 }
@@ -2228,11 +2220,6 @@ video {
   padding-right: 1rem;
 }
 
-.px-2 {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-}
-
 .text-left {
   text-align: left;
 }
@@ -2770,10 +2757,6 @@ video {
 
 .hover\:border-2:hover {
   border-width: 2px;
-}
-
-.hover\:border:hover {
-  border-width: 1px;
 }
 
 .hover\:border-black:hover {
