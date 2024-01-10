@@ -9,7 +9,7 @@ Daar komt onze Vedute Maker in het plaatje. De Vedute maker is een ruimte waarin
 
 ### Painter’s Algorithm
 Ruimte is ongelooflijk belangrijk voor het maken van een Vedute, ze hebben immers een standaard breedte, hoogte, en diepte. Daarom hebben we besloten dit te verwerken in ons project via het “Painter’s Algorithm”.
-Het ‘Painter’s Algorithm is een manier om een ruimtelijke afbeelding te tekenen. Stel je voor dat je een landschap schildert: je begint met de bergen in de verte, voegt dan de dichterbij gelegen weilanden toe en schildert ten slotte bomen in de buurt.
+In het "Painter's Algorithm" maak gebruik van meerdere lagen om zo een unieke vorm van ruimte te schetsen. Stel je voor dat je een landschap schildert: je begint met de bergen in de verte, voegt dan de dichterbij gelegen weilanden toe en schildert ten slotte bomen in de buurt.
 Zo werkt de Vedute Maker ook. Je tekent eerst wat het verste weg is, daarna wat er in het midden staat, en als laatste wat er helemaal voor aan staat.
 ### Gif-ication
 GIF's, die levendige fragmenten van leuke animaties, boordevol verzadigde kleuren, flitsende lichten en versnelde bewegingen zijn één van de favoriete expressietalen van Gen Z geworden. In een digitaal tijdperk leggen deze geanimeerde clips emoties en reacties vast, een dynamische en visueel aantrekkelijke vorm van communicatie.
@@ -18,12 +18,11 @@ Daarom hebben we besloten GIF’s te verwerken in ons product. Als je je vedute 
 <p align="center"><img src="./Images/readme/vedutebirthday.gif" height="300"><img src="./Images/readme/vedutestar.gif" height="300"><img src="./Images/readme/vedutecat.gif" height="300"></p>
 
 ### P5.js Library
-Om de gebruiker van een gemakkelijke teken- en edit ervaring te verzekeren, hebben we gebruik gemaakt van de P5.js library. Deze library is speciaal ontwikkeld voor creatieve doeleindes, en sluit goed aan bij ons project. 
-P5 is geheel open source en gratis te gebruiken.
+Om de gebruiker van een gemakkelijke teken- en edit ervaring te verzekeren, hebben we gebruik gemaakt van de [P5.js library](https://p5js.org/). Deze library is speciaal ontwikkeld voor creatieve doeleindes, en sluit goed aan bij ons project. P5 is geheel open source en gratis te gebruiken. Om dit project te gebruiken is geen installatie van de P5.js library nodig, maar mocht je meer uitleg of informatie over P5.js nodig hebben, is die [hier](https://p5js.org/) te vinden.
 
 
 ### Tailwind CSS framework 
-Bij dit project hebben we gebruik gemaakt van het CSS framework [Tailwind](https://tailwindcss.com/). Het project zelf is al startklaar maar mocht je toch nog de opmaak willen aanpassen? [Installeer dan Tailwind](https://tailwindcss.com/docs/installation)
+Bij dit project hebben we gebruik gemaakt van het CSS framework [Tailwind](https://tailwindcss.com/). Het project zelf is al startklaar maar mocht je toch nog de opmaak willen aanpassen, [installeer dan Tailwind.](https://tailwindcss.com/docs/installation)
 
 ### Teken Opties
 ##### Kwast Aanpassingen
