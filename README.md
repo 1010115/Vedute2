@@ -18,7 +18,7 @@ Daarom hebben we besloten GIF’s te verwerken in ons product. Als je je vedute 
 <p align="center"><img src="./Images/readme/vedutebirthday.gif" height="300"><img src="./Images/readme/vedutestar.gif" height="300"><img src="./Images/readme/vedutecat.gif" height="300"></p>
 
 ### P5.js Library
-Om de gebruiker van een gemakkelijke teken- en edit ervaring te verzekeren, hebben we gebruik gemaakt van de [P5.js library](https://p5js.org/). Deze library is speciaal ontwikkeld voor creatieve doeleindes, en sluit goed aan bij ons project. P5 is geheel open source en gratis te gebruiken. Om dit project te gebruiken is geen installatie van de P5.js library nodig, maar mocht je meer uitleg of informatie over P5.js nodig hebben, is die [hier](https://p5js.org/) te vinden.
+Om de gebruiker van een gemakkelijke teken- en edit ervaring te verzekeren, hebben we gebruik gemaakt van de [P5.js library](https://p5js.org/). Deze library is speciaal ontwikkeld voor creatieve doeleindes, en sluit goed aan bij ons project. P5 is geheel open source en gratis te gebruiken. Om dit project te gebruiken is geen installatie van de P5.js library nodig, maar mocht je meer uitleg of informatie over P5.js nodig hebben, is die [hier]([https://p5js.org/](https://p5js.org/reference/) te vinden.
 
 
 ### Tailwind CSS framework 
