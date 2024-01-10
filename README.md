@@ -18,6 +18,11 @@ Daarom hebben we besloten GIF’s te verwerken in ons product. Als je je vedute 
 
 ### P5.js Library
 Om de gebruiker van een gemakkelijke teken- en edit ervaring te verzekeren, hebben we gebruik gemaakt van de P5.js library. Deze library is speciaal ontwikkeld voor creatieve doeleindes, en sluit goed aan bij ons project.
+
+
+### Tailwind CSS framework 
+Bij zit project hebben we gebruik gemaakt van het CSS framework [Tailwind](https://tailwindcss.com/). Wil je dit project gebruiken en de opmaak aanpassen? [Installeer dan Tailwind](https://tailwindcss.com/docs/installation)
+
 ### Teken Opties
 ##### Kwast Aanpassingen
 Gebruikers kunnen genieten van ons brede scala aan opties watbetreft kwasten.
