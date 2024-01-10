@@ -4,8 +4,7 @@ Begin dit schooljaar kregen wij, team Vedute2, een opdracht van [Vedute](https:/
 Vedute heeft echter een probleem. De aandacht naar Vedute wordt steeds minder, de doelgroep wordt ouder, en door de gelimiteerde aandacht komen ze niet in aanmerking voor subsidies en fondsen.
 ### Wie maakt de eerste digitale vedute?
 Daar komt onze Vedute Maker in het plaatje. De Vedute maker is een ruimte waarin onze jonge doelgroep (gen-z) de ruimte krijgt om zich creatief te uiten binnen de context van Vedute. Zo laten we een jongere generatie kennis maken met vedute, en vergroten we Vedute’s kans op een subsidie.
-
-<img src="./Images/readme/vedutebirthday.gif" height="300"> <img src="./Images/readme/vedutestar.gif" height="300"> <img src="./Images/readme/vedutecat.gif" height="300">
+<p align="center"><img src="./Images/readme/vedutemaker.png" height="500"></p>
 
 ### Painter’s Algorithm
 Ruimte is ongelooflijk belangrijk voor het maken van een Vedute, ze hebben immers een standaar breedte, hoogte, en diepte. Daarom hebben we besloten dit te verwerken in ons project via het “Painter’s Algorithm”.
@@ -14,28 +13,38 @@ Zo werkt de Vedute Maker ook. Je tekent eerst wat het verste weg is, daarna wat 
 ### Gif-ication
 GIF's, die levendige fragmenten van leuke animaties, boordevol verzadigde kleuren, flitsende lichten en versnelde bewegingen, zijn één van de favoriete expressietalen van Gen Z geworden. In een digitaal tijdperk leggen deze geanimeerde clips emoties en reacties vast, een dynamische en visueel aantrekkelijke vorm van communicatie.
 Daarom hebben we besloten GIF’s te verwerken in ons product. Als je je vedute hebt afgerond, wordt je beloont met een grappig clipje waar je de verschillende lagen ziet bewegen. Bewegende Vedute’s zijn leuk en makkelijk online te delen.
+
+<p align="center"><img src="./Images/readme/vedutebirthday.gif" height="300"><img src="./Images/readme/vedutestar.gif" height="300"><img src="./Images/readme/vedutecat.gif" height="300"></p>
+
 ### P5.js Library
 Om de gebruiker van een gemakkelijke teken- en edit ervaring te verzekeren, hebben we gebruik gemaakt van de P5.js library. Deze library is speciaal ontwikkeld voor creatieve doeleindes, en sluit goed aan bij ons project.
 ### Teken Opties
 ##### Kwast Aanpassingen
 Gebruikers kunnen genieten van ons brede scala aan opties watbetreft kwasten.
 
-<img src="./Images/readme/drawingoptions.png" height="100">
+<p align="center"><img src="./Images/readme/drawingoptions.png" height="100"></p>
 
 ##### Kleuren Selecteren
 Onze Vedute Maker is uitgerust met een kleurmenu waarop alle kleuren op de regenboog beschikbaar zijn. Daarnaast krijgt de kunstenaar een pipet waarmee kleuren op je kunstwerk overnieuw gebruikt kunnen worden.
 
-<img src="./Images/readme/colorselecter.png" height="250">
+<p align="center"><img src="./Images/readme/colorselecter.png" height="250"></p>
 
 ##### Afbeeldingen Toevoegen
 De Vedute kunstenaar wordt niet gelimiteerd door eventuele lage illustratievaardigdheden, aangezien hen alle fotos op het internet en uit hen persoonlijk archief ter beschikking heeft! Deze kunnen gemakkelijk toegoevoegd worden doormiddel van de afbeeldingen-selector.
 
-<img src="./Images/readme/imgselector.png" height="200">
+<p align="center"><img src="./Images/readme/imgselector.png" height="200"></p>
 
 ##### Lagen Selector
 Doormiddel van de lagen selector zijn de 'Painter's Algorithm'-principes zonder enige moeite toe te passen.
 
-<img src="./Images/readme/layerselector.png" height="300">
+<p align="center"><img src="./Images/readme/layerselector.png" height="300"></p>
+
+
+##### Tutorial
+Is de Vedute Maker niet duidelijk? Gelukkig is er een tutorial die je alles haarfijn uitlegt.
+
+<p align="center"><img src="./Images/readme/tutorial.png" height="100"></p>
+
 
 ### Samenvatting van de code
 ###### Js bestanden
