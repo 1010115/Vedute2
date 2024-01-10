@@ -46,14 +46,14 @@ function setup() {
     console.log(img1);
 
     //give layers inheritance from class "Layer" and set their initial positions
-    layer1 = new Layer("pink", img1, 40, 40);
-    layer2 = new Layer("pink", img2, 80, 80);
-    layer3 = new Layer("pink", img3, 120, 120);
+    layer1 = new Layer("pink", img1, 70, 123);
+    layer2 = new Layer("pink", img2, 150, 203);
+    layer3 = new Layer("pink", img3, 230, 283);
 
     //call start methods of layer instances with target positions
-    layer1.start(3, 80, 80);
-    layer2.start(3, 80, 80);
-    layer3.start(3, 80, 80);
+    layer1.start(3, 150, 203);
+    layer2.start(3, 150, 203);
+    layer3.start(3, 150, 203);
 
     //create a button and place it beneath the canvas.
     let button = createButton('Gif opslaan');

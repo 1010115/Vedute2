@@ -802,6 +802,14 @@ video {
   margin-bottom: 0.5rem;
 }
 
+<<<<<<< HEAD
+=======
+.mx-12 {
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+
+>>>>>>> origin/gif-changes
 .mb-2 {
   margin-bottom: 0.5rem;
 }
