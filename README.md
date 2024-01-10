@@ -4,7 +4,7 @@ Begin dit schooljaar kregen wij, team Vedute2, een opdracht van [Vedute](https:/
 Vedute heeft echter een probleem. De aandacht naar Vedute wordt steeds minder, de doelgroep wordt ouder, en door de gelimiteerde aandacht komen ze niet in aanmerking voor subsidies en fondsen.
 ### Wie maakt de eerste digitale vedute?
 Daar komt onze Vedute Maker in het plaatje. De Vedute maker is een ruimte waarin onze jonge doelgroep (gen-z) de ruimte krijgt om zich creatief te uiten binnen de context van Vedute. Zo laten we een jongere generatie kennis maken met vedute, en vergroten we Vedute’s kans op een subsidie.
-<img src="./Images/readme/vedutemaker" height="500">
+<img src="./Images/readme/vedutemaker.png" height="500">
 
 ### Painter’s Algorithm
 Ruimte is ongelooflijk belangrijk voor het maken van een Vedute, ze hebben immers een standaar breedte, hoogte, en diepte. Daarom hebben we besloten dit te verwerken in ons project via het “Painter’s Algorithm”.
@@ -41,7 +41,7 @@ Doormiddel van de lagen selector zijn de 'Painter's Algorithm'-principes zonder 
 
 ##### Tutorial
 Is de Vedute Maker niet duidelijk? Gelukkig is er een tutorial die je alles haarfijn uitlegt.
-<img src="./Images/readme/tutorial" height="500">
+<img src="./Images/readme/tutorial.png" height="500">
 
 
 ### Samenvatting van de code
