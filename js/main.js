@@ -25,11 +25,11 @@ let color;
 let Ubrush = "pen"; //user brush
 let USize = 10; //user size
 let Utoothpicklength = 5;//user toothpick length
-let sizeImg;
-let brushImg
+let sizeImg; //brush size
+let brushImg //type brush
 
-let previousState;
-let saveStates = []
+let previousState; //last state recorded
+let saveStates = [] //array of everything the user does
 let drawing = true
 
 //multiple canvases
@@ -40,8 +40,8 @@ let veduteImage1, veduteImage2, veduteImage3; //loaded images from local storage
 let prevLayerButton, nextLayerButton; //buttons to switch layers
 let currentLayer = 0; //checks the current layer;
 let layerSwitch = false;
-let canvasImg;
-let layerImg;
+let canvasImg; //image from canvas (for importing images)
+let layerImg; // info image on the left side of screen showing you the current layer
 
 //brush sizes
 const sizes = {
@@ -50,27 +50,12 @@ const sizes = {
     'big': 15
 }
 
-//alle colors die worden gebruikt
-const colors = {
-    "black": [0, 0, 0],
-    "white": [255, 255, 255],
-    "red": [239, 68, 68],
-    "green": [34, 197, 94],
-    "blue": [59, 130, 246],
-    "yellow": [234, 179, 8],
-    "orange": [249, 115, 22],
-    "violet": [139, 92, 246],
-    // "mypicker": color
-}
-
+//mouse events for P5
 const activeEvents = {
     "mousedown": undefined,
     "mouseup": undefined,
     "mousemove": undefined
 };
-
-// For every brush
-
 
 function init() {
 
@@ -88,6 +73,8 @@ function init() {
   nextLayerButton.addEventListener('click', nextLayerHandler)
   prevLayerButton = document.getElementById('prevLayer');
   prevLayerButton.addEventListener('click', prevLayerHandler);
+
+  //initialize brush types
   const tools = document.getElementsByClassName('tool')
         for(const tool of tools) {
             tool.addEventListener('click', (e) => { setBrush(e, tool.id)} );
@@ -179,25 +166,19 @@ setup = function () {
 
     //savestate for undo function
     saveState();
-
-    //get last vedute from localstorage (if one is in there)
-    if(localStorage.getItem("img")){
-        loadImage(localStorage.getItem("img"),img => {
-        image(img,0,0,406,560);
-        });
-    }
-
 }
 
 
 
-draw = function () {
+    draw = function () {
+    //get color from color picker
     color = myPicker.color();
     color = color.toString();
     color= color.replace(/rgba?|\(|\)/g,'').split(',');
     color = color.slice(0,3)
     // Display the current color as a hex string.
     //selects the correct pen and allows you to draw
+        // savestate function makes a savestate for the undo function
     if (mouseIsPressed && imgDiv.classList.contains("hidden") && inCanvas === true) {
         switch (Ubrush) {
             case "pen":
@@ -278,8 +259,6 @@ draw = function () {
 
     addEventListener("mouseup", (event) => {
          drawing = true;
-        
-        
     })
 
     addEventListener("mousedown", (event) => {
@@ -289,7 +268,6 @@ draw = function () {
         } else {
             inCanvas = false;
         }
-        
     })
 
     //sets the current canvas to new layer
@@ -375,7 +353,6 @@ function handleGallery(b64) {
     }
 }
 
-
 function setBrush(e, mode) {
     for (const event in activeEvents) {
         window.removeEventListener(event, activeEvents[event]);
@@ -383,6 +360,7 @@ function setBrush(e, mode) {
     }
 
     //when user selects diffrent brush
+    //noErase (P5 function that disables the erase function)
     switch (mode) {
         case 'pen':
             Ubrush = "pen";
@@ -468,6 +446,7 @@ function ButtonColor() {
 
 }
 
+//handler for clearing the current active canvas
 function clearClickHandler(e) {
     if(confirm("wil je echt je canvas clearen? Dit verwijderd alles wat op de huidige laag is getekent, als je dit terug wil halen kan je op de undo button clicken (ctrl + z)")){
         imgSaveState();
@@ -475,7 +454,6 @@ function clearClickHandler(e) {
     }
     
 }
-
 
 // --- pen---
 function pen() {
@@ -758,6 +736,7 @@ let s2 = function (sketch) {
     }
 }
 
+//import image and convert to B64 to use in canvas
 function setB64(file) {
     const reader = new FileReader()
 
@@ -784,7 +763,8 @@ function confirmClickHandler() {
     }
     
     usingGallery = false;
-    
+
+    //toggle visibility
   if (!imgDiv.classList.contains('hidden') && imgDiv !== undefined) {
         imgDiv.classList.add('hidden');
         confirmImg.classList.toggle('hidden');
@@ -792,6 +772,7 @@ function confirmClickHandler() {
       }
 }
 
+//cancel importing image handler
 function cancelClickHandler() {
     if (!imgDiv.classList.contains('hidden') && imgDiv !== undefined) {
         imgDiv.classList.toggle('hidden');
@@ -800,6 +781,7 @@ function cancelClickHandler() {
     }
 }
 
+//saving the uploaded image to localstorage
 function saveUploadedToLocal() {
     ImageObject = {"name": imageName, "base64": imageB64};
 
@@ -858,6 +840,7 @@ function finish() {
 
 }
 
+//importing to image from gallery to canvasd
 function imageFromGallery(imgName) {
     //get image name
     let clickedName = imgName.target.alt;
@@ -871,6 +854,7 @@ function imageFromGallery(imgName) {
 
 }
 
+//handles switching to next layer
 function nextLayerHandler() {
     currentLayer ++;
     let prevCanvas = get( 0, 0, 406, 560);
@@ -899,6 +883,7 @@ function nextLayerHandler() {
     }
 }
 
+//handles switching to previous layer
 function prevLayerHandler() {
     currentLayer --;
     
@@ -907,37 +892,26 @@ function prevLayerHandler() {
         currentLayer = 2
     }
     console.log(currentLayer)
-    switch(currentLayer){
-        case(0): 
-            canvasImg = l1;
-            l2.image(prevCanvas, 0,0, 406, 560);
+        switch(currentLayer){
+            case(0):
+                canvasImg = l1;
+                l2.image(prevCanvas, 0,0, 406, 560);
+                layerSwitch = true;
+                layerImg.src = "../Images/layer1.png"
+                break;
+                case(1):
+            l3.image(prevCanvas, 0,0, 406, 560);
+            canvasImg = l2;
             layerSwitch = true;
-            layerImg.src = "../Images/layer1.png"
+            layerImg.src = "../Images/layer2.png"
             break;
-            case(1):
-        l3.image(prevCanvas, 0,0, 406, 560);
-        canvasImg = l2;
-        layerSwitch = true;
-        layerImg.src = "../Images/layer2.png"
-        break;
-        case(2):
-        l1.image(prevCanvas, 0,0, 406, 560);
-        canvasImg = l3;
-        layerSwitch = true;
-        layerImg.src = "../Images/layer3.png"
-        break;
+            case(2):
+            l1.image(prevCanvas, 0,0, 406, 560);
+            canvasImg = l3;
+            layerSwitch = true;
+            layerImg.src = "../Images/layer3.png"
+            break;
+        }
     }
-        
-    }
-
-    function getImageFromLocalstorage() {
-        veduteImage1 = localStorage.getItem("img1");
-        veduteImage2 = localStorage.getItem("img2");
-        veduteImage3 = localStorage.getItem("img3");
-    if(localStorage.getItem("img1"))
-        existingLayers = true;
-     }
-
-
 
 

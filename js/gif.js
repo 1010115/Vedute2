@@ -4,7 +4,7 @@ let layer1;
 let layer2;
 let layer3;
 
-//loadedimages
+//loaded images
 let veduteImage1;
 let veduteImage2;
 let veduteImage3;
