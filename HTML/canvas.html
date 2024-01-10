@@ -20,8 +20,8 @@
         <img class="w-96 my-2" src="../Images/layer1.png" alt="placeholder" id="layerImg">
 
         <div class="place-content-around">
-            <button id="prevLayer" class="bg-slate-50 p-2 rounded-lg mx-2"><img src="../Images/arrow-left.png" alt="<-"/></button>
-            <button id="nextLayer" class="bg-slate-50 p-2 rounded-lg mx-2"><img src="../Images/arrow-right.png" alt="->"></button>
+            <button id="prevLayer" class="bg-slate-50 p-2 rounded-lg mx-2 border border-2 hover:border-black transition duration-150 ease-in-out"><img src="../Images/arrow-left.png" alt="<-"/></button>
+            <button id="nextLayer" class="bg-slate-50 p-2 rounded-lg mx-2 border border-2 hover:border-black transition duration-150 ease-in-out"><img src="../Images/arrow-right.png" alt="->"></button>
         </div>
     </div>
 
@@ -38,7 +38,7 @@
         </div>
 
         <button id="finish"
-                class="p-6 w-96 text-center rounded-md bg-slate-50 bg-opacity-70 hover:bg-opacity-100 text-black text-xl font-medium mb-2">
+                class="p-6 w-96 text-center rounded-md bg-slate-50 bg-opacity-70 hover:bg-opacity-100 text-black text-xl font-medium mb-2 transition duration-150 ease-in-out">
             Mijn kunstwerk is af
         </button>
     </div>
@@ -48,7 +48,7 @@
         <div class="flex flex-col w-80">
 
             <!--popup brush-->
-            <button class="bg-slate-50 rounded-full justify-center hover:border-2 border-black mb-2 relative flex place-content-center w-full p-2 h-12"
+            <button class="bg-slate-50 rounded-full justify-center border border-2 hover:border-black mb-2 relative flex place-content-center w-full p-2 h-12 transition duration-150 ease-in-out"
                     id="brush-selector"><img src="#" id="brushimg" alt="selected brush" class="mt-2"></button>
             <div id="brushModal"
                  class="absolute hidden z-10 bg-slate-50 p-2  right-popup rounded-md border-2 border-black">
@@ -75,12 +75,12 @@
 
             <!--popup color selector-->
             <button id="color-selector"
-                    class="bg-[#000000] rounded-full justify-center hover:border-2 border-black mb-2 relative flex place-content-center p-6 w-auto h-12">
+                    class="bg-[#000000] rounded-full justify-center border border-2 hover:border-black mb-2 relative flex place-content-center p-6 w-auto h-12 transition duration-150 ease-in-out">
                 <label id="color-picker"></label>
             </button>
 
             <!--brushsize selector-->
-            <button class="bg-slate-50 rounded-full justify-center hover:border-2 border-black mb-2 relative flex place-content-center w-full p-2"
+            <button class="bg-slate-50 rounded-full justify-center border border-2 hover:border-black mb-2 relative flex place-content-center w-full p-2 h-12 transition duration-150 ease-in-out"
                     id="size-selector"><img src="#" id="sizeimg"></button>
             <div id="sizeModal"
                  class="absolute hidden z-10 bg-slate-50 p-2  right-popup rounded-md border-2 border-black">
@@ -92,7 +92,7 @@
             </div>
 
             <!--popup custom image import-->
-            <button class="bg-slate-50 rounded-full justify-center hover:border-2 border-black mb-2 relative flex place-content-center w-full p-2 h-12"
+            <button class="bg-slate-50 rounded-full justify-center border border-2 hover:border-black mb-2 relative flex place-content-center w-full p-2 h-12 transition duration-150 ease-in-out"
                     id="image-button"><img src="../assets/image.svg"
                                            alt="add image" class="mt-2">
             </button>
@@ -113,21 +113,21 @@
             </div>
 
             <div id="settings" class="grid grid-cols-2 gap-1 justify-self-end mt-1">
-                <button class="bg-slate-50 rounded-full p-6 justify-center hover:border-2 border-black mb-2 hidden"
+                <button class="bg-slate-50 rounded-full p-6 justify-center border border-2 hover:border-black mb-2 hidden transition duration-150 ease-in-out"
                 id="image-confirm">image confirm
                </button>
-               <button class="bg-slate-50 rounded-full p-6 justify-center hover:border-2 border-black mb-2 hidden"
+               <button class="bg-slate-50 rounded-full p-6 justify-center border border-2 hover:border-black mb-2 hidden transition duration-150 ease-in-out"
                 id="image-cancel">image cancel
                </button>
               
             </div>
 
 
-            <button class="bg-slate-50 rounded-full justify-center hover:border-2 border-black mb-2 relative flex place-content-center w-full p-2 h-12"
+            <button class="bg-slate-50 rounded-full justify-center border border-2 hover:border-black mb-2 relative flex place-content-center w-full p-2 h-12 transition duration-150 ease-in-out"
             id="clear-button"><img src="../assets/clear.svg"
             alt="clear canvas">
            </button>
-           <button class="bg-slate-50 rounded-full justify-center hover:border-2 border-black mb-2 relative flex place-content-center w-full p-2 h-12"
+           <button class="bg-slate-50 rounded-full justify-center border border-2 hover:border-black mb-2 relative flex place-content-center w-full p-2 h-12 transition duration-150 ease-in-out"
             id="tutorial-button">?
            </button>
         </div>

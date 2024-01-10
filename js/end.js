@@ -18,11 +18,11 @@ console.log(back)
         for(let i = 1; i< 4; i++) {
     
             let downloadBtn = document.createElement('a')
-            downloadBtn.classList.add("p-6",  "w-80", "text-center", "rounded-md", "bg-slate-50", "bg-opacity-70", "hover:bg-opacity-100", "text-black", "text-xl", "font-medium", "mr-4", "mt-2")
+            downloadBtn.classList.add("p-6",  "w-80", "text-center", "rounded-md", "bg-slate-50", "bg-opacity-70", "hover:bg-opacity-100", "text-black", "text-xl", "font-medium", "mr-4", "mt-2", "transition", "duration-150", "ease-in-out")
             downloadBtn.href = localStorage.getItem(`img${i}`);
             downloadBtn.download = `vedute${i}.png`
             downloadBtn.innerText = `Download laag ${i}` 
-            downloadDiv.appendChild(downloadBtn)
+            document.getElementById("buttonlayerdiv").appendChild(downloadBtn)
         }
     }
 
