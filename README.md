@@ -56,6 +56,9 @@ tutorial.js: Door middel van deze tutorial weet de gebruiker precies waar die me
 popup.js: Deze code wordt gebruikt voor de pop-ups.
 
 end.js: Deze code is voor nadat je je Vedute hebt afgerond.
+
+gif.js: De code in dit bestand word gebruikt voor het genereren van de animatie voor de GIF, en het genereren van de GIF
+
 ### Onze developers
 [Zino Schubert](https://github.com/1010115); Groepsleider, Ondernemende Technoloog
 
