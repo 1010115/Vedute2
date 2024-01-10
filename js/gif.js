@@ -12,7 +12,7 @@ let veduteImage3;
 //dom tags
 let canvas;
 let canvasParent;
-let GifSave;
+let GifDiv;
 
 let img1;
 let img2;
@@ -21,7 +21,7 @@ let imagesLoaded = false;
 
 function init() {
     canvasParent = document.getElementById("canvas");
-    GifSave = document.getElementById('saveGif');
+    GifDiv = document.getElementById('gifdiv');
 }
 
 //preloads images
@@ -57,7 +57,8 @@ function setup() {
 
     //create a button and place it beneath the canvas.
     let button = createButton('Gif opslaan');
-    button.parent(GifSave);
+    button.addClass("p-6 w-80 text-center rounded-md bg-slate-50 bg-opacity-70 hover:bg-opacity-100 text-black text-xl font-medium mr-4 mt-2 transition duration-150 ease-in-out")
+    button.parent(GifDiv);
 
     //use the button to change download the gif
     button.mousePressed(() => {
