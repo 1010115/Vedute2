@@ -14,7 +14,7 @@ Zo werkt de Vedute Maker ook. Je tekent eerst wat het verste weg is, daarna wat 
 GIF's, die levendige fragmenten van leuke animaties, boordevol verzadigde kleuren, flitsende lichten en versnelde bewegingen, zijn één van de favoriete expressietalen van Gen Z geworden. In een digitaal tijdperk leggen deze geanimeerde clips emoties en reacties vast, een dynamische en visueel aantrekkelijke vorm van communicatie.
 Daarom hebben we besloten GIF’s te verwerken in ons product. Als je je vedute hebt afgerond, wordt je beloont met een grappig clipje waar je de verschillende lagen ziet bewegen. Bewegende Vedute’s zijn leuk en makkelijk online te delen.
 
-<img align="left"> <src="./Images/readme/vedutebirthday.gif" height="300"/> </p> <p align="center"> <img src="./Images/readme/vedutestar.gif" height="300"/> </p> <img align="right"> <src="./Images/readme/vedutecat.gif" height="300"/> </p>
+<p align="left"> <img src="./Images/readme/vedutebirthday.gif" height="300"/> </p> <p align="center"> <img src="./Images/readme/vedutestar.gif" height="300"/> </p> <p align="right"> <img src="./Images/readme/vedutecat.gif" height="300"/> </p>
 
 ### P5.js Library
 Om de gebruiker van een gemakkelijke teken- en edit ervaring te verzekeren, hebben we gebruik gemaakt van de P5.js library. Deze library is speciaal ontwikkeld voor creatieve doeleindes, en sluit goed aan bij ons project.
