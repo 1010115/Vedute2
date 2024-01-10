@@ -13,9 +13,9 @@ let prevBtn = document.createElement('button')
 let exitBtn = document.createElement('button')
 
 tutorialImg.src = `../Images/tutorial_${pageNmbr}.png`
-nextBtn.innerHTML = `<img src="../Images/arrow-right.png" alt="->"/>`
-prevBtn.innerHTML = `<img src="../Images/arrow-left.png" alt="<-"/>`
-exitBtn.innerHTML = `<img src="../Images/cross.png" alt="X"/>`
+nextBtn.innerHTML = `<img src="../assets/arrow-right.svg" alt="->"/>`
+prevBtn.innerHTML = `<img src="../assets/arrow-left.svg" alt="<-"/>`
+exitBtn.innerHTML = `<img src="../assets/xmark-solid.svg" alt="X"/>`
 
 nextBtn.classList = 'absolute left-3/4 bottom-2 rounded-full bg-slate-50 border border-2 hover:border-black w-1/6 flex justify-center'
 prevBtn.classList = 'absolute left-1/4 bottom-2 rounded-full bg-slate-50 border border-2 hover:border-black w-1/6 flex justify-center'
