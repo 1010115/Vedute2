@@ -1,33 +1,57 @@
-let tutorialField = document.getElementById('tutorial-field')
-let tutorialBtn = document.getElementById('tutorial-button')
-let screen = document.getElementById('screen')
+document.addEventListener("DOMContentLoaded", init)
+
+let tutorialField
+let tutorialBtn
+let screen
 let pageNmbr = 0
 let popUpState = false
 let tutorialLength = 6
 
-let tutorialImg = document.createElement('img')
-let nextBtn = document.createElement('button')
-let prevBtn = document.createElement('button')
-let exitBtn = document.createElement('button')
+let tutorialImg
+let nextBtn
+let prevBtn
+let exitBtn
 
-tutorialImg.src = `../Images/tutorial_${pageNmbr}.png`
-nextBtn.innerHTML = `<img src="../assets/arrow-right.svg" alt="->"/>`
-prevBtn.innerHTML = `<img src="../assets/arrow-left.svg" alt="<-"/>`
-exitBtn.innerHTML = `<img src="../assets/xmark-solid.svg" alt="X"/>`
+function init () {
+    exitBtn = document.createElement('button')
+    prevBtn = document.createElement('button')
+    nextBtn = document.createElement('button')
+    tutorialImg = document.createElement('img')
+    screen = document.getElementById('screen')
+    tutorialBtn = document.getElementById('tutorial-button')
+    tutorialField = document.getElementById('tutorial-field')
 
-nextBtn.classList = 'absolute left-3/4 bottom-2 rounded-full bg-slate-50 border border-2 hover:border-black w-1/6 flex justify-center'
-prevBtn.classList = 'absolute left-1/4 bottom-2 rounded-full bg-slate-50 border border-2 hover:border-black w-1/6 flex justify-center'
-exitBtn.classList = 'absolute left-2/4 bottom-2 rounded-full bg-slate-50 border border-2 hover:border-black w-1/6 flex justify-center'
-tutorialImg.classList = 'w-screen h-screen'
+    if (!localStorage.getItem("firsttime")) {
+        localStorage.setItem("firsttime", "true")
+    }
 
+    if (localStorage.getItem("firsttime") === "true") {
+        popUp()
+        localStorage.setItem("firsttime", "false")
+    }
 
-tutorialBtn.addEventListener('click', () => {
-    popUp()
-})
+    tutorialImg.src = `../Images/tutorial_${pageNmbr}.png`
+    nextBtn.innerHTML = `<img src="../assets/arrow-right.svg" alt="->"/>`
+    prevBtn.innerHTML = `<img src="../assets/arrow-left.svg" alt="<-"/>`
+    exitBtn.innerHTML = `<img src="../assets/xmark-solid.svg" alt="X"/>`
 
-exitBtn.addEventListener('click', ()=> {
-    popUp()
-})
+    nextBtn.classList = 'absolute left-3/4 bottom-2 rounded-full bg-slate-50 border border-2 hover:border-black w-1/6 flex justify-center'
+    prevBtn.classList = 'absolute left-1/4 bottom-2 rounded-full bg-slate-50 border border-2 hover:border-black w-1/6 flex justify-center'
+    exitBtn.classList = 'absolute left-2/4 bottom-2 rounded-full bg-slate-50 border border-2 hover:border-black w-1/6 flex justify-center'
+    tutorialImg.classList = 'w-screen h-screen'
+
+    tutorialBtn.addEventListener('click', popUp)
+
+    exitBtn.addEventListener('click', popUp)
+
+    nextBtn.addEventListener('click', () => {
+        pageTracker(1)
+    })
+
+    prevBtn.addEventListener('click', () => {
+        pageTracker(-1)
+    })
+}
 
 
 function popUp() {
@@ -57,11 +81,3 @@ function popUp() {
         }
         tutorialImg.src = `../Images/tutorial_${pageNmbr}.png`
     }
-
-    nextBtn.addEventListener('click', () => {
-        pageTracker(1)
-    })
-
-    prevBtn.addEventListener('click', () => {
-        pageTracker(-1)
-    })
