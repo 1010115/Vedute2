@@ -13,6 +13,7 @@ Zo werkt de Vedute Maker ook. Je tekent eerst wat het verste weg is, daarna wat 
 ### Gif-ication
 GIF's, die levendige fragmenten van leuke animaties, boordevol verzadigde kleuren, flitsende lichten en versnelde bewegingen, zijn één van de favoriete expressietalen van Gen Z geworden. In een digitaal tijdperk leggen deze geanimeerde clips emoties en reacties vast, een dynamische en visueel aantrekkelijke vorm van communicatie.
 Daarom hebben we besloten GIF’s te verwerken in ons product. Als je je vedute hebt afgerond, wordt je beloont met een grappig clipje waar je de verschillende lagen ziet bewegen. Bewegende Vedute’s zijn leuk en makkelijk online te delen.
+
 <img src="./Images/readme/vedutebirthday.gif" height="300"> <img src="./Images/readme/vedutestar.gif" height="300"> <img src="./Images/readme/vedutecat.gif" height="300">
 
 ### P5.js Library
@@ -41,7 +42,7 @@ Doormiddel van de lagen selector zijn de 'Painter's Algorithm'-principes zonder 
 
 ##### Tutorial
 Is de Vedute Maker niet duidelijk? Gelukkig is er een tutorial die je alles haarfijn uitlegt.
-<img src="./Images/readme/tutorial.png" height="500">
+<img src="./Images/readme/tutorial.png" height="100">
 
 
 ### Samenvatting van de code
