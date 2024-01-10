@@ -18,6 +18,11 @@ Daarom hebben we besloten GIF’s te verwerken in ons product. Als je je vedute 
 
 ### P5.js Library
 Om de gebruiker van een gemakkelijke teken- en edit ervaring te verzekeren, hebben we gebruik gemaakt van de P5.js library. Deze library is speciaal ontwikkeld voor creatieve doeleindes, en sluit goed aan bij ons project.
+
+
+### Tailwind CSS framework 
+Bij zit project hebben we gebruik gemaakt van het CSS framework [Tailwind](https://tailwindcss.com/). Wil je dit project gebruiken en de opmaak aanpassen? [Installeer dan Tailwind](https://tailwindcss.com/docs/installation)
+
 ### Teken Opties
 ##### Kwast Aanpassingen
 Gebruikers kunnen genieten van ons brede scala aan opties watbetreft kwasten.
@@ -56,6 +61,9 @@ tutorial.js: Door middel van deze tutorial weet de gebruiker precies waar die me
 popup.js: Deze code wordt gebruikt voor de pop-ups.
 
 end.js: Deze code is voor nadat je je Vedute hebt afgerond.
+
+gif.js: De code in dit bestand word gebruikt voor het genereren van de animatie voor de GIF, en het genereren van de GIF
+
 ### Onze developers
 [Zino Schubert](https://github.com/1010115); Groepsleider, Ondernemende Technoloog
 
